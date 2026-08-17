@@ -1,0 +1,22 @@
+.container {
+    display: grid;
+    grid-template-rows: 96px 1fr;
+    grid-template-columns: 232px 1fr;
+}
+
+app-header {
+    background-color: red;
+    grid-column: 2 / 3;
+}
+
+app-navbar {
+    height: 100dvh;
+    background-color: blue;
+    grid-column: 1;
+    grid-row: 1/4;
+}
+
+app-summary {
+    background-color: green;
+    grid-column: 2;
+}
