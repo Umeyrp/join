@@ -1,7 +1,13 @@
+:host {
+  display: block;
+}
+
 .button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+  width: 100%;
   padding: 12px 16px;
   border: none;
   border-radius: 10px;
