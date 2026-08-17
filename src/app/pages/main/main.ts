@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Header } from '../../shared/header/header';
 import { Navbar } from '../../shared/navbar/navbar';
-import { Summary } from './summary/summary';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
-  imports: [Header, Navbar, Summary],
+  imports: [Header, Navbar, RouterOutlet],
   templateUrl: './main.html',
   styleUrl: './main.scss',
 })
