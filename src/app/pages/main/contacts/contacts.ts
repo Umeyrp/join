@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { Button } from '../../../shared/component/button/button';
@@ -19,6 +19,7 @@ export class Contacts {
 
   protected readonly isLoading = this.contactsService.isLoading;
   protected readonly loadError = this.contactsService.loadError;
+  protected readonly selectedContactId = signal<number | null>(null);
 
   groups = computed<ContactGroup[]>(() => {
     const contacts = this.contactsService.contacts();
@@ -34,6 +35,10 @@ export class Contacts {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([letter, contacts]) => ({ letter, contacts }));
   });
+
+  protected selectContact(id: number): void {
+    this.selectedContactId.set(id);
+  }
 
   protected readonly getAvatarColor = getAvatarColor;
   protected readonly getInitials = getInitials;

@@ -36,7 +36,11 @@ hr {
   border-radius: 10px;
   cursor: pointer;
 
-  &:hover {
+  &:hover:not(.contact--active) {
+    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
+  }
+
+  &.contact--active {
     background-color: #2a3647;
 
     .contact__name {

@@ -13,7 +13,11 @@
       <div class="contact-list__group">{{ group.letter }}</div>
       <hr />
       @for (contact of group.contacts; track contact.id) {
-        <div class="contact">
+        <div
+          class="contact"
+          [class.contact--active]="selectedContactId() === contact.id"
+          (click)="selectContact(contact.id)"
+        >
           <div class="contact__avatar" [style.background-color]="getAvatarColor(contact.id)">
             {{ getInitials(contact.name) }}
           </div>
