@@ -2,6 +2,7 @@ import { Component, inject, computed, signal } from '@angular/core';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { Button } from '../../../shared/component/button/button';
+import { PhoneFormatPipe } from '../../../shared/pipes/phone-format-pipe';
 
 interface ContactGroup {
   letter: string;
@@ -10,7 +11,7 @@ interface ContactGroup {
 
 @Component({
   selector: 'app-contacts',
-  imports: [Button],
+  imports: [Button, PhoneFormatPipe],
   templateUrl: './contacts.html',
   styleUrl: './contacts.scss',
 })

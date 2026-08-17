@@ -23,7 +23,7 @@
           </div>
           <div class="contact__info">
             <span class="contact__name">{{ contact.name }}</span>
-            <a class="contact__email" [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+            <span class="contact__email">{{ contact.email }}</span>
           </div>
         </div>
       }
@@ -72,7 +72,7 @@
 
       <div class="contact-card__field">
         <span class="contact-card__label">Phone</span>
-        <span class="contact-card__value">{{ contact.phone }}</span>
+        <span class="contact-card__value">{{ contact.phone | phoneFormat }}</span>
       </div>
     </div>
   }
