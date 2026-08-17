@@ -4,9 +4,9 @@
     <img src="icons/person_add.svg" alt="" />
   </app-button>
 
-  @if (contactsResource.isLoading()) {
+  @if (isLoading()) {
     <p>Lädt…</p>
-  } @else if (contactsResource.error()) {
+  } @else if (loadError()) {
     <p>Fehler beim Laden der Kontakte.</p>
   } @else {
     @for (group of groups(); track group.letter) {

@@ -1,4 +1,4 @@
-import { Component, inject, resource, computed } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { Button } from '../../../shared/component/button/button';
@@ -17,12 +17,11 @@ interface ContactGroup {
 export class Contacts {
   private contactsService = inject(ContactsService);
 
-  contactsResource = resource({
-    loader: () => this.contactsService.getContacts(),
-  });
+  protected readonly isLoading = this.contactsService.isLoading;
+  protected readonly loadError = this.contactsService.loadError;
 
   groups = computed<ContactGroup[]>(() => {
-    const contacts = this.contactsResource.value() ?? [];
+    const contacts = this.contactsService.contacts();
     const map = new Map<string, Contact[]>();
 
     for (const contact of contacts) {
