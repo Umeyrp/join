@@ -36,6 +36,10 @@ export class Contacts {
       .map(([letter, contacts]) => ({ letter, contacts }));
   });
 
+  protected readonly selectedContact = computed(() =>
+    this.contactsService.contacts().find((contact) => contact.id === this.selectedContactId()),
+  );
+
   protected selectContact(id: number): void {
     this.selectedContactId.set(id);
   }
