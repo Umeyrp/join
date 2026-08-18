@@ -5,19 +5,15 @@
   </app-button>
 
   @if (isLoading()) {
-    <p>Loading...</p>
+    <p>Lädt…</p>
   } @else if (loadError()) {
-    <p>Error loading contacts.</p>
+    <p>Fehler beim Laden der Kontakte.</p>
   } @else {
     @for (group of groups(); track group.letter) {
       <div class="contact-list__group">{{ group.letter }}</div>
       <hr />
       @for (contact of group.contacts; track contact.id) {
-        <div
-          class="contact"
-          [class.contact--active]="selectedContactId() === contact.id"
-          (click)="selectContact(contact.id)"
-        >
+        <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
           <div class="contact__avatar" [style.background-color]="getAvatarColor(contact.id)">
             {{ getInitials(contact.name) }}
           </div>
@@ -38,44 +34,5 @@
     <span class="contact-detail__subtitle">Better with a team</span>
   </h1>
 
-  @if (selectedContact(); as contact) {
-    <div class="contact-card">
-      <div class="contact-card__header">
-        <div class="contact-card__avatar" [style.background-color]="getAvatarColor(contact.id)">
-          {{ getInitials(contact.name) }}
-        </div>
-        <div class="contact-card__heading">
-          <h2 class="contact-card__name">{{ contact.name }}</h2>
-          <div class="contact-card__actions">
-            <button type="button" class="contact-card__action">
-              <img src="icons/edit.svg" alt="" />
-              Edit
-            </button>
-            <button type="button" class="contact-card__action">
-              <img src="icons/delete.svg" alt="" />
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="contact-card__section-title">Contact Information</h3>
-
-      <div class="contact-card__field">
-        <span class="contact-card__label">Email</span>
-        <a
-          class="contact-card__value contact-card__value--link"
-          [href]="'mailto:' + contact.email"
-          >{{ contact.email }}</a
-        >
-      </div>
-
-      <div class="contact-card__field">
-        <span class="contact-card__label">Phone</span>
-        <a class="contact-card__value contact-card__value--tel" [href]="telLink(contact.phone)">{{
-          contact.phone | phoneFormat
-        }}</a>
-      </div>
-    </div>
-  }
+  <router-outlet></router-outlet>
 </section>
