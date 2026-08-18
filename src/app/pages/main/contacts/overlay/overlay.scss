@@ -101,16 +101,11 @@
     background-color: #2A3647;
 }
 
-.form-panel {
-    width: 62%;
-    background: #fff;
-}
-
 .text-wrapper {
     display: flex;
-    padding-top: 12px;
     flex-direction: column;
     gap: 8px;
+    padding-top: 12px;
 
     & h2 {
         @include font('Inter', 700, 61px, 120%, 0%);
@@ -139,5 +134,112 @@
 .brand-content {
     display: flex;
     flex-direction: column;
+    margin-bottom: 37px;
     text-align: center;
+}
+
+.form-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 62%;
+    background: #fff;
+}
+
+.form-wrapper {
+    width: 100%;
+    margin-top: 35px;
+    align-self: center;
+}
+
+.close-overlay {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    & .input-wrapper {
+        position: relative;
+
+        & svg {
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            transform: translateY(-50%);
+        }
+    }
+
+    & input {
+        @include font('Inter', 400, 20px, 120%, 0%);
+        width: 100%;
+        height: 50px;
+        padding: 13px 21px;
+        border: 1px solid #6B6B6BB6;
+        border-radius: 10px;
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px #fff inset;
+            -webkit-text-fill-color: #000;
+        }
+    }
+}
+
+.form-buttons {
+    display: flex;
+    gap: 24px;
+    padding-top: 48px;
+}
+
+.add-contact {
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    width: 100%;
+    padding-right: 48px;
+    padding-left: 80px;
+
+    &>svg {
+        flex-shrink: 0;
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.cancel-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px;
+    background: none;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    color: #2A3647;
+    cursor: pointer;
+    @include font('Inter', 400, 20px, 100%, 0%);
+}
+
+.submit-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px;
+    background: #2A3647;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    @include font('Inter', 700, 21px, 100%, 0%);
 }
