@@ -1,26 +1,20 @@
 .container {
   display: grid;
-  grid-template-rows: 96px 1fr;
   grid-template-columns: 232px 1fr;
-}
-
-app-header {
-  background-color: red;
-  grid-column: 2 / 3;
+  grid-template-rows: 96px 1fr;
+  grid-template-areas:
+    'navbar header'
+    'navbar content';
+  height: 100dvh;
 }
 
 app-navbar {
-  height: 100dvh;
-  background-color: blue;
-  grid-column: 1;
-  grid-row: 1/4;
+  grid-area: navbar;
 }
-
-app-summary {
-  background-color: green;
-  grid-column: 2;
+app-header {
+  grid-area: header;
 }
-
-app-contacts {
-  grid-column: 2;
+.content {
+  grid-area: content;
+  overflow-y: auto;
 }
