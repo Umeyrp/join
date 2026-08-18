@@ -1,0 +1,143 @@
+// :host {
+//     display: contents;
+// }
+
+@use 'mixins' as *;
+
+.overlay-backdrop {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    inset: 0;
+}
+
+.overlay-panel {
+    position: relative;
+    display: flex;
+    width: 1212px;
+    height: 50%;
+    overflow-y: auto;
+    border: none;
+    border-radius: 30px;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+}
+
+.overlay-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.backdrop-fade-in {
+    animation: fade-in 0.3s ease-out;
+}
+
+.backdrop-fade-out {
+    animation: fade-out 0.3s ease-in;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.panel-slide-in {
+    animation: slide-in 0.3s ease-out;
+}
+
+.panel-slide-out {
+    animation: slide-out 0.3s ease-in;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.brand-panel {
+    display: flex;
+    align-items: center;
+    width: 38%;
+    padding: 66px 48px;
+    background-color: #2A3647;
+}
+
+.form-panel {
+    width: 62%;
+    background: #fff;
+}
+
+.text-wrapper {
+    display: flex;
+    padding-top: 12px;
+    flex-direction: column;
+    gap: 8px;
+
+    & h2 {
+        @include font('Inter', 700, 61px, 120%, 0%);
+        color: white;
+    }
+
+    & p {
+        @include font('Inter', 400, 26px, 120%, 0%);
+        position: relative;
+        color: white;
+
+        &::after {
+            position: absolute;
+            bottom: -16px;
+            left: 50px;
+            width: 25%;
+            height: 3px;
+            background-color: currentColor;
+            color: #29ABE2;
+            content: "";
+            transform: translate(-50%);
+        }
+    }
+}
+
+.brand-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+@mixin font($family: 'Inter', $weight: 400, $size: 1rem, $line-height: 100%, $letter-spacing: 0%) {
+    font-family: $family;
+    font-weight: $weight;
+    font-size: $size;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+}
+
+// @mixin flex($direction: row, $justify-content: normal, $align-items: normal) {
+//     display: flex;
+//     justify-content: $justify-content;
+//     align-items: $align-items;
+//     flex-direction: $direction;
+// }

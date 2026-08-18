@@ -1,8 +1,9 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, signal} from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { Button } from '../../../shared/component/button/button';
+import { Overlay } from './overlay/overlay';
 
 interface ContactGroup {
   letter: string;
@@ -11,7 +12,7 @@ interface ContactGroup {
 
 @Component({
   selector: 'app-contacts',
-  imports: [Button, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [Button, RouterLink, RouterLinkActive, RouterOutlet, Overlay],
   templateUrl: './contacts.html',
   styleUrl: './contacts.scss',
 })
@@ -38,4 +39,14 @@ export class Contacts {
 
   protected readonly getAvatarColor = getAvatarColor;
   protected readonly getInitials = getInitials;
+  
+  isOverlayOpen = signal(false);
+
+    openOverlay(): void {
+        this.isOverlayOpen.set(true);
+    }
+
+    closeOverlay(): void {
+        this.isOverlayOpen.set(false);
+    }
 }
