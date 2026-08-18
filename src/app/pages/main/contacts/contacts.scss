@@ -31,10 +31,15 @@ hr {
 .contact {
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 20px;
   padding: 12px 8px;
   border-radius: 10px;
   cursor: pointer;
+
+  &__name {
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
 
   &:hover:not(.contact--active) {
     background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
@@ -57,18 +62,30 @@ hr {
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 400;
     flex-shrink: 0;
   }
 
   &__info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+    font-weight: 400;
   }
 
   &__email {
     color: #007cee;
     text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
@@ -127,19 +144,23 @@ hr {
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 2.9375rem;
+    font-weight: 500;
     flex-shrink: 0;
   }
 
   &__name {
     margin: 0 0 8px;
-    font-size: 32px;
+    font-size: 2.9375rem;
+    font-weight: 500;
   }
 
   &__actions {
     display: flex;
     gap: 16px;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 400;
   }
 
   &__action {
@@ -161,8 +182,8 @@ hr {
 
   &__section-title {
     margin: 32px 0 56px;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 400;
   }
 
   &__field {
@@ -173,11 +194,14 @@ hr {
   }
 
   &__label {
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 700;
   }
 
   &__value {
     color: #2a3647;
+    font-size: 1rem;
+    font-weight: 400;
 
     &--link,
     &--tel {

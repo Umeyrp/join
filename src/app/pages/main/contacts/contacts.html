@@ -5,9 +5,9 @@
   </app-button>
 
   @if (isLoading()) {
-    <p>Lädt…</p>
+    <p>Loading...</p>
   } @else if (loadError()) {
-    <p>Fehler beim Laden der Kontakte.</p>
+    <p>Error loading contacts.</p>
   } @else {
     @for (group of groups(); track group.letter) {
       <div class="contact-list__group">{{ group.letter }}</div>
@@ -23,7 +23,7 @@
           </div>
           <div class="contact__info">
             <span class="contact__name">{{ contact.name }}</span>
-            <span class="contact__email">{{ contact.email }}</span>
+            <span class="contact__email" [title]="contact.email">{{ contact.email }}</span>
           </div>
         </div>
       }
