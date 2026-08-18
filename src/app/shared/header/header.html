@@ -1,4 +1,15 @@
+<img class="logo--mobile" src="./icons/join_dark.svg" alt="Join Logo" />
 <span>Kanban Project Management Tool</span>
+
 @if (isLoggedIn) {
-  <div class="avatar">SM</div>
+  <div class="avatar" (click)="toggleMenu()">SM</div>
+
+  <div class="dropdown" [class.open]="isMenuOpen">
+    <ul>
+      <li routerLink="/help">Help</li>
+      <li routerLink="/legal-notice">Legal Notice</li>
+      <li routerLink="/privacy-policy">Privacy Policy</li>
+      <li>Logout</li>
+    </ul>
+  </div>
 }
