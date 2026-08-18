@@ -15,12 +15,12 @@
 
 .contact-card {
     animation: slide-in 0.3s ease-out;
-    margin-top: 40px;
+    margin-top: 32px;
 
     &__header {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 54px;
     }
 
     &__avatar {
@@ -28,7 +28,7 @@
         height: 120px;
         border: 3px solid #ffffff;
         border-radius: 70px;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -69,7 +69,7 @@
     }
 
     &__section-title {
-        margin: 32px 0 56px;
+        margin: 56px 0 56px;
         font-size: 1.25rem;
         font-weight: 400;
     }

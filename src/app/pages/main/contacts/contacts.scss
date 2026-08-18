@@ -7,7 +7,7 @@
 .contact-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     padding: 24px 16px;
     overflow-y: auto;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
@@ -109,10 +109,10 @@ hr {
     &__subtitle {
         font-weight: normal;
         font-size: 20px;
-        color: #666;
+        color: #2a3647;
     }
 }
 
-app-overlay{
+app-overlay {
     position: absolute;
 }
