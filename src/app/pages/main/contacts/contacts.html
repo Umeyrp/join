@@ -1,5 +1,38 @@
-<p>contacts works!</p>
-<button (click)="openOverlay()">open dialog</button>
-<button (click)="closeOverlay()">close dialog</button>
+<aside class="contact-list">
+  <app-button (click)="openOverlay()">
+    Add new contact
+    <img src="icons/person_add.svg" alt="" />
+  </app-button>
 
-<app-overlay [open]="isOverlayOpen()" (closed)="closeOverlay()"></app-overlay>
+  @if (isLoading()) {
+    <p>Lädt…</p>
+  } @else if (loadError()) {
+    <p>Fehler beim Laden der Kontakte.</p>
+  } @else {
+    @for (group of groups(); track group.letter) {
+      <div class="contact-list__group">{{ group.letter }}</div>
+      <hr />
+      @for (contact of group.contacts; track contact.id) {
+        <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
+          <div class="contact__avatar" [style.background-color]="getAvatarColor(contact.id)">
+            {{ getInitials(contact.name) }}
+          </div>
+          <div class="contact__info">
+            <span class="contact__name">{{ contact.name }}</span>
+            <span class="contact__email" [title]="contact.email">{{ contact.email }}</span>
+          </div>
+        </div>
+      }
+    }
+  }
+</aside>
+
+<section class="contact-detail">
+  <h1 class="contact-detail__title">
+    Contacts
+    <span class="contact-detail__divider"></span>
+    <span class="contact-detail__subtitle">Better with a team</span>
+  </h1>
+
+  <router-outlet></router-outlet>
+</section>
