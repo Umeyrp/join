@@ -12,11 +12,7 @@ export const routes: Routes = [
     component: Main,
     children: [
       { path: 'summary', component: Summary },
-      {
-        path: 'contacts',
-        component: Contacts,
-        children: [{ path: ':id', component: ContactDetails }],
-      },
+      { path: 'contacts', component: Contacts },
       { path: '', redirectTo: 'summary', pathMatch: 'full' },
     ],
   },
