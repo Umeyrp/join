@@ -1,4 +1,4 @@
-@if (open()) {
+@if (overlayisOpen()) {
 <div class="overlay-backdrop" animate.enter="backdrop-fade-in" animate.leave="backdrop-fade-out" (click)="onClose()">
     <div class="overlay-panel" animate.enter="panel-slide-in" animate.leave="panel-slide-out"
         (click)="$event.stopPropagation()">
@@ -19,8 +19,14 @@
                         fill="white" />
                 </svg>
                 <div class="text-wrapper">
+                    @if(overlayisEditMode()){
+                    <h2>Edit contact</h2>
+                    }@else {
                     <h2>Add contact</h2>
+                    }
+                    @if(!overlayisEditMode()){
                     <p>Tasks are better with a team!</p>
+                    }
                 </div>
             </div>
         </div>
@@ -39,6 +45,11 @@
                 </svg>
             </button>
             <div class="add-contact">
+                @if(overlayisEditMode() && contact(); as contact){
+                <div class="contact-initial" [style.background-color]="getAvatarColor(contact.id)">
+                    {{ getInitials(contact.name) }}
+                </div>
+                }@else {
                 <svg width="134" height="134" viewBox="0 0 134 134" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_d_576_4834)">
                         <rect x="7" y="7" width="120" height="120" rx="60" fill="white" />
@@ -69,12 +80,12 @@
                         </filter>
                     </defs>
                 </svg>
-
+                }
                 <div class="form-wrapper">
                     <form action="">
                         <div class="form-inputs">
                             <div class="input-wrapper">
-                                <input type="text" required placeholder="Name">
+                                <input type="text" required [value]="name()" placeholder="Name">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_495071_3774" style="mask-type:alpha" maskUnits="userSpaceOnUse"
@@ -89,7 +100,7 @@
                                 </svg>
                             </div>
                             <div class="input-wrapper">
-                                <input type="email" required placeholder="Email">
+                                <input type="email" [value]="email()" required placeholder="Email">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_495071_3781" style="mask-type:alpha" maskUnits="userSpaceOnUse"
@@ -104,7 +115,7 @@
                                 </svg>
                             </div>
                             <div class="input-wrapper">
-                                <input type="tel" required placeholder="Phone">
+                                <input type="tel" required [value]="phone()" placeholder="Phone">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_495071_3788" style="mask-type:alpha" maskUnits="userSpaceOnUse"
@@ -121,6 +132,26 @@
                             </div>
                         </div>
                         <div class="form-buttons">
+                            @if(overlayisEditMode()){
+                            <button type="button" class="cancel-button">
+                                Delete
+                            </button>
+                            <button class="submit-button">
+                                Save
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <mask id="mask0_495071_3045" style="mask-type:alpha" maskUnits="userSpaceOnUse"
+                                        x="0" y="0" width="24" height="24">
+                                        <rect width="24" height="24" fill="#D9D9D9" />
+                                    </mask>
+                                    <g mask="url(#mask0_495071_3045)">
+                                        <path
+                                            d="M9.55057 15.15L18.0256 6.675C18.2256 6.475 18.4631 6.375 18.7381 6.375C19.0131 6.375 19.2506 6.475 19.4506 6.675C19.6506 6.875 19.7506 7.1125 19.7506 7.3875C19.7506 7.6625 19.6506 7.9 19.4506 8.1L10.2506 17.3C10.0506 17.5 9.81724 17.6 9.55057 17.6C9.28391 17.6 9.05057 17.5 8.85057 17.3L4.55057 13C4.35057 12.8 4.25474 12.5625 4.26307 12.2875C4.27141 12.0125 4.37557 11.775 4.57557 11.575C4.77557 11.375 5.01307 11.275 5.28807 11.275C5.56307 11.275 5.80057 11.375 6.00057 11.575L9.55057 15.15Z"
+                                            fill="white" />
+                                    </g>
+                                </svg>
+                            </button>
+                            }@else {
                             <button type="button" class="cancel-button" (click)="onClose()">
                                 Cancel
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -146,6 +177,7 @@
                                     </g>
                                 </svg>
                             </button>
+                            }
                         </div>
                     </form>
                 </div>
