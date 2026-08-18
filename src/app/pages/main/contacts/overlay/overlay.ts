@@ -13,8 +13,6 @@ export class Overlay {
     overlayisEditMode = input.required<boolean>();
     contact = input.required<Contact | undefined>();
     private contactsService = inject(ContactsService);
-
-    open = input.required<boolean>();
     closed = output<void>();
 
     isSaving = signal(false);
