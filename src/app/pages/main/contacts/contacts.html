@@ -1,0 +1,5 @@
+<p>contacts works!</p>
+<button (click)="openOverlay()">open dialog</button>
+<button (click)="closeOverlay()">close dialog</button>
+
+<app-overlay [open]="isOverlayOpen()" (closed)="closeOverlay()"></app-overlay>

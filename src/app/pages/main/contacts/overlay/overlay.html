@@ -1,0 +1,33 @@
+@if (open()) {
+<div class="overlay-backdrop" animate.enter="backdrop-fade-in" animate.leave="backdrop-fade-out" (click)="onClose()">
+    <div class="overlay-panel" animate.enter="panel-slide-in" animate.leave="panel-slide-out"
+        (click)="$event.stopPropagation()">
+        <!-- <button type="button" class="overlay-close" (click)="onClose()" aria-label="Schließen">
+            ✕
+        </button> -->
+        <div class="brand-panel">
+            <div class="brand-content">
+                <svg width="56" height="67" viewBox="0 0 56 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M39.8358 0H27.5203V13.8957H39.8358V0Z" fill="white" />
+                    <path
+                        d="M27.5203 25.197H39.8358V44.7947C39.8921 49.5105 38.5236 54.1362 35.9043 58.0839C33.3181 61.9194 28.3256 66.4829 19.089 66.4829C9.02818 66.4829 3.16413 61.8167 0 59.2597L7.76822 49.8621C10.8566 52.3352 13.8312 54.3696 19.1363 54.3696C23.1531 54.3696 24.7541 52.7645 25.692 51.3646C26.967 49.4203 27.6265 47.1465 27.5866 44.8321L27.5203 25.197Z"
+                        fill="white" />
+                    <path d="M21.2395 16.4248H8.92399V28.5567H21.2395V16.4248Z" fill="#29ABE2" />
+                    <path
+                        d="M46.2872 60.7904C46.2872 63.3754 44.9514 64.7659 43.0852 64.7659C41.2189 64.7659 39.9968 63.1141 39.9968 60.9211C39.9968 58.728 41.2568 56.9922 43.1894 56.9922C45.122 56.9922 46.2872 58.7 46.2872 60.7904ZM41.4273 60.8931C41.4273 62.4516 42.062 63.5994 43.1515 63.5994C44.2409 63.5994 44.8567 62.3862 44.8567 60.7997C44.8567 59.4092 44.2883 58.1027 43.1515 58.1027C42.0147 58.1027 41.4273 59.3626 41.4273 60.8931Z"
+                        fill="white" />
+                    <path d="M48.7313 57.104V64.6445H47.3672V57.104H48.7313Z" fill="white" />
+                    <path
+                        d="M50.2092 64.6445V57.104H51.7249L53.3544 60.2116C53.7738 61.0242 54.147 61.8592 54.4722 62.7127C54.387 61.7795 54.3491 60.7063 54.3491 59.5117V57.104H55.5996V64.6445H54.188L52.5397 61.4715C52.1032 60.638 51.7142 59.7812 51.3744 58.9051C51.3744 59.8384 51.4407 60.8929 51.4407 62.1901V64.6351L50.2092 64.6445Z"
+                        fill="white" />
+                </svg>
+                <div class="text-wrapper">
+                    <h2>Add contact</h2>
+                    <p>Tasks are better with a team!</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-panel"></div>
+    </div>
+</div>
+}
