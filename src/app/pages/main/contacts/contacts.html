@@ -5,28 +5,32 @@
     </app-button>
 
     @if (isLoading()) {
-    <p>Lädt…</p>
+        <p>Loading...</p>
     } @else if (loadError()) {
-    <p>Fehler beim Laden der Kontakte.</p>
+        <p>Error while loading contacts.</p>
     } @else {
-    @for (group of groups(); track group.letter) {
-    <div class="contact-list__group">{{ group.letter }}</div>
-    <hr />
-    @for (contact of group.contacts; track contact.id) {
-    <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
-        <div class="contact__avatar" [style.background-color]="getAvatarColor(contact.id)">
-            {{ getInitials(contact.name) }}
-        </div>
-        <div class="contact__info">
-            <span class="contact__name">{{ contact.name }}</span>
-            <span class="contact__email" [title]="contact.email">{{ contact.email }}</span>
-        </div>
-    </div>
-    }
-    }
+        @for (group of groups(); track group.letter) {
+            <div class="contact-list__group">{{ group.letter }}</div>
+            <hr />
+            @for (contact of group.contacts; track contact.id) {
+                <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
+                    <div
+                        class="contact__avatar"
+                        [style.background-color]="getAvatarColor(contact.id)"
+                    >
+                        {{ getInitials(contact.name) }}
+                    </div>
+                    <div class="contact__info">
+                        <span class="contact__name">{{ contact.name }}</span>
+                        <span class="contact__email" [title]="contact.email">{{
+                            contact.email
+                        }}</span>
+                    </div>
+                </div>
+            }
+        }
     }
 </aside>
-
 
 <section class="contact-detail">
     <h1 class="contact-detail__title">

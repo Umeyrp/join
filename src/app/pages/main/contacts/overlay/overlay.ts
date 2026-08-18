@@ -1,4 +1,5 @@
-import { Component, effect, input, output, signal } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
+import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/contact';
 
 @Component({
@@ -11,7 +12,13 @@ export class Overlay {
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
     contact = input.required<Contact | undefined>();
+    private contactsService = inject(ContactsService);
+
+    open = input.required<boolean>();
     closed = output<void>();
+
+    isSaving = signal(false);
+
     onClose(): void {
         this.closed.emit();
     }
@@ -33,4 +40,14 @@ export class Overlay {
 
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
+    async onSubmit(event: Event, name: string, email: string, phone: string): Promise<void> {
+        event.preventDefault();
+        this.isSaving.set(true);
+        try {
+            await this.contactsService.addContact({ name, email, phone });
+            this.onClose();
+        } finally {
+            this.isSaving.set(false);
+        }
+    }
 }
