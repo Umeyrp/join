@@ -1,8 +1,8 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { Button } from '../../../shared/component/button/button';
-import { PhoneFormatPipe } from '../../../shared/pipes/phone-format-pipe';
 
 interface ContactGroup {
   letter: string;
@@ -11,7 +11,7 @@ interface ContactGroup {
 
 @Component({
   selector: 'app-contacts',
-  imports: [Button, PhoneFormatPipe],
+  imports: [Button, RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './contacts.html',
   styleUrl: './contacts.scss',
 })
@@ -20,7 +20,6 @@ export class Contacts {
 
   protected readonly isLoading = this.contactsService.isLoading;
   protected readonly loadError = this.contactsService.loadError;
-  protected readonly selectedContactId = signal<number | null>(null);
 
   groups = computed<ContactGroup[]>(() => {
     const contacts = this.contactsService.contacts();
@@ -36,14 +35,6 @@ export class Contacts {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([letter, contacts]) => ({ letter, contacts }));
   });
-
-  protected readonly selectedContact = computed(() =>
-    this.contactsService.contacts().find((contact) => contact.id === this.selectedContactId()),
-  );
-
-  protected selectContact(id: number): void {
-    this.selectedContactId.set(id);
-  }
 
   protected readonly getAvatarColor = getAvatarColor;
   protected readonly getInitials = getInitials;
