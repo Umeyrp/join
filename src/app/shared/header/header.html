@@ -2,14 +2,14 @@
 <span>Kanban Project Management Tool</span>
 
 @if (isLoggedIn) {
-  <div class="avatar" (click)="toggleMenu()">SM</div>
+    <div class="avatar" (click)="toggleMenu()">SM</div>
 
-  <div class="dropdown" [class.open]="isMenuOpen">
-    <ul>
-      <li routerLink="/help" (click)="toggleMenu()">Help</li>
-      <li routerLink="/legal-notice" (click)="toggleMenu()">Legal Notice</li>
-      <li routerLink="/privacy-policy" (click)="toggleMenu()">Privacy Policy</li>
-      <li>Logout</li>
-    </ul>
-  </div>
+    <div class="dropdown" [class.open]="isMenuOpen()">
+        <ul>
+            <li routerLink="/help" (click)="toggleMenu()" class="dropdown__help">Help</li>
+            <li routerLink="/legal-notice" (click)="toggleMenu()">Legal Notice</li>
+            <li routerLink="/privacy-policy" (click)="toggleMenu()">Privacy Policy</li>
+            <li>Logout</li>
+        </ul>
+    </div>
 }
