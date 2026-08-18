@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
 import { Main } from './pages/main/main';
 import { Summary } from './pages/main/summary/summary';
+import { Contacts } from './pages/main/contacts/contacts';
 
 export const routes: Routes = [
   { path: 'login', component: Login },
@@ -10,6 +11,7 @@ export const routes: Routes = [
     component: Main,
     children: [
       { path: 'summary', component: Summary },
+      { path: 'contacts', component: Contacts },
       { path: '', redirectTo: 'summary', pathMatch: 'full' },
     ],
   },

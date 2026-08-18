@@ -45,6 +45,10 @@ export class Contacts {
     this.selectedContactId.set(id);
   }
 
+  protected telLink(phone: string): string {
+    return 'tel:' + phone.replace(/\s+/g, '');
+  }
+
   protected readonly getAvatarColor = getAvatarColor;
   protected readonly getInitials = getInitials;
 }

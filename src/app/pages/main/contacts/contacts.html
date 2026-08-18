@@ -72,7 +72,9 @@
 
       <div class="contact-card__field">
         <span class="contact-card__label">Phone</span>
-        <span class="contact-card__value">{{ contact.phone | phoneFormat }}</span>
+        <a class="contact-card__value contact-card__value--tel" [href]="telLink(contact.phone)">{{
+          contact.phone | phoneFormat
+        }}</a>
       </div>
     </div>
   }

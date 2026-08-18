@@ -179,8 +179,19 @@ hr {
   &__value {
     color: #2a3647;
 
+    &--link,
+    &--tel {
+      &:hover {
+        font-weight: bold;
+      }
+    }
+
     &--link {
       color: #007cee;
+      text-decoration: none;
+    }
+
+    &--tel {
       text-decoration: none;
     }
   }
