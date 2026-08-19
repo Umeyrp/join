@@ -16,7 +16,7 @@ export class Overlay {
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
     contact = input.required<Contact | null>();
-    closed = output();
+    closed = output<'created' | 'edited' | 'deleted' | null>();
     isSaving = signal(false);
 
     name = signal('');
@@ -32,8 +32,8 @@ export class Overlay {
         });
     }
 
-    onClose() {
-        this.closed.emit();
+    onClose(action: 'created' | 'edited' | 'deleted' | null = null) {
+        this.closed.emit(action);
     }
 
     async onSubmit(event: Event, name: string, email: string, phone: string): Promise<void> {
@@ -46,9 +46,10 @@ export class Overlay {
                     email,
                     phone,
                 });
+                this.onClose('edited');
             } else {
                 await this.contactsService.addContact({ name, email, phone });
-                this.onClose();
+                this.onClose('created');
             }
         } finally {
             this.isSaving.set(false);
@@ -59,7 +60,7 @@ export class Overlay {
         this.isSaving.set(true);
         try {
             await this.contactsService.deleteContact(this.contact()!.id);
-            this.onClose();
+            this.onClose('deleted');
         } finally {
             this.isSaving.set(false);
         }

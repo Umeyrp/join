@@ -42,4 +42,4 @@
     <router-outlet></router-outlet>
 </section>
 
-<app-overlay [overlayisOpen]="contactsOverlayService.isOpen()" [overlayisEditMode]="contactsOverlayService.isEditMode()" (closed)="contactsOverlayService.closeOverlay()" [contact]="contactsOverlayService.selectedContact()"></app-overlay>
+<app-overlay [overlayisOpen]="contactsOverlayService.isOpen()" [overlayisEditMode]="contactsOverlayService.isEditMode()" (closed)="contactsOverlayService.closeOverlay($event)" [contact]="contactsOverlayService.selectedContact()"></app-overlay>
