@@ -1,0 +1,54 @@
+.container {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  grid-template-rows: 96px 1fr;
+  grid-template-areas:
+    'navbar header'
+    'navbar content';
+  height: 100dvh;
+}
+
+app-navbar {
+  grid-area: navbar;
+}
+app-header {
+  grid-area: header;
+}
+.content {
+  grid-area: content;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .container {
+    display: block;
+    height: 100dvh;
+  }
+
+  app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 100;
+  }
+
+  app-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 100;
+  }
+
+  .content {
+    position: fixed;
+    top: 80px; // Header-Höhe
+    bottom: 80px; // Navbar-Höhe
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,132 @@
+:host {
+    display: block;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.contact-card {
+    animation: slide-in 0.3s ease-out;
+    margin-top: 32px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 54px;
+    }
+
+    &__avatar {
+        width: 120px;
+        height: 120px;
+        border: 3px solid #ffffff;
+        border-radius: 70px;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.9375rem;
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+
+    &__name {
+        margin: 0 0 8px;
+        font-size: 2.9375rem;
+        font-weight: 500;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 16px;
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 60px;
+        background: none;
+        border: none;
+        color: #2a3647;
+        cursor: pointer;
+        padding: 0;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 400;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+
+    &__section-title {
+        margin: 56px 0 56px;
+        font-size: 1.25rem;
+        font-weight: 400;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 16px;
+    }
+
+    &__label {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    &__value {
+        color: #2a3647;
+        font-size: 1rem;
+        font-weight: 400;
+
+        &--link,
+        &--tel {
+            &:hover {
+                font-weight: bold;
+            }
+        }
+
+        &--link {
+            color: #007cee;
+            text-decoration: none;
+        }
+
+        &--tel {
+            text-decoration: none;
+        }
+    }
+}
+
+.toast {
+    width: 326px;
+    height: 74px;
+    padding: 25px 25px;
+    border-radius: 20px;
+    background-color: #2a3647;
+    box-shadow: 0 0 4px 0 #00000026;
+
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: white;
+
+    position: fixed;
+    bottom: 80px;
+    right: 50%;
+    animation: slide-in 0.3s ease-out;
+}

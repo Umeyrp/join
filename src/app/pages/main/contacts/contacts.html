@@ -1,0 +1,50 @@
+<aside class="contact-list">
+    <app-button
+        variant="primary-contact"
+        (click)="contactsOverlayService.openAddOverlay()"
+    ></app-button>
+
+    @if (isLoading()) {
+        <p>Loading...</p>
+    } @else if (loadError()) {
+        <p>Error while loading contacts.</p>
+    } @else {
+        @for (group of groups(); track group.letter) {
+            <div class="contact-list__group">{{ group.letter }}</div>
+            <hr />
+            @for (contact of group.contacts; track contact.id) {
+                <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
+                    <div
+                        class="contact__avatar"
+                        [style.background-color]="getAvatarColor(contact.id)"
+                    >
+                        {{ getInitials(contact.name) }}
+                    </div>
+                    <div class="contact__info">
+                        <span class="contact__name">{{ contact.name }}</span>
+                        <span class="contact__email" [title]="contact.email">{{
+                            contact.email
+                        }}</span>
+                    </div>
+                </div>
+            }
+        }
+    }
+</aside>
+
+<section class="contact-detail">
+    <h1 class="contact-detail__title">
+        Contacts
+        <span class="contact-detail__divider"></span>
+        <span class="contact-detail__subtitle">Better with a team</span>
+    </h1>
+
+    <router-outlet></router-outlet>
+</section>
+
+<app-overlay
+    [overlayisOpen]="contactsOverlayService.isOpen()"
+    [overlayisEditMode]="contactsOverlayService.isEditMode()"
+    (closed)="contactsOverlayService.closeOverlay($event)"
+    [contact]="contactsOverlayService.selectedContact()"
+></app-overlay>
