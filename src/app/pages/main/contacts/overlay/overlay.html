@@ -152,11 +152,13 @@
                             <div class="form-buttons">
                                 @if (overlayisEditMode()) {
                                 <app-button variant="delete" (click)="onDelete()"></app-button>
-                                <app-button variant="secondary" type="submit">Save</app-button>
+                                <app-button variant="secondary" [disabled]="contactForm().invalid()" [isSaving]="isSaving()"
+                                    type="submit">Save</app-button>
                                 } @else {
                                 <app-button variant="cancel" (click)="onClose()"></app-button>
-                                <app-button variant="secondary" type="submit">Create contact</app-button>
-                                }
+                                <app-button variant="secondary" type="submit" [disabled]="contactForm().invalid()" [isSaving]="isSaving()">
+                                    Create contact
+                                </app-button> }
                             </div>
                         </div>
                     </form>

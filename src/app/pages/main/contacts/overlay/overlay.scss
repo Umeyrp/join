@@ -254,11 +254,6 @@
     @include font('Inter', 700, 21px, 100%, 0%);
     transition: all 125ms ease-in-out;
 
-    &.disabled {
-        background-color: #5e6266;
-        cursor: not-allowed;
-    }
-
     &:hover {
         background: #124658;
         box-shadow: 0 4px 4px 0 #00000040;

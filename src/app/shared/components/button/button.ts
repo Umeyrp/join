@@ -11,6 +11,8 @@ export class Button {
         'primary-contact',
     );
     type = input<'button' | 'submit'>('button');
+    disabled = input<boolean>();
+    isSaving = input<boolean>();
     styleClass = computed(() => {
         const variant = this.variant();
         if (variant.startsWith('primary')) return 'primary';
