@@ -38,19 +38,19 @@ export class Overlay {
     });
 
     contactForm = form(this.contactModel, (schemaPath) => {
-        required(schemaPath.name, { message: 'Vor- und Nachname ist erforderlich' });
+        required(schemaPath.name, { message: 'First and last name are required' });
         pattern(schemaPath.name, /^\p{L}+ \p{L}+$/u, {
-            message: 'Bitte Vor- und Nachnamen eingeben',
+            message: 'Please enter your first and last name',
         });
 
-        required(schemaPath.email, { message: 'E-Mail ist erforderlich' });
+        required(schemaPath.email, { message: 'Email is required' });
         pattern(schemaPath.email, /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, {
-            message: 'Bitte gültige E-Mail-Adresse eingeben',
+            message: 'Please enter a valid email address',
         });
 
-        required(schemaPath.phone, { message: 'Telefonnummer ist erforderlich' });
+        required(schemaPath.phone, { message: 'Phone number is required' });
         pattern(schemaPath.phone, /^\+?[0-9\s().-]{7,20}$/, {
-            message: 'Bitte gültige Telefonnummer eingeben',
+            message: 'Please enter a valid phone number',
         });
     });
 
