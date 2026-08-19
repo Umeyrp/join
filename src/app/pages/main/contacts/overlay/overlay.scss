@@ -217,49 +217,6 @@
     }
 }
 
-.cancel-button {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 16px;
-    background: none;
-    border: 1px solid #2a3647;
-    border-radius: 10px;
-    color: #2a3647;
-    cursor: pointer;
-    @include font('Inter', 400, 20px, 100%, 0%);
-    transition: all 125ms ease-in-out;
-    box-shadow: 0 0 0 0px transparent;
-
-    &:hover {
-        border-color: #124658;
-        box-shadow:
-            0 0 0 1px #124658,
-            0 4px 4px 0 #00000040;
-        transition: all 125ms ease-in-out;
-    }
-}
-
-.submit-button {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 16px;
-    background: #2a3647;
-    border: 1px solid #2a3647;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    @include font('Inter', 700, 21px, 100%, 0%);
-    transition: all 125ms ease-in-out;
-
-    &:hover {
-        background: #124658;
-        box-shadow: 0 4px 4px 0 #00000040;
-        transition: all 125ms ease-in-out;
-    }
-}
-
 .contact-initial {
     width: 120px;
     height: 120px;
