@@ -13,8 +13,6 @@ import {
 import { Router } from '@angular/router';
 import { Button } from '../../../../shared/components/button/button';
 
-
-
 @Component({
     selector: 'app-overlay',
     imports: [FormField, Button],
@@ -90,8 +88,12 @@ export class Overlay {
                     });
                     this.onClose('edited');
                 } else {
-                                  const newContact = await this.contactsService.addContact({ name, email, phone });
-                this.router.navigate(['/contacts', newContact.id]);
+                    const newContact = await this.contactsService.addContact({
+                        name,
+                        email,
+                        phone,
+                    });
+                    this.router.navigate(['/contacts', newContact.id]);
                     this.onClose('created');
                 }
                 return null;

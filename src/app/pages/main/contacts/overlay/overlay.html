@@ -135,8 +135,8 @@
                                 @for (err of contactForm.phone().errors(); track err.kind) {
                                 <span class="error">{{ err.message }}</span>
                                 }
-                        </div>
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                }
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_495071_3788" style="mask-type: alpha" maskUnits="userSpaceOnUse"
                                         x="0" y="0" width="24" height="24">
@@ -148,17 +148,17 @@
                                             fill="#6B6B6B" />
                                     </g>
                                 </svg>
-                                             <div class="form-buttons">
+                            </div>
+                            <div class="form-buttons">
                                 @if (overlayisEditMode()) {
-                                    <app-button variant="delete" (click)="onDelete()"></app-button>
-                                    <app-button variant="secondary" type="submit">Save</app-button>
+                                <app-button variant="delete" (click)="onDelete()"></app-button>
+                                <app-button variant="secondary" type="submit">Save</app-button>
                                 } @else {
-                                    <app-button variant="cancel" (click)="onClose()"></app-button>
-                                    <app-button variant="secondary" type="submit"
-                                        >Create contact</app-button
-                                    >
+                                <app-button variant="cancel" (click)="onClose()"></app-button>
+                                <app-button variant="secondary" type="submit">Create contact</app-button>
                                 }
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>
