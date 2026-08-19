@@ -8,7 +8,7 @@
             <h2 class="contact-card__name">{{ contact.name }}</h2>
             <div class="contact-card__actions">
                 <button type="button" class="contact-card__action"
-                    (click)="contactsOverlayService.openEditOverlay(this.contact())">
+                    (click)="contactsOverlayService.openEditOverlay(contact)">
                     <img src="icons/edit.svg" alt="" />
                     Edit
                 </button>

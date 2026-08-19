@@ -9,17 +9,15 @@ import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/con
     styleUrl: './overlay.scss',
 })
 export class Overlay {
+    protected readonly getAvatarColor = getAvatarColor;
+    protected readonly getInitials = getInitials;
+    private contactsService = inject(ContactsService);
+
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
-    contact = input.required<Contact | undefined>();
-    private contactsService = inject(ContactsService);
-    closed = output<void>();
-
+    contact = input.required<Contact | null>();
+    closed = output();
     isSaving = signal(false);
-
-    onClose(): void {
-        this.closed.emit();
-    }
 
     name = signal('');
     email = signal('');
@@ -27,8 +25,6 @@ export class Overlay {
 
     constructor() {
         effect(() => {
-            console.log(this.contact());
-
             const c = this.contact();
             this.name.set(c?.name ?? '');
             this.email.set(c?.email ?? '');
@@ -36,8 +32,10 @@ export class Overlay {
         });
     }
 
-    protected readonly getAvatarColor = getAvatarColor;
-    protected readonly getInitials = getInitials;
+    onClose() {
+        this.closed.emit();
+    }
+
     async onSubmit(event: Event, name: string, email: string, phone: string): Promise<void> {
         event.preventDefault();
         this.isSaving.set(true);
