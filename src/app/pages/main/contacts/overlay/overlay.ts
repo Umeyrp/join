@@ -1,6 +1,7 @@
 import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/contact';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-overlay',
@@ -12,6 +13,7 @@ export class Overlay {
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
     private contactsService = inject(ContactsService);
+    private router = inject(Router);
 
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
@@ -48,7 +50,8 @@ export class Overlay {
                 });
                 this.onClose('edited');
             } else {
-                await this.contactsService.addContact({ name, email, phone });
+                const newContact = await this.contactsService.addContact({ name, email, phone });
+                this.router.navigate(['/contacts', newContact.id]);
                 this.onClose('created');
             }
         } finally {
