@@ -43,4 +43,8 @@
             >
         </div>
     </div>
+
+    @if (contactsOverlayService.lastAction()) {
+        <div class="toast">Contact successfully {{ contactsOverlayService.lastAction() }}</div>
+    }
 }

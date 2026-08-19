@@ -6,6 +6,7 @@ export class ContactsOverlayService {
     isOpen = signal(false);
     isEditMode = signal(false);
     selectedContact = signal<Contact | null>(null);
+    lastAction = signal<'created' | 'edited' | 'deleted' | null>(null);
 
     openAddOverlay() {
         this.isEditMode.set(false);
@@ -19,7 +20,8 @@ export class ContactsOverlayService {
         this.isOpen.set(true);
     }
 
-    closeOverlay() {
+    closeOverlay(action: 'created' | 'edited' | 'deleted' | null = null) {
         this.isOpen.set(false);
+        this.lastAction.set(action);
     }
 }

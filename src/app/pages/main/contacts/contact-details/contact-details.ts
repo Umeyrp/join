@@ -1,4 +1,4 @@
-import { Component, inject, input, computed } from '@angular/core';
+import { Component, inject, input, computed, effect } from '@angular/core';
 import { ContactsService } from '../../../../core/contacts.service';
 import { getAvatarColor, getInitials } from '../../../../interfaces/contact';
 import { PhoneFormatPipe } from '../../../../shared/pipes/phone-format-pipe';
@@ -30,4 +30,12 @@ export class ContactDetails {
     async onDelete() {
         await this.contactsService.deleteContact(this.contact()!.id);
     }
+
+    private readonly toastEffect = effect(() => {
+        if (this.contactsOverlayService.lastAction()) {
+            setTimeout(() => {
+                this.contactsOverlayService.lastAction.set(null);
+            }, 3000);
+        }
+    });
 }
