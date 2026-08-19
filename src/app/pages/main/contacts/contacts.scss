@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 :host {
     display: grid;
     grid-template-columns: 300px 1fr;
@@ -46,22 +48,22 @@ hr {
     }
 
     &.contact--active {
-        background-color: #2a3647;
+        background-color: $color-dark;
 
         .contact__name {
-            color: white;
+            color: $color-white;
         }
     }
 
     &__avatar {
         width: 42px;
         height: 42px;
-        border: 2px solid white;
+        border: 2px solid $color-white;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: $color-white;
         font-size: 1rem;
         font-weight: 400;
         flex-shrink: 0;
@@ -79,7 +81,7 @@ hr {
     }
 
     &__email {
-        color: #007cee;
+        color: $color-link;
         text-decoration: none;
         font-size: 1rem;
         font-weight: 400;
@@ -91,7 +93,7 @@ hr {
 
 .contact-detail {
     padding: 110px 0 0 58px;
-    background-color: #f6f7f8;
+    background-color: $color-section-bg;
 
     &__title {
         display: flex;
@@ -103,13 +105,13 @@ hr {
     &__divider {
         width: 1px;
         height: 40px;
-        background: #29abe2;
+        background: $color-hover-blue;
     }
 
     &__subtitle {
         font-weight: normal;
         font-size: 20px;
-        color: #2a3647;
+        color: $color-dark;
     }
 }
 

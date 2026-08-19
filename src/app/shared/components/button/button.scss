@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .button {
     display: flex;
     align-items: center;
@@ -12,47 +14,47 @@
     cursor: pointer;
 
     &.primary {
-        background-color: #2a3647;
-        color: white;
+        background-color: $color-dark;
+        color: $color-white;
 
         &:hover {
-            background-color: #29abe2;
+            background-color: $color-hover-blue;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         &:active {
-            background-color: #091931;
+            background-color: $color-dark-active;
         }
     }
 
     &.secondary {
-        background-color: #2a3647;
-        color: white;
+        background-color: $color-dark;
+        color: $color-white;
 
         &:hover {
-            background-color: #124658;
+            background-color: $color-hover-teal;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         &:active {
-            background-color: #091931;
+            background-color: $color-dark-active;
         }
     }
 
     &.cancel {
         background-color: transparent;
-        border-color: #2a3647;
-        color: #2a3647;
+        border-color: $color-dark;
+        color: $color-dark;
 
         &:hover {
-            border-color: #124658;
-            color: #124658;
+            border-color: $color-hover-teal;
+            color: $color-hover-teal;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         &:active {
-            border-color: #091931;
-            color: #091931;
+            border-color: $color-dark-active;
+            color: $color-dark-active;
         }
     }
 }
