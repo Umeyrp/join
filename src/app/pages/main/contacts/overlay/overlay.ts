@@ -40,7 +40,25 @@ export class Overlay {
         event.preventDefault();
         this.isSaving.set(true);
         try {
-            await this.contactsService.addContact({ name, email, phone });
+            if (this.overlayisEditMode()) {
+                await this.contactsService.updateContact(this.contact()!.id, {
+                    name,
+                    email,
+                    phone,
+                });
+            } else {
+                await this.contactsService.addContact({ name, email, phone });
+                this.onClose();
+            }
+        } finally {
+            this.isSaving.set(false);
+        }
+    }
+
+    async onDelete() {
+        this.isSaving.set(true);
+        try {
+            await this.contactsService.deleteContact(this.contact()!.id);
             this.onClose();
         } finally {
             this.isSaving.set(false);

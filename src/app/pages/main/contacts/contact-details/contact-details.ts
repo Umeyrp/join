@@ -26,4 +26,8 @@ export class ContactDetails {
 
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
+
+    async onDelete() {
+        await this.contactsService.deleteContact(this.contact()!.id);
+    }
 }
