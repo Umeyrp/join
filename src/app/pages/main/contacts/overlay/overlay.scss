@@ -210,7 +210,7 @@
     padding-right: 48px;
     padding-left: 80px;
 
-    & > svg {
+    &>svg {
         flex-shrink: 0;
         width: 120px;
         height: 120px;
@@ -253,6 +253,11 @@
     @include font('Inter', 700, 21px, 100%, 0%);
     transition: all 125ms ease-in-out;
 
+    &.disabled {
+        background-color: #5e6266;
+        cursor: not-allowed;
+    }
+
     &:hover {
         background: #124658;
         box-shadow: 0 4px 4px 0 #00000040;
@@ -273,4 +278,11 @@
     font-size: 2.9375rem;
     font-weight: 500;
     flex-shrink: 0;
+}
+
+.error {
+    position: absolute;
+    left: 0;
+    top: 54px;
+    color: #E53E3E;
 }
