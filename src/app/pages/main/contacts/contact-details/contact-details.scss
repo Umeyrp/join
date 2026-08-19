@@ -207,8 +207,8 @@
     letter-spacing: 0%;
     color: $color-white;
 
-    position: fixed;
-    bottom: 80px;
-    right: 50%;
+    position: absolute;
+    bottom: 40px;
+    right: 50px;
     animation: slide-in 0.3s ease-out;
 }
