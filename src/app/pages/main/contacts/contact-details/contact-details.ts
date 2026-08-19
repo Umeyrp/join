@@ -29,6 +29,7 @@ export class ContactDetails {
 
     async onDelete() {
         await this.contactsService.deleteContact(this.contact()!.id);
+        this.contactsOverlayService.lastAction.set('deleted');
     }
 
     private readonly toastEffect = effect(() => {

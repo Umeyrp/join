@@ -10,10 +10,14 @@ import {
     FormField,
     submit,
 } from '@angular/forms/signals';
+import { Router } from '@angular/router';
+import { Button } from '../../../../shared/components/button/button';
+
+
 
 @Component({
     selector: 'app-overlay',
-    imports: [FormField],
+    imports: [FormField, Button],
     templateUrl: './overlay.html',
     styleUrl: './overlay.scss',
 })
@@ -21,6 +25,7 @@ export class Overlay {
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
     private contactsService = inject(ContactsService);
+    private router = inject(Router);
 
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
@@ -85,7 +90,8 @@ export class Overlay {
                     });
                     this.onClose('edited');
                 } else {
-                    await this.contactsService.addContact({ name, email, phone });
+                                  const newContact = await this.contactsService.addContact({ name, email, phone });
+                this.router.navigate(['/contacts', newContact.id]);
                     this.onClose('created');
                 }
                 return null;
