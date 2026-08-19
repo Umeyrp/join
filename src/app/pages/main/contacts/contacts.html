@@ -1,8 +1,8 @@
 <aside class="contact-list">
-    <app-button (click)="contactsOverlayService.openAddOverlay()">
-        Add new contact
-        <img src="icons/person_add.svg" alt="" />
-    </app-button>
+    <app-button
+        variant="primary-contact"
+        (click)="contactsOverlayService.openAddOverlay()"
+    ></app-button>
 
     @if (isLoading()) {
         <p>Loading...</p>
@@ -42,4 +42,9 @@
     <router-outlet></router-outlet>
 </section>
 
-<app-overlay [overlayisOpen]="contactsOverlayService.isOpen()" [overlayisEditMode]="contactsOverlayService.isEditMode()" (closed)="contactsOverlayService.closeOverlay($event)" [contact]="contactsOverlayService.selectedContact()"></app-overlay>
+<app-overlay
+    [overlayisOpen]="contactsOverlayService.isOpen()"
+    [overlayisEditMode]="contactsOverlayService.isEditMode()"
+    (closed)="contactsOverlayService.closeOverlay($event)"
+    [contact]="contactsOverlayService.selectedContact()"
+></app-overlay>

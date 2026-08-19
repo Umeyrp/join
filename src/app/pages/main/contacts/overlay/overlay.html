@@ -284,92 +284,13 @@
                             </div>
                             <div class="form-buttons">
                                 @if (overlayisEditMode()) {
-                                    <button
-                                        type="button"
-                                        class="cancel-button"
-                                        (click)="onDelete()"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="submit-button"
-                                        [disabled]="isSaving()"
-                                    >
-                                        Save
-                                        <svg
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <mask
-                                                id="mask0_495071_3045"
-                                                style="mask-type: alpha"
-                                                maskUnits="userSpaceOnUse"
-                                                x="0"
-                                                y="0"
-                                                width="24"
-                                                height="24"
-                                            >
-                                                <rect width="24" height="24" fill="#D9D9D9" />
-                                            </mask>
-                                            <g mask="url(#mask0_495071_3045)">
-                                                <path
-                                                    d="M9.55057 15.15L18.0256 6.675C18.2256 6.475 18.4631 6.375 18.7381 6.375C19.0131 6.375 19.2506 6.475 19.4506 6.675C19.6506 6.875 19.7506 7.1125 19.7506 7.3875C19.7506 7.6625 19.6506 7.9 19.4506 8.1L10.2506 17.3C10.0506 17.5 9.81724 17.6 9.55057 17.6C9.28391 17.6 9.05057 17.5 8.85057 17.3L4.55057 13C4.35057 12.8 4.25474 12.5625 4.26307 12.2875C4.27141 12.0125 4.37557 11.775 4.57557 11.575C4.77557 11.375 5.01307 11.275 5.28807 11.275C5.56307 11.275 5.80057 11.375 6.00057 11.575L9.55057 15.15Z"
-                                                    fill="white"
-                                                />
-                                            </g>
-                                        </svg>
-                                    </button>
+                                    <app-button variant="delete" (click)="onDelete()"></app-button>
+                                    <app-button variant="secondary" type="submit">Save</app-button>
                                 } @else {
-                                    <button type="button" class="cancel-button" (click)="onClose()">
-                                        Cancel
-                                        <svg
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M12.001 12.0001L17.244 17.2431M6.758 17.2431L12.001 12.0001L6.758 17.2431ZM17.244 6.75708L12 12.0001L17.244 6.75708ZM12 12.0001L6.758 6.75708L12 12.0001Z"
-                                                stroke="#2A3647"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            />
-                                        </svg>
-                                    </button>
-                                    <button class="submit-button" [disabled]="isSaving()">
-                                        Create contact
-                                        <svg
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <mask
-                                                id="mask0_495071_3045"
-                                                style="mask-type: alpha"
-                                                maskUnits="userSpaceOnUse"
-                                                x="0"
-                                                y="0"
-                                                width="24"
-                                                height="24"
-                                            >
-                                                <rect width="24" height="24" fill="#D9D9D9" />
-                                            </mask>
-                                            <g mask="url(#mask0_495071_3045)">
-                                                <path
-                                                    d="M9.55057 15.15L18.0256 6.675C18.2256 6.475 18.4631 6.375 18.7381 6.375C19.0131 6.375 19.2506 6.475 19.4506 6.675C19.6506 6.875 19.7506 7.1125 19.7506 7.3875C19.7506 7.6625 19.6506 7.9 19.4506 8.1L10.2506 17.3C10.0506 17.5 9.81724 17.6 9.55057 17.6C9.28391 17.6 9.05057 17.5 8.85057 17.3L4.55057 13C4.35057 12.8 4.25474 12.5625 4.26307 12.2875C4.27141 12.0125 4.37557 11.775 4.57557 11.575C4.77557 11.375 5.01307 11.275 5.28807 11.275C5.56307 11.275 5.80057 11.375 6.00057 11.575L9.55057 15.15Z"
-                                                    fill="white"
-                                                />
-                                            </g>
-                                        </svg>
-                                    </button>
+                                    <app-button variant="cancel" (click)="onClose()"></app-button>
+                                    <app-button variant="secondary" type="submit"
+                                        >Create contact</app-button
+                                    >
                                 }
                             </div>
                         </form>

@@ -1,11 +1,12 @@
 import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/contact';
+import { Button } from '../../../../shared/components/button/button';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-overlay',
-    imports: [],
+    imports: [Button],
     templateUrl: './overlay.html',
     styleUrl: './overlay.scss',
 })

@@ -2,7 +2,7 @@ import { Component, inject, computed, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
-import { Button } from '../../../shared/component/button/button';
+import { Button } from '../../../shared/components/button/button';
 import { Overlay } from './overlay/overlay';
 import { ContactsOverlayService } from '../../../core/contacts-overlay-service';
 
