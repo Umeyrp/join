@@ -11,18 +11,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(3px);
     background: $color-backdrop;
+    backdrop-filter: blur(3px);
     inset: 0;
 }
 
 .overlay-panel {
-    margin: 2vw;
     position: relative;
     display: flex;
     width: 1212px;
     height: 100%;
     max-height: 592px;
+    margin: 2vw;
     overflow-y: auto;
     border: none;
     border-radius: 30px;
@@ -213,7 +213,7 @@
     padding-right: 48px;
     padding-left: 80px;
 
-    & > svg {
+    &>svg {
         flex-shrink: 0;
         width: 120px;
         height: 120px;
@@ -228,17 +228,17 @@
     background: none;
     border: 1px solid $color-dark;
     border-radius: 10px;
+    box-shadow: 0 0 0 0px transparent;
     color: $color-dark;
     cursor: pointer;
-    @include font('Inter', 400, 20px, 100%, 0%);
     transition: all 125ms ease-in-out;
-    box-shadow: 0 0 0 0px transparent;
+    @include font('Inter', 400, 20px, 100%, 0%);
 
     &:hover {
-        border-color: $color-hover-teal;
         box-shadow:
             0 0 0 1px $color-hover-teal,
             0 4px 4px 0 #00000040;
+        border-color: $color-hover-teal;
         transition: all 125ms ease-in-out;
     }
 }
@@ -248,23 +248,23 @@
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    gap: 4px;
     width: 120px;
     height: 120px;
+    padding: 16px;
+    background: $color-dark;
     border: 3px solid $color-white;
+    border: 1px solid $color-dark;
     border-radius: 70px;
+    border-radius: 10px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     font-size: 2.9375rem;
     font-weight: 500;
     color: $color-white;
-    gap: 4px;
-    padding: 16px;
-    background: $color-dark;
-    border: 1px solid $color-dark;
-    border-radius: 10px;
     color: $color-white;
     cursor: pointer;
-    @include font('Inter', 700, 21px, 100%, 0%);
     transition: all 125ms ease-in-out;
+    @include font('Inter', 700, 21px, 100%, 0%);
 
     &:hover {
         background: $color-hover-teal;
@@ -371,28 +371,31 @@
     .add-contact {
         flex-direction: column;
         gap: 0;
-        padding-left: 30px;
         padding-right: 30px;
+        padding-left: 30px;
     }
 
     .text-wrapper {
         text-align: left;
 
-        & h2{
+        & h2 {
             font-size: 44px;
         }
 
-        & p{
+        & p {
             font-size: 19px;
         }
 
-        &::after{
+        &::after {
             width: 33%;
         }
     }
 
-    .form-buttons{
+    .form-buttons {
         justify-content: center;
+    }
 
+    .brand-panel {
+        padding: 66px 45px;
     }
 }
