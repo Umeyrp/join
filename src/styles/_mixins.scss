@@ -27,6 +27,13 @@
     }
 }
 
+// 769px – 1440px – tablets / laptops
+@mixin tablet-laptop {
+    @media (min-width: 769px) and (max-width: 1440px) {
+        @content;
+    }
+}
+
 // 1025px – 1440px – smaller desktops (design was built for ~1920px)
 @mixin laptop {
     @media (min-width: 1025px) and (max-width: 1440px) {
