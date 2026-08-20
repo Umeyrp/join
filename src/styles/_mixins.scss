@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 @mixin font($family: 'Inter', $weight: 400, $size: 1rem, $line-height: 100%, $letter-spacing: 0%) {
     font-family: $family;
     font-weight: $weight;
@@ -12,6 +14,22 @@
 //     align-items: $align-items;
 //     flex-direction: $direction;
 // }
+
+@mixin avatar-circle($size: 120px) {
+    width: $size;
+    height: $size;
+    border: 3px solid $color-white;
+    border-radius: 70px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-white;
+    font-size: 2.9375rem;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
 
 // < 768px – phones (matches the mobile design, 320px min)
 @mixin mobile {

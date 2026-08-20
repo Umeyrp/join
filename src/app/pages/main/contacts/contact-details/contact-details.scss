@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 :host {
     display: block;
@@ -59,6 +60,18 @@
     }
 }
 
+.contact-card__back {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    z-index: 2;
+    color: $color-dark;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 .contact-card-viewport {
     position: relative;
     overflow: hidden;
@@ -106,18 +119,7 @@
     }
 
     &__avatar {
-        width: 120px;
-        height: 120px;
-        border: 3px solid $color-white;
-        border-radius: 70px;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: $color-white;
-        font-size: 2.9375rem;
-        font-weight: 500;
-        flex-shrink: 0;
+        @include avatar-circle();
     }
 
     &__name {
@@ -200,15 +202,66 @@
     background-color: $color-dark;
     box-shadow: 0 0 4px 0 #00000026;
 
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 120%;
-    letter-spacing: 0%;
+    @include font($size: 1.25rem, $line-height: 120%);
     color: $color-white;
 
     position: absolute;
     bottom: 40px;
     right: 50px;
     animation: slide-in 0.3s ease-out;
+}
+
+// Responsive
+@include mobile {
+    .contact-card__back {
+        display: inline-block;
+    }
+
+    .contact-card__header {
+        gap: 20px;
+    }
+
+    .contact-card__avatar {
+        @include avatar-circle($size: 72px);
+        font-size: 1.75rem;
+    }
+
+    .contact-card__name {
+        font-size: 2.25rem;
+        font-weight: 700;
+    }
+
+    .contact-card__section-title {
+        margin: 21px 0 21px;
+    }
+
+    .toast {
+        width: calc(100% - 32px);
+        right: 16px;
+        bottom: 16px;
+    }
+    .contact-card__actions {
+        display: none;
+    }
+}
+
+@include tablet {
+    .contact-card__header {
+        gap: 32px;
+    }
+
+    .contact-card__avatar {
+        @include avatar-circle($size: 90px);
+        font-size: 1.75rem;
+    }
+
+    .contact-card__name {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 410px) {
+    .contact-card__name {
+        font-size: 2rem;
+    }
 }

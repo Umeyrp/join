@@ -1,8 +1,10 @@
-<aside class="contact-list">
+<aside class="contact-list" [class.contact-list--hidden]="hasSelectedContact()">
     <app-button
         variant="primary-contact"
         (click)="contactsOverlayService.openAddOverlay()"
     ></app-button>
+
+    <app-contact-mobile-button />
 
     @if (isLoading()) {
         <p>Loading...</p>
@@ -32,14 +34,17 @@
     }
 </aside>
 
-<section class="contact-detail">
+<section class="contact-detail" [class.contact-detail--hidden]="!hasSelectedContact()">
     <h1 class="contact-detail__title">
         Contacts
         <span class="contact-detail__divider"></span>
         <span class="contact-detail__subtitle">Better with a team</span>
     </h1>
 
-    <router-outlet></router-outlet>
+    <router-outlet
+        (activate)="hasSelectedContact.set(true)"
+        (deactivate)="hasSelectedContact.set(false)"
+    ></router-outlet>
 </section>
 
 <app-overlay
