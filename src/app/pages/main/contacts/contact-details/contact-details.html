@@ -1,3 +1,15 @@
+<a class="contact-card__back" routerLink="../"
+    ><svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M12.0361 16.9129H29.2135C30.0626 16.9129 30.751 17.6013 30.751 18.4504C30.751 19.2996 30.0626 19.988 29.2135 19.988H12.0361L19.1964 27.1483C19.7968 27.7486 19.7968 28.722 19.1964 29.3223C18.596 29.9227 17.6227 29.9227 17.0223 29.3223L7.5646 19.8646C6.78356 19.0836 6.78356 17.8173 7.5646 17.0362L17.0223 7.57849C17.6227 6.97814 18.596 6.97814 19.1964 7.57849C19.7968 8.17885 19.7968 9.15222 19.1964 9.75257L12.0361 16.9129Z"
+            fill="#124658"
+        />
+    </svg>
+</a>
+@if (contact(); as contact) {
+    <app-contact-mobile-button [contact]="contact" />
+}
+
 <div class="contact-card-viewport">
     @if (outgoingContact(); as outgoing) {
         <div
