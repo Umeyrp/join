@@ -12,3 +12,31 @@
 //     align-items: $align-items;
 //     flex-direction: $direction;
 // }
+
+// < 768px – phones (matches the mobile design, 320px min)
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+// 769px – 1024px – tablets / small laptops
+@mixin tablet {
+    @media (min-width: 769px) and (max-width: 1024px) {
+        @content;
+    }
+}
+
+// 1025px – 1440px – smaller desktops (design was built for ~1920px)
+@mixin laptop {
+    @media (min-width: 1025px) and (max-width: 1440px) {
+        @content;
+    }
+}
+
+// >= 1920px – large / ultra-wide screens
+@mixin wide {
+    @media (min-width: 1441px) and (max-width: 1920px) {
+        @content;
+    }
+}
