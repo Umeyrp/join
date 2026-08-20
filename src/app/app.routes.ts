@@ -8,7 +8,7 @@ import { AddTask } from './pages/main/add-task/add-task';
 import { Board } from './pages/main/board/board';
 import { Help } from './pages/main/help/help';
 import { PrivacyPolicy } from './pages/main/privacy-policy/privacy-policy';
-import { LegaNotice } from './pages/main/lega-notice/lega-notice';
+import { LegalNotice } from './pages/main/legal-notice/legal-notice';
 
 export const routes: Routes = [
     { path: 'login', component: Login },
@@ -26,7 +26,7 @@ export const routes: Routes = [
             { path: 'board', component: Board },
             { path: 'help', component: Help },
             { path: 'privacy-policy', component: PrivacyPolicy },
-            { path: 'legal-notice', component: LegaNotice },
+            { path: 'legal-notice', component: LegalNotice },
             { path: '', redirectTo: 'summary', pathMatch: 'full' },
         ],
     },

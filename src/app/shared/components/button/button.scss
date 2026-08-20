@@ -57,4 +57,9 @@
             color: $color-dark-active;
         }
     }
+
+    &.disabled {
+        background-color: #5e6266;
+        cursor: not-allowed;
+    }
 }
