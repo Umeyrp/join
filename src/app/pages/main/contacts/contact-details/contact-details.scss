@@ -60,6 +60,18 @@
     }
 }
 
+.contact-card__back {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    z-index: 2;
+    color: $color-dark;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 .contact-card-viewport {
     position: relative;
     overflow: hidden;
@@ -197,4 +209,50 @@
     bottom: 40px;
     right: 50px;
     animation: slide-in 0.3s ease-out;
+}
+
+// Responsive
+@include mobile {
+    .contact-card__back {
+        display: inline-block;
+    }
+
+    .contact-card__header {
+        gap: 20px;
+    }
+
+    .contact-card__avatar {
+        @include avatar-circle($size: 72px);
+        font-size: 1.75rem;
+    }
+
+    .contact-card__name {
+        font-size: 2.25rem;
+        font-weight: 700;
+    }
+
+    .contact-card__section-title {
+        margin: 21px 0 21px;
+    }
+
+    .toast {
+        width: calc(100% - 32px);
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+@include tablet {
+    .contact-card__header {
+        gap: 32px;
+    }
+
+    .contact-card__avatar {
+        @include avatar-circle($size: 90px);
+        font-size: 1.75rem;
+    }
+
+    .contact-card__name {
+        font-size: 2rem;
+    }
 }

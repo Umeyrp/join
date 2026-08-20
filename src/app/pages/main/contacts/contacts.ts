@@ -20,6 +20,7 @@ interface ContactGroup {
 export class Contacts {
     private contactsService = inject(ContactsService);
     protected contactsOverlayService = inject(ContactsOverlayService);
+    protected readonly hasSelectedContact = signal(false);
 
     protected readonly isLoading = this.contactsService.isLoading;
     protected readonly loadError = this.contactsService.loadError;

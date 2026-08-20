@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 :host {
     display: grid;
@@ -118,4 +119,23 @@ hr {
 
 app-overlay {
     position: absolute;
+}
+
+// Responsive
+@include mobile {
+    :host {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-list--hidden {
+        display: none;
+    }
+
+    .contact-detail {
+        padding: 48px 16px;
+    }
+
+    .contact-detail--hidden {
+        display: none;
+    }
 }
