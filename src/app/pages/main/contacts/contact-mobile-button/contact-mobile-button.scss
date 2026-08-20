@@ -1,0 +1,92 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    display: none;
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out-right {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.mobile-button {
+    position: fixed;
+    bottom: 112px;
+    right: 16px;
+    z-index: 10;
+
+    &__fab {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: none;
+        background-color: $color-dark;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        &:active {
+            background-color: $color-hover-teal;
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        bottom: -15px;
+        right: -5px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background-color: $color-white;
+        border-radius: 20px 20px 0 20px;
+        padding: 16px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        animation: slide-in-right 0.4s ease-out;
+
+        &--closing {
+            animation: slide-out-right 0.4s ease-out forwards;
+        }
+    }
+
+    &__menu-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: none;
+        color: $color-dark;
+        cursor: pointer;
+        padding: 8px;
+        white-space: nowrap;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 400;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+}
+
+// Responsive
+@include mobile {
+    :host {
+        display: block;
+    }
+}

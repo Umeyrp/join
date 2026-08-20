@@ -4,6 +4,7 @@ import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { Button } from '../../../shared/components/button/button';
 import { Overlay } from './overlay/overlay';
+import { ContactMobileButton } from './contact-mobile-button/contact-mobile-button';
 import { ContactsOverlayService } from '../../../core/contacts-overlay-service';
 
 interface ContactGroup {
@@ -13,7 +14,7 @@ interface ContactGroup {
 
 @Component({
     selector: 'app-contacts',
-    imports: [Button, RouterLink, RouterLinkActive, RouterOutlet, Overlay],
+    imports: [Button, RouterLink, RouterLinkActive, RouterOutlet, Overlay, ContactMobileButton],
     templateUrl: './contacts.html',
     styleUrl: './contacts.scss',
 })

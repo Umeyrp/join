@@ -4,6 +4,8 @@
         (click)="contactsOverlayService.openAddOverlay()"
     ></app-button>
 
+    <app-contact-mobile-button />
+
     @if (isLoading()) {
         <p>Loading...</p>
     } @else if (loadError()) {

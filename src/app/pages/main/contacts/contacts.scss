@@ -138,4 +138,8 @@ app-overlay {
     .contact-detail--hidden {
         display: none;
     }
+
+    .contact-list > app-button {
+        display: none;
+    }
 }

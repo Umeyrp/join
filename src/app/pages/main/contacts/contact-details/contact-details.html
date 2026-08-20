@@ -6,6 +6,10 @@
         />
     </svg>
 </a>
+@if (contact(); as contact) {
+    <app-contact-mobile-button [contact]="contact" />
+}
+
 <div class="contact-card-viewport">
     @if (outgoingContact(); as outgoing) {
         <div

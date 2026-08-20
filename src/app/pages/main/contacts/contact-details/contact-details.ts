@@ -1,6 +1,7 @@
 import { Component, inject, input, computed, effect, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ContactMobileButton } from '../contact-mobile-button/contact-mobile-button';
 import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/contact';
 import { PhoneFormatPipe } from '../../../../shared/pipes/phone-format-pipe';
@@ -10,7 +11,7 @@ type SlideDirection = 'first' | 'up' | 'down';
 
 @Component({
     selector: 'app-contact-details',
-    imports: [PhoneFormatPipe, NgTemplateOutlet, RouterLink],
+    imports: [PhoneFormatPipe, NgTemplateOutlet, RouterLink, ContactMobileButton],
     templateUrl: './contact-details.html',
     styleUrl: './contact-details.scss',
 })
