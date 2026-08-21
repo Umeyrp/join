@@ -40,7 +40,7 @@ export class Overlay {
     contactForm = form(this.contactModel, (schemaPath) => {
         required(schemaPath.name, { message: 'First and last name are required' });
         pattern(schemaPath.name, /^\p{L}+ \p{L}+$/u, {
-            message: 'Please enter your first and last name',
+            message: 'First and last name are required',
         });
 
         required(schemaPath.email, { message: 'Email is required' });

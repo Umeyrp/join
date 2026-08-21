@@ -46,11 +46,11 @@
         <div class="form-panel">
             <div class="add-contact">
                 @if (overlayisEditMode() && contact(); as contact) {
-                <div class="contact-initial" [style.background-color]="getAvatarColor(contact.id)">
+                <div class="contact-initial initial" [style.background-color]="getAvatarColor(contact.id)">
                     {{ getInitials(contact.name) }}
                 </div>
                 } @else {
-                <svg width="134" height="134" viewBox="0 0 134 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="initial" width="134" height="134" viewBox="0 0 134 134" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_d_576_4825)">
                         <rect x="7" y="7" width="120" height="120" rx="60" fill="white" />
                         <rect x="5.5" y="5.5" width="123" height="123" rx="61.5" stroke="white" stroke-width="3" />
