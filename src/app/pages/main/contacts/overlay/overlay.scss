@@ -40,12 +40,9 @@
     cursor: pointer;
 }
 
-.backdrop-fade-in {
-    animation: fade-in 0.3s ease-out;
-}
-
+.backdrop-fade-in,
 .backdrop-fade-out {
-    animation: fade-out 0.3s ease-in;
+    animation: none;
 }
 
 @keyframes fade-in {
@@ -93,6 +90,26 @@
 
     to {
         transform: translateX(100%);
+    }
+}
+
+@keyframes slide-in-bottom {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-out-bottom {
+    from {
+        transform: translateY(0%);
+    }
+
+    to {
+        transform: translateY(100%);
     }
 }
 
@@ -285,7 +302,15 @@
 }
 
 @include mobile {
-    app-button[variant="cancel"] {
+    .panel-slide-in {
+        animation: slide-in-bottom 0.3s ease-out;
+    }
+
+    .panel-slide-out {
+        animation: slide-out-bottom 0.3s ease-in;
+    }
+
+    app-button[variant='cancel'] {
         display: none;
     }
 
@@ -335,7 +360,8 @@
         height: 100%;
         padding: 0 16px;
 
-        &>svg {
+        & > svg,
+        & > .contact-initial {
             position: absolute;
             width: 100px;
             height: 100px;
@@ -366,7 +392,6 @@
     }
 }
 
-
 @include tablet-laptop {
     .add-contact {
         flex-direction: column;
@@ -378,21 +403,20 @@
     .text-wrapper {
         text-align: left;
 
-        & h2{
+        & h2 {
             font-size: 44px;
         }
 
-        & p{
+        & p {
             font-size: 19px;
         }
 
-        &::after{
+        &::after {
             width: 33%;
         }
     }
 
-    .form-buttons{
+    .form-buttons {
         justify-content: center;
-
     }
 }
