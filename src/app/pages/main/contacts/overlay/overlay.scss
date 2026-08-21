@@ -161,15 +161,15 @@
 
 .close-overlay {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    padding: 0;
     z-index: 2;
     top: 48px;
     right: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
     background: none;
     border: none;
     border-radius: 50%;
@@ -195,8 +195,8 @@
     gap: 32px;
 
     & .input-wrapper {
-        width: 100%;
         position: relative;
+        width: 100%;
 
         & svg {
             position: absolute;
@@ -433,5 +433,96 @@
     .close-overlay {
         top: 24px;
         right: 24px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 768px) {
+    .overlay-panel {
+        flex-direction: column;
+        width: 100%;
+        height: 92%;
+        max-height: none;
+        margin: 1rem;
+        overflow: hidden;
+    }
+
+    .close-overlay {
+        top: 20px;
+        right: 16px;
+
+        & path {
+            fill: white;
+        }
+    }
+
+    .brand-panel {
+        flex: unset;
+        height: 28%;
+        padding: 0 24px;
+    }
+
+    .brand-content {
+        margin-bottom: 0;
+
+        &>svg {
+            display: none;
+        }
+    }
+
+    .text-wrapper {
+        gap: 0;
+
+        & h2 {
+            font-size: 29px;
+        }
+
+        & p {
+            font-size: 1rem;
+        }
+    }
+
+    .form-panel {
+        position: relative;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        background: #ffffff;
+        overflow: auto;
+    }
+
+    .add-contact {
+        flex-direction: column;
+        height: 100%;
+        padding: 0 16px;
+
+        & .initial {
+            transform: translate(260%, -108%);
+            width: 80px;
+            height: 80px;
+            display: none;
+        }
+    }
+
+    .form-wrapper {
+        margin-top: 2vh;
+    }
+
+    .form-inputs {
+        gap: 22px;
+        margin-bottom: 0;
+
+        & input{
+            font-size: 1rem;
+            height: 40px;
+        }
+    }
+
+    .form-buttons {
+        justify-content: center;
+        padding-top: 4px;
+    }
+
+    .error{
+        top: 42px;
     }
 }
