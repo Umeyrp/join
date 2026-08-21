@@ -60,6 +60,17 @@
     }
 }
 
+@keyframes toast-slide-in {
+    from {
+        transform: translateX(calc(-50% + 40px));
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+
 .contact-card__back {
     display: none;
     position: absolute;
@@ -207,8 +218,9 @@
 
     position: absolute;
     bottom: 40px;
-    right: 50%;
-    animation: slide-in 0.3s ease-out;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: toast-slide-in 0.3s ease-out;
 }
 
 // Responsive
