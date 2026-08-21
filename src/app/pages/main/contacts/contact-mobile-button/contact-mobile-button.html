@@ -2,11 +2,11 @@
     @if (contact() && (isMenuOpen() || isMenuClosing())) {
         <div class="mobile-button__menu" [class.mobile-button__menu--closing]="isMenuClosing()">
             <button type="button" class="mobile-button__menu-item" (click)="onEdit()">
-                <img src="icons/edit.svg" alt="" />
+                <img src="/app-icons/edit.svg" alt="" />
                 Edit
             </button>
             <button type="button" class="mobile-button__menu-item" (click)="onDelete()">
-                <img src="icons/delete.svg" alt="" />
+                <img src="/app-icons/delete.svg" alt="" />
                 Delete
             </button>
         </div>
