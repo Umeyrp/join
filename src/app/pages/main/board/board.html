@@ -1,1 +1,3 @@
-<p>board works!</p>
+@for (task of tasksService.tasks(); track task.id) {
+    <p>{{ task.title }} - {{ task.status }}</p>
+}

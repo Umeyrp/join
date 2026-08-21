@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { TasksService } from '../../../core/tasks.service';
 
 @Component({
     selector: 'app-board',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
-export class Board {}
+export class Board {
+    protected readonly tasksService = inject(TasksService);
+}
