@@ -124,7 +124,7 @@
 
     &__name {
         margin: 0 0 8px;
-        font-size: 2.9375rem;
+        font-size: clamp(2rem, 0.4325rem + 2.783vw, 2.9375rem);
         font-weight: 500;
     }
 
@@ -227,7 +227,6 @@
     }
 
     .contact-card__name {
-        font-size: 2.25rem;
         font-weight: 700;
     }
 
@@ -254,14 +253,10 @@
         @include avatar-circle($size: 90px);
         font-size: 1.75rem;
     }
-
-    .contact-card__name {
-        font-size: 2rem;
-    }
 }
 
-@media (max-width: 410px) {
+@media (max-width: 900px) {
     .contact-card__name {
-        font-size: 2rem;
+        font-size: clamp(1.75rem, 1.393rem + 1.786vw, 2rem);
     }
 }

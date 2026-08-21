@@ -93,9 +93,10 @@ hr {
 }
 
 .contact-detail {
-    padding: 110px 0 0 58px;
+    padding: 110px 0 0 clamp(16px, -112.94px + 16.78vw, 58px);
     background-color: $color-section-bg;
     position: relative;
+    overflow-y: auto;
 
     &__title {
         display: flex;
