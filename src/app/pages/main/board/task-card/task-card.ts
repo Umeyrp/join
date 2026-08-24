@@ -1,5 +1,7 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Task } from '../../../../interfaces/task';
+import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/contact';
+import { ContactsService } from '../../../../core/contacts.service';
 
 @Component({
     selector: 'app-task-card',
@@ -9,6 +11,18 @@ import { Task } from '../../../../interfaces/task';
 })
 export class TaskCard {
     task = input.required<Task>();
+
+    protected readonly contactsService = inject(ContactsService);
+    protected readonly getAvatarColor = getAvatarColor;
+    protected readonly getInitials = getInitials;
+
+    protected readonly assignedContacts = computed(() =>
+        this.task()
+            .contactIds.map((id) =>
+                this.contactsService.contacts().find((contact) => contact.id === id),
+            )
+            .filter((contact): contact is Contact => contact !== undefined),
+    );
 
     protected readonly categoryClass = computed(() =>
         this.task().category === 'User Story' ? 'user-story' : 'technical-task',

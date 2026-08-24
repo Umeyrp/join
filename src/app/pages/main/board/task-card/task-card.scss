@@ -44,6 +44,7 @@
         margin: 8px 0 0;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -73,5 +74,32 @@
         @include font($weight: 400, $size: 1rem, $line-height: 120%);
         color: black;
         white-space: nowrap;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 16px 0 0;
+    }
+
+    &__avatars {
+        display: flex;
+    }
+
+    &__avatar {
+        @include avatar-circle($size: 32px);
+        @include font($weight: 400, $size: 1rem, $line-height: 120%);
+        border: 1px solid $color-white;
+        box-shadow: none;
+        margin-left: -8px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    &__priority {
+        flex-shrink: 0;
     }
 }
