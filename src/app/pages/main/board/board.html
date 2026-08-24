@@ -23,36 +23,162 @@
     </div>
 </section>
 
-@for (task of tasksService.tasks(); track task.id) {
-    <p>
-        {{ task.title }} - {{ task.status }}
-        <button (click)="tasksService.deleteTask(task.id)">Löschen</button>
-        <button (click)="tasksService.addSubtask(task.id, 'Test-Subtask ' + task.subtasks.length)">
-            + Subtask
-        </button>
-        <button
-            [disabled]="!nextUnassignedContact(task)"
-            (click)="tasksService.assignContact(task.id, nextUnassignedContact(task)!.id)"
-        >
-            + Contact
-        </button>
-    </p>
-    @for (subtask of task.subtasks; track subtask.id) {
-        <p style="margin-left: 2rem">
-            <input
-                type="checkbox"
-                [checked]="subtask.done"
-                (change)="tasksService.toggleSubtask(subtask.id, !subtask.done)"
-            />
-            {{ subtask.title }}
-        </p>
-    }
-    @for (contactId of task.contactIds; track contactId) {
-        <p style="margin-left: 2rem">
-            {{ contactName(contactId) }}
-            <button (click)="tasksService.unassignContact(task.id, contactId)">Entfernen</button>
-        </p>
-    }
-}
+<section class="board-columns">
+    <div class="column">
+        <div class="column__header">
+            <h2>To do</h2>
+            <button type="button" class="column__add">
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect
+                        x="1"
+                        y="1"
+                        width="22"
+                        height="22"
+                        rx="7"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                    />
+                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                    <path
+                        d="M16 12.0754L8 12.0754"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div class="column__tasks">
+            @if (todoTasks().length === 0) {
+                <p class="column__empty">No tasks To do</p>
+            } @else {
+                <p class="column__count">{{ todoTasks().length }} task(s)</p>
+            }
+        </div>
+    </div>
 
-<button (click)="addTestTask()">Test-Task anlegen</button>
+    <div class="column">
+        <div class="column__header">
+            <h2>In progress</h2>
+            <button type="button" class="column__add">
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect
+                        x="1"
+                        y="1"
+                        width="22"
+                        height="22"
+                        rx="7"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                    />
+                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                    <path
+                        d="M16 12.0754L8 12.0754"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div class="column__tasks">
+            @if (inProgressTasks().length === 0) {
+                <p class="column__empty">No tasks In progress</p>
+            } @else {
+                <p class="column__count">{{ inProgressTasks().length }} task(s)</p>
+            }
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="column__header">
+            <h2>Await feedback</h2>
+            <button type="button" class="column__add">
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect
+                        x="1"
+                        y="1"
+                        width="22"
+                        height="22"
+                        rx="7"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                    />
+                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                    <path
+                        d="M16 12.0754L8 12.0754"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div class="column__tasks">
+            @if (awaitFeedbackTasks().length === 0) {
+                <p class="column__empty">No tasks Await feedback</p>
+            } @else {
+                <p class="column__count">{{ awaitFeedbackTasks().length }} task(s)</p>
+            }
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="column__header">
+            <h2>Done</h2>
+            <button type="button" class="column__add">
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect
+                        x="1"
+                        y="1"
+                        width="22"
+                        height="22"
+                        rx="7"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                    />
+                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                    <path
+                        d="M16 12.0754L8 12.0754"
+                        stroke="#2A3647"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div class="column__tasks">
+            @if (doneTasks().length === 0) {
+                <p class="column__empty">No tasks Done</p>
+            } @else {
+                <p class="column__count">{{ doneTasks().length }} task(s)</p>
+            }
+        </div>
+    </div>
+</section>
+
+<button class="debug-button" (click)="addTestTask()">Test-Task anlegen</button>
