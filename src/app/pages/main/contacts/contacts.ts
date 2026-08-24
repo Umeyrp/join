@@ -14,7 +14,7 @@ interface ContactGroup {
 
 @Component({
     selector: 'app-contacts',
-    imports: [Button, RouterLink, RouterLinkActive, RouterOutlet, Overlay, ContactMobileButton],
+    imports: [Button, RouterLink, RouterLinkActive, RouterOutlet, ContactMobileButton, Overlay],
     templateUrl: './contacts.html',
     styleUrl: './contacts.scss',
 })

@@ -1,4 +1,13 @@
-import { Component, effect, inject, input, output, signal } from '@angular/core';
+import {
+    Component,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    output,
+    signal,
+    viewChild,
+} from '@angular/core';
 import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials, NewContact } from '../../../../interfaces/contact';
 import {
@@ -20,6 +29,9 @@ import { Button } from '../../../../shared/components/button/button';
     styleUrl: './overlay.scss',
 })
 export class Overlay {
+    private dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+    private pendingAction: 'created' | 'edited' | 'deleted' | null = null;
+
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
     private contactsService = inject(ContactsService);
@@ -56,9 +68,15 @@ export class Overlay {
 
     constructor() {
         effect(() => {
+            const dialog = this.dialogRef().nativeElement;
+            if (this.overlayisOpen() && !dialog.open) {
+                dialog.showModal();
+            }
+        });
+
+        effect(() => {
             this.overlayisOpen();
             const contact = this.contact();
-
             this.contactForm().reset();
             this.contactModel.set({
                 name: contact?.name ?? '',
@@ -68,8 +86,30 @@ export class Overlay {
         });
     }
 
-    onClose(action: 'created' | 'edited' | 'deleted' | null = null) {
-        this.closed.emit(action);
+    private requestClose(action: 'created' | 'edited' | 'deleted' | null = null) {
+        this.pendingAction = action;
+        const dialog = this.dialogRef().nativeElement;
+        if (dialog.open) {
+            dialog.close();
+        } else {
+            this.closed.emit(action);
+        }
+    }
+
+    onDialogClick(event: MouseEvent) {
+        if (event.target === this.dialogRef().nativeElement) {
+            this.requestClose();
+        }
+    }
+
+    onNativeClose() {
+        const action = this.pendingAction;
+        this.pendingAction = null;
+        this.closed.emit(action); // genau EIN emit pro Schließvorgang
+    }
+
+        onCloseButtonClick() {
+        this.requestClose();
     }
 
     async onSubmit(event: Event): Promise<void> {
@@ -86,7 +126,7 @@ export class Overlay {
                         email,
                         phone,
                     });
-                    this.onClose('edited');
+                    this.requestClose('edited');
                 } else {
                     const newContact = await this.contactsService.addContact({
                         name,
@@ -94,7 +134,7 @@ export class Overlay {
                         phone,
                     });
                     this.router.navigate(['/contacts', newContact.id]);
-                    this.onClose('created');
+                    this.requestClose('created');
                 }
                 return null;
             } finally {
@@ -107,7 +147,7 @@ export class Overlay {
         this.isSaving.set(true);
         try {
             await this.contactsService.deleteContact(this.contact()!.id);
-            this.onClose('deleted');
+            this.requestClose('deleted');
         } finally {
             this.isSaving.set(false);
         }
