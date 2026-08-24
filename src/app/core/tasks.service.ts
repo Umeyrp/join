@@ -19,9 +19,10 @@ export class TasksService {
     private async loadTasks() {
         const { data, error } = await this.supabase
             .from('tasks')
-            .select(TASK_SELECT)
+            .select('*, subtasks(*), task_contacts(contact_id, created_at)')
             .order('position', { ascending: true })
-            .order('id', { referencedTable: 'subtasks', ascending: true });
+            .order('id', { referencedTable: 'subtasks', ascending: true })
+            .order('created_at', { referencedTable: 'task_contacts', ascending: true });
 
         if (error) throw error;
         this.tasks.set((data as TaskRow[]).map(this.toTask));
@@ -53,6 +54,24 @@ export class TasksService {
 
     async toggleSubtask(subtaskId: number, done: boolean): Promise<void> {
         const { error } = await this.supabase.from('subtasks').update({ done }).eq('id', subtaskId);
+        if (error) throw error;
+        await this.loadTasks();
+    }
+
+    async assignContact(taskId: number, contactId: number): Promise<void> {
+        const { error } = await this.supabase
+            .from('task_contacts')
+            .insert({ task_id: taskId, contact_id: contactId });
+        if (error) throw error;
+        await this.loadTasks();
+    }
+
+    async unassignContact(taskId: number, contactId: number): Promise<void> {
+        const { error } = await this.supabase
+            .from('task_contacts')
+            .delete()
+            .eq('task_id', taskId)
+            .eq('contact_id', contactId);
         if (error) throw error;
         await this.loadTasks();
     }
