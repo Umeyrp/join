@@ -21,6 +21,8 @@ export class ContactsOverlayService {
     }
 
     closeOverlay(action: 'created' | 'edited' | 'deleted' | null = null) {
+        console.log(action);
+        
         this.isOpen.set(false);
         this.lastAction.set(action);
     }

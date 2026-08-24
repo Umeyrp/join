@@ -1,32 +1,26 @@
-// :host {
-//     display: contents;
-// }
-
 @use 'mixins' as *;
 @use 'variables' as *;
 
-.overlay-backdrop {
-    position: fixed;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: $color-backdrop;
-    backdrop-filter: blur(3px);
-    inset: 0;
+dialog {
+    padding: 0;
+    margin: auto;
+    border: none;
+    width: 1212px;
+    max-height: 592px;
+    overflow-y: auto;
+    border-radius: 30px;
+    height: 100%;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+
+    &::backdrop {
+        background: $color-backdrop;
+        backdrop-filter: blur(3px);
+    }
 }
 
-.overlay-panel {
-    position: relative;
+.overlay-content {
     display: flex;
-    width: 1212px;
     height: 100%;
-    max-height: 592px;
-    margin: 2vw;
-    overflow-y: auto;
-    border: none;
-    border-radius: 30px;
-    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
 }
 
 .backdrop-fade-in,
@@ -321,11 +315,9 @@
         display: none;
     }
 
-    .overlay-panel {
+    .overlay-content {
         flex-direction: column;
-        height: calc(100% - 168px);
         max-height: none;
-        margin: 1rem;
         overflow: hidden;
     }
 
@@ -437,12 +429,14 @@
 }
 
 @media (orientation: landscape) and (max-height: 768px) {
-    .overlay-panel {
-        flex-direction: column;
-        width: 100%;
-        height: 92%;
-        max-height: none;
+    dialog {
         margin: 1rem;
+        max-height: stretch;
+    }
+
+    .overlay-content {
+        flex-direction: column;
+        max-height: none;
         overflow: hidden;
     }
 
@@ -511,7 +505,7 @@
         gap: 22px;
         margin-bottom: 0;
 
-        & input{
+        & input {
             font-size: 1rem;
             height: 40px;
         }
@@ -522,7 +516,7 @@
         padding-top: 4px;
     }
 
-    .error{
+    .error {
         top: 42px;
     }
 }

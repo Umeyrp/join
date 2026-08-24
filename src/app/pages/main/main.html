@@ -5,10 +5,3 @@
         <router-outlet></router-outlet>
     </div>
 </div>
-
-<app-overlay
-    [overlayisOpen]="contactsOverlayService.isOpen()"
-    [overlayisEditMode]="contactsOverlayService.isEditMode()"
-    (closed)="contactsOverlayService.closeOverlay($event)"
-    [contact]="contactsOverlayService.selectedContact()"
-></app-overlay>
