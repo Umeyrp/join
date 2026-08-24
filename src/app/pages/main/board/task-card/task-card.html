@@ -8,4 +8,19 @@
     @if (task().description) {
         <p class="task-card__description">{{ task().description }}</p>
     }
+
+    @if (subtaskProgress(); as progress) {
+        <div class="task-card__subtasks">
+            <div class="task-card__progress">
+                <div
+                    class="task-card__progress-fill"
+                    [style.width.%]="progress.percent"
+                    [style.background-color]="progress.color"
+                ></div>
+            </div>
+            <span class="task-card__subtasks-count"
+                >{{ progress.done }}/{{ progress.total }} Subtasks</span
+            >
+        </div>
+    }
 </article>

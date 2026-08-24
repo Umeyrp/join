@@ -47,4 +47,31 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
+
+    &__subtasks {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 24px 0 0;
+    }
+
+    &__progress {
+        width: 110px;
+        height: 8px;
+        background-color: $color-light-text;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    &__progress-fill {
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    &__subtasks-count {
+        @include font($weight: 400, $size: 1rem, $line-height: 120%);
+        color: black;
+        white-space: nowrap;
+    }
 }
