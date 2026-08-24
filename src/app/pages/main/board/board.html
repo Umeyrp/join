@@ -1,9 +1,21 @@
 @for (task of tasksService.tasks(); track task.id) {
     <p>
-        {{ task.title }} — {{ task.status }} — {{ task.subtasks.length }} Subtasks —
-        {{ task.contactIds.length }} Contacts
+        {{ task.title }} - {{ task.status }} - {{ task.contactIds.length }} Contacts
         <button (click)="tasksService.deleteTask(task.id)">Löschen</button>
+        <button (click)="tasksService.addSubtask(task.id, 'Test-Subtask ' + task.subtasks.length)">
+            + Subtask
+        </button>
     </p>
+    @for (subtask of task.subtasks; track subtask.id) {
+        <p style="margin-left: 2rem">
+            <input
+                type="checkbox"
+                [checked]="subtask.done"
+                (change)="tasksService.toggleSubtask(subtask.id, !subtask.done)"
+            />
+            {{ subtask.title }}
+        </p>
+    }
 }
 
 <button (click)="addTestTask()">Test-Task anlegen</button>

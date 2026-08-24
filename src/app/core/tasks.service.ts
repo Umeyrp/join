@@ -20,7 +20,8 @@ export class TasksService {
         const { data, error } = await this.supabase
             .from('tasks')
             .select(TASK_SELECT)
-            .order('position', { ascending: true });
+            .order('position', { ascending: true })
+            .order('id', { referencedTable: 'subtasks', ascending: true });
 
         if (error) throw error;
         this.tasks.set((data as TaskRow[]).map(this.toTask));
@@ -40,6 +41,18 @@ export class TasksService {
 
     async deleteTask(id: number): Promise<void> {
         const { error } = await this.supabase.from('tasks').delete().eq('id', id);
+        if (error) throw error;
+        await this.loadTasks();
+    }
+
+    async addSubtask(taskId: number, title: string): Promise<void> {
+        const { error } = await this.supabase.from('subtasks').insert({ task_id: taskId, title });
+        if (error) throw error;
+        await this.loadTasks();
+    }
+
+    async toggleSubtask(subtaskId: number, done: boolean): Promise<void> {
+        const { error } = await this.supabase.from('subtasks').update({ done }).eq('id', subtaskId);
         if (error) throw error;
         await this.loadTasks();
     }
