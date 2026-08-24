@@ -1,7 +1,9 @@
 @for (task of tasksService.tasks(); track task.id) {
     <p>
-        {{ task.title }} - {{ task.status }} - {{ task.subtasks.length }} Subtasks -
+        {{ task.title }} — {{ task.status }} — {{ task.subtasks.length }} Subtasks —
         {{ task.contactIds.length }} Contacts
+        <button (click)="tasksService.deleteTask(task.id)">Löschen</button>
     </p>
 }
+
 <button (click)="addTestTask()">Test-Task anlegen</button>

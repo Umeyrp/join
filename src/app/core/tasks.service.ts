@@ -37,4 +37,10 @@ export class TasksService {
         if (error) throw error;
         await this.loadTasks();
     }
+
+    async deleteTask(id: number): Promise<void> {
+        const { error } = await this.supabase.from('tasks').delete().eq('id', id);
+        if (error) throw error;
+        await this.loadTasks();
+    }
 }
