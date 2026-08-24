@@ -1,6 +1,6 @@
 @for (task of tasksService.tasks(); track task.id) {
     <p>
-        {{ task.title }} — {{ task.status }}
+        {{ task.title }} - {{ task.status }}
         <button (click)="tasksService.deleteTask(task.id)">Löschen</button>
         <button (click)="tasksService.addSubtask(task.id, 'Test-Subtask ' + task.subtasks.length)">
             + Subtask
