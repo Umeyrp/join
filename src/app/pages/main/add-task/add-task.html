@@ -2,9 +2,33 @@
     <h2>Add Task</h2>
     <div class="add-task_form">
         <div class="col-left">
-            <div><label for="input"></label><input type="text" /></div>
-            <div><label for=""></label><textarea name="" id=""></textarea></div>
-            <div><label for="input"></label><input type="text" /></div>
+            <div class="field-group">
+                <label>Title<span class="required">*</span></label>
+                <input
+                    type="text"
+                    [value]="title()"
+                    (input)="title.set($any($event.target).value)"
+                    placeholder="Enter a title"
+                />
+            </div>
+
+            <div class="field-group">
+                <label>Description</label>
+                <textarea
+                    [value]="description()"
+                    (input)="description.set($any($event.target).value)"
+                    placeholder="Enter a Description"
+                ></textarea>
+            </div>
+
+            <div class="field-group">
+                <label>Due date<span class="required">*</span></label>
+                <input
+                    type="date"
+                    [value]="dueDate()"
+                    (input)="dueDate.set($any($event.target).value)"
+                />
+            </div>
         </div>
         <div class="col-divider"></div>
         <div class="col-right">
@@ -34,10 +58,47 @@
                     </button>
                 </div>
             </div>
-            <div><label for=""></label></div>
-            <div><label for=""></label></div>
-            <div><label for=""></label><input type="text" /></div>
+            <div class="field-group">
+                <label>Assigned to</label>
+                <app-dropdown
+                    mode="contacts"
+                    [reset]="resetDropdown()"
+                    (contactsChanged)="selectedContacts.set($event)"
+                />
+            </div>
+
+            <div class="field-group">
+                <label>Category<span class="required">*</span></label>
+                <app-dropdown
+                    mode="category"
+                    [reset]="resetDropdown()"
+                    (categoryChanged)="selectedCategory.set($event)"
+                />
+            </div>
+            <div class="field-group">
+                <label>Subtasks</label>
+                <input
+                    type="text"
+                    [value]="newSubtask()"
+                    (input)="newSubtask.set($any($event.target).value)"
+                    (keydown.enter)="addSubtask()"
+                    placeholder="Add new subtask"
+                />
+                @if (subtasks().length > 0) {
+                    <ul>
+                        @for (subtask of subtasks(); track subtask) {
+                            <li>{{ subtask }}</li>
+                        }
+                    </ul>
+                }
+            </div>
         </div>
     </div>
-    <div class="add-task-footer"></div>
+    <div class="add-task-footer">
+        <span class="required-hint">*This field is required</span>
+        <div class="footer-buttons">
+            <button type="button" (click)="clearForm()">Clear <span>✕</span></button>
+            <button type="button" (click)="createTask()">Create Task <span>✓</span></button>
+        </div>
+    </div>
 </div>
