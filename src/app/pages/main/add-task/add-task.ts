@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
@@ -19,6 +19,8 @@ export class AddTask {
     selectedContacts = signal<Contact[]>([]);
     selectedCategory = signal<string | null>(null);
     resetDropdown = signal(false);
+    editingIndex = signal<number | null>(null);
+    editingValue = signal('');
 
     private supabase = inject(Supabase);
 
@@ -46,6 +48,16 @@ export class AddTask {
     }
 
     async createTask() {
+        const { data: lastTask } = await this.supabase.client
+            .from('tasks')
+            .select('position')
+            .eq('status', 'todo')
+            .order('position', { ascending: false })
+            .limit(1)
+            .single();
+
+        const position = lastTask ? lastTask.position + 1 : 0;
+
         const { data: task, error } = await this.supabase.client
             .from('tasks')
             .insert({
@@ -55,7 +67,7 @@ export class AddTask {
                 priority: this.priority(),
                 category: this.selectedCategory(),
                 status: 'todo',
-                position: 0,
+                position,
             })
             .select('id')
             .single();
@@ -80,5 +92,28 @@ export class AddTask {
         }
 
         this.clearForm();
+    }
+
+    isFormValid = computed(
+        () =>
+            this.title().trim().length > 0 &&
+            this.dueDate().length > 0 &&
+            this.selectedCategory() !== null,
+    );
+
+    startEdit(index: number) {
+        this.editingIndex.set(index);
+        this.editingValue.set(this.subtasks()[index]);
+    }
+
+    saveEdit(index: number) {
+        this.subtasks.update((current) =>
+            current.map((s, i) => (i === index ? this.editingValue() : s)),
+        );
+        this.editingIndex.set(null);
+    }
+
+    deleteSubtask(index: number) {
+        this.subtasks.update((current) => current.filter((_, i) => i !== index));
     }
 }
