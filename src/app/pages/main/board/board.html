@@ -1,1 +1,33 @@
-<p>board works!</p>
+@for (task of tasksService.tasks(); track task.id) {
+    <p>
+        {{ task.title }} - {{ task.status }}
+        <button (click)="tasksService.deleteTask(task.id)">Löschen</button>
+        <button (click)="tasksService.addSubtask(task.id, 'Test-Subtask ' + task.subtasks.length)">
+            + Subtask
+        </button>
+        <button
+            [disabled]="!nextUnassignedContact(task)"
+            (click)="tasksService.assignContact(task.id, nextUnassignedContact(task)!.id)"
+        >
+            + Contact
+        </button>
+    </p>
+    @for (subtask of task.subtasks; track subtask.id) {
+        <p style="margin-left: 2rem">
+            <input
+                type="checkbox"
+                [checked]="subtask.done"
+                (change)="tasksService.toggleSubtask(subtask.id, !subtask.done)"
+            />
+            {{ subtask.title }}
+        </p>
+    }
+    @for (contactId of task.contactIds; track contactId) {
+        <p style="margin-left: 2rem">
+            {{ contactName(contactId) }}
+            <button (click)="tasksService.unassignContact(task.id, contactId)">Entfernen</button>
+        </p>
+    }
+}
+
+<button (click)="addTestTask()">Test-Task anlegen</button>
