@@ -9,4 +9,16 @@ import { TasksService } from '../../../core/tasks.service';
 })
 export class Board {
     protected readonly tasksService = inject(TasksService);
+
+    protected addTestTask() {
+        this.tasksService.addTask({
+            title: 'Testeintrag ' + Date.now(),
+            description: null,
+            due_date: '2026-09-01',
+            priority: 'medium',
+            category: 'Technical Task',
+            status: 'todo',
+            position: 0,
+        });
+    }
 }

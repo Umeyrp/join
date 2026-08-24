@@ -29,4 +29,12 @@ export class TasksService {
     private toTask({ task_contacts, ...task }: TaskRow): Task {
         return { ...task, contactIds: task_contacts.map((tc) => tc.contact_id) };
     }
+
+    async addTask(
+        task: Omit<Task, 'id' | 'created_at' | 'subtasks' | 'contactIds'>,
+    ): Promise<void> {
+        const { error } = await this.supabase.from('tasks').insert(task);
+        if (error) throw error;
+        await this.loadTasks();
+    }
 }
