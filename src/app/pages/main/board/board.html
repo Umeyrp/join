@@ -58,7 +58,9 @@
             @if (todoTasks().length === 0) {
                 <p class="column__empty">No tasks To do</p>
             } @else {
-                <p class="column__count">{{ todoTasks().length }} task(s)</p>
+                @for (task of todoTasks(); track task.id) {
+                    <app-task-card [task]="task" />
+                }
             }
         </div>
     </div>
@@ -97,7 +99,9 @@
             @if (inProgressTasks().length === 0) {
                 <p class="column__empty">No tasks In progress</p>
             } @else {
-                <p class="column__count">{{ inProgressTasks().length }} task(s)</p>
+                @for (task of inProgressTasks(); track task.id) {
+                    <app-task-card [task]="task" />
+                }
             }
         </div>
     </div>
@@ -136,7 +140,9 @@
             @if (awaitFeedbackTasks().length === 0) {
                 <p class="column__empty">No tasks Await feedback</p>
             } @else {
-                <p class="column__count">{{ awaitFeedbackTasks().length }} task(s)</p>
+                @for (task of awaitFeedbackTasks(); track task.id) {
+                    <app-task-card [task]="task" />
+                }
             }
         </div>
     </div>
@@ -175,7 +181,9 @@
             @if (doneTasks().length === 0) {
                 <p class="column__empty">No tasks Done</p>
             } @else {
-                <p class="column__count">{{ doneTasks().length }} task(s)</p>
+                @for (task of doneTasks(); track task.id) {
+                    <app-task-card [task]="task" />
+                }
             }
         </div>
     </div>

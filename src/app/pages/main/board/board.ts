@@ -2,10 +2,11 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TasksService } from '../../../core/tasks.service';
 import { Button } from '../../../shared/components/button/button';
+import { TaskCard } from './task-card/task-card';
 
 @Component({
     selector: 'app-board',
-    imports: [Button, RouterLink],
+    imports: [Button, RouterLink, TaskCard],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })

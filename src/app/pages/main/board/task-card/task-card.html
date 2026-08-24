@@ -1,0 +1,11 @@
+<article class="task-card">
+    <span class="task-card__category" [class]="categoryClass()">
+        {{ task().category }}
+    </span>
+
+    <h3 class="task-card__title">{{ task().title }}</h3>
+
+    @if (task().description) {
+        <p class="task-card__description">{{ task().description }}</p>
+    }
+</article>
