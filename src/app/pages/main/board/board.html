@@ -1,3 +1,6 @@
 @for (task of tasksService.tasks(); track task.id) {
-    <p>{{ task.title }} - {{ task.status }}</p>
+    <p>
+        {{ task.title }} - {{ task.status }} - {{ task.subtasks.length }} Subtasks -
+        {{ task.contactIds.length }} Contacts
+    </p>
 }
