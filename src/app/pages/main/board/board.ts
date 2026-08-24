@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TasksService } from '../../../core/tasks.service';
 import { ContactsService } from '../../../core/contacts.service';
 import { Task } from '../../../interfaces/task';
+import { Button } from '../../../shared/components/button/button';
 
 @Component({
     selector: 'app-board',
-    imports: [],
+    imports: [Button, RouterLink],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
