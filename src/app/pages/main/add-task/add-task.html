@@ -1,1 +1,43 @@
-<p>add-task works!</p>
+<div class="add-task-wrapper">
+    <h2>Add Task</h2>
+    <div class="add-task_form">
+        <div class="col-left">
+            <div><label for="input"></label><input type="text" /></div>
+            <div><label for=""></label><textarea name="" id=""></textarea></div>
+            <div><label for="input"></label><input type="text" /></div>
+        </div>
+        <div class="col-divider"></div>
+        <div class="col-right">
+            <div class="field-group">
+                <label>Priority</label>
+                <div class="priority-buttons">
+                    <button
+                        type="button"
+                        (click)="setPriority('urgent')"
+                        [class.active]="priority() === 'urgent'"
+                    >
+                        Urgent
+                    </button>
+                    <button
+                        type="button"
+                        (click)="setPriority('medium')"
+                        [class.active]="priority() === 'medium'"
+                    >
+                        Medium
+                    </button>
+                    <button
+                        type="button"
+                        (click)="setPriority('low')"
+                        [class.active]="priority() === 'low'"
+                    >
+                        Low
+                    </button>
+                </div>
+            </div>
+            <div><label for=""></label></div>
+            <div><label for=""></label></div>
+            <div><label for=""></label><input type="text" /></div>
+        </div>
+    </div>
+    <div class="add-task-footer"></div>
+</div>

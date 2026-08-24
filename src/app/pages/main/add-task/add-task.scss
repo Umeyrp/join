@@ -1,0 +1,27 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    display: block;
+    padding: 124px 96px 66px;
+    height: 100%;
+}
+
+.add-task-wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+h2 {
+    @include font($weight: 700, $size: 3.8rem, $line-height: 120%);
+}
+
+.add-task_form {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 0 48px;
+}
+
+.col-divider {
+    background: var($task-divider);
+}
