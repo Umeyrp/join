@@ -227,14 +227,14 @@
                 }
             </div>
         </div>
-        <div class="add-task-footer">
-            <span class="required-hint">*This field is required</span>
-            <div class="footer-buttons">
-                <button type="button" (click)="clearForm()">Clear <span>✕</span></button>
-                <button type="button" (click)="createTask()" [disabled]="!isFormValid()">
-                    Create Task <span>✓</span>
-                </button>
-            </div>
+    </div>
+    <div class="add-task-footer">
+        <span class="required-hint">*This field is required</span>
+        <div class="footer-buttons">
+            <button type="button" (click)="clearForm()">Clear <span>✕</span></button>
+            <button type="button" (click)="createTask()" [disabled]="!isFormValid()">
+                Create Task <span>✓</span>
+            </button>
         </div>
     </div>
 </div>
