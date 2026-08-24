@@ -2,11 +2,11 @@ import { Component, input, output } from '@angular/core';
 import { Task } from '../../../../interfaces/task';
 
 @Component({
-    selector: 'app-task-details',
+    selector: 'app-task-overlay',
     imports: [],
-    templateUrl: './task-details.html',
-    styleUrl: './task-details.scss',
+    templateUrl: './task-overlay.html',
+    styleUrl: './task-overlay.scss',
 })
-export class TaskDetails {
+export class TaskOverlay {
 
 }

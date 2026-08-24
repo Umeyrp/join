@@ -23,12 +23,12 @@ import { Router } from '@angular/router';
 import { Button } from '../../../../shared/components/button/button';
 
 @Component({
-    selector: 'app-overlay',
+    selector: 'app-contact-overlay',
     imports: [FormField, Button],
-    templateUrl: './overlay.html',
-    styleUrl: './overlay.scss',
+    templateUrl: './contact-overlay.html',
+    styleUrl: './contact-overlay.scss',
 })
-export class Overlay {
+export class ContactOverlay {
     private dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
     private pendingAction: 'created' | 'edited' | 'deleted' | null = null;
 
@@ -72,10 +72,7 @@ export class Overlay {
             if (this.overlayisOpen() && !dialog.open) {
                 dialog.showModal();
             }
-        });
 
-        effect(() => {
-            this.overlayisOpen();
             const contact = this.contact();
             this.contactForm().reset();
             this.contactModel.set({
@@ -108,7 +105,7 @@ export class Overlay {
         this.closed.emit(action); // genau EIN emit pro Schließvorgang
     }
 
-        onCloseButtonClick() {
+    onCloseButtonClick() {
         this.requestClose();
     }
 

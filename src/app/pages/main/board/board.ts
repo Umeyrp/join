@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { TasksService } from '../../../core/tasks.service';
 import { ContactsService } from '../../../core/contacts.service';
 import { Task } from '../../../interfaces/task';
+import { TaskOverlay } from "./task-overlay/task-overlay";
 
 @Component({
     selector: 'app-board',
-    imports: [],
+    imports: [TaskOverlay],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
