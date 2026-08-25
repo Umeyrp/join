@@ -1,0 +1,80 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+dialog {
+    width: 500px;
+    height: 100%;
+    max-height: 592px;
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    border: none;
+    border-radius: 30px;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+
+    &::backdrop {
+        background: $color-backdrop;
+        backdrop-filter: blur(3px);
+    }
+}
+
+.overlay-content {
+    height: 100%;
+}
+
+.panel-slide-in {
+    animation: slide-in 0.3s ease-out;
+}
+
+.panel-slide-out {
+    animation: slide-out 0.3s ease-in;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.close-overlay {
+    position: absolute;
+    z-index: 2;
+    top: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 170ms ease-in-out;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    &:hover {
+        background: #d9d9d9;
+        scale: 1.1;
+        transition: all 170ms ease-in-out;
+    }
+}
