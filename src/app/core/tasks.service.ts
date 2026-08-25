@@ -88,6 +88,13 @@ export class TasksService implements OnDestroy {
         if (error) throw error;
     }
 
+    applyReorderedTasks(tasks: Task[]): void {
+        this.tasks.update((current) => {
+            const updatedById = new Map(tasks.map((task) => [task.id, task]));
+            return current.map((task) => updatedById.get(task.id) ?? task);
+        });
+    }
+
     ngOnDestroy(): void {
         this.taskChannel.unsubscribe();
         this.subtaskChannel.unsubscribe();
