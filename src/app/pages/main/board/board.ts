@@ -6,7 +6,7 @@ import { TaskCard } from './task-card/task-card';
 import { TaskOverlay } from './task-overlay/task-overlay';
 import { TasksOverlayService } from '../../../core/tasks-overlay-service';
 import { Status, Task } from '../../../interfaces/task';
-import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-board',
@@ -19,7 +19,10 @@ export class Board {
     protected tasksOverlayService = inject(TasksOverlayService);
 
     protected tasksByStatus(status: Status): Task[] {
-        return this.tasksService.tasks().filter((task) => task.status === status);
+        return this.tasksService
+            .tasks()
+            .filter((task) => task.status === status)
+            .sort((a, b) => a.position - b.position);
     }
 
     protected addTestTask() {
@@ -37,7 +40,28 @@ export class Board {
     drop(event: CdkDragDrop<Task[]>) {
         const task = event.previousContainer.data[event.previousIndex];
         const newStatus = event.container.id as Status;
-        this.tasksService.updateTaskStatusAndPosition(task.id, newStatus, event.currentIndex);
+
+        const targetTasks = [...event.container.data];
+        if (event.previousContainer === event.container) {
+            moveItemInArray(targetTasks, event.previousIndex, event.currentIndex);
+        } else {
+            targetTasks.splice(event.currentIndex, 0, task);
+        }
+
+        const reorderedTasks = targetTasks.map((columnTask, index) => ({
+            ...columnTask,
+            status: newStatus,
+            position: index,
+        }));
+
+        this.tasksService.applyReorderedTasks(reorderedTasks);
+        reorderedTasks.forEach((columnTask) => {
+            this.tasksService.updateTaskStatusAndPosition(
+                columnTask.id,
+                columnTask.status,
+                columnTask.position,
+            );
+        });
     }
 
     openAddTask() {
