@@ -10,15 +10,7 @@ import {
 } from '@angular/core';
 import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials, NewContact } from '../../../../interfaces/contact';
-import {
-    email,
-    form,
-    minLength,
-    pattern,
-    required,
-    FormField,
-    submit,
-} from '@angular/forms/signals';
+import { form, pattern, required, FormField, submit } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { Button } from '../../../../shared/components/button/button';
 
@@ -132,7 +124,7 @@ export class ContactOverlay {
             }
         });
     }
-    
+
     async onDelete() {
         this.isSaving.set(true);
         try {

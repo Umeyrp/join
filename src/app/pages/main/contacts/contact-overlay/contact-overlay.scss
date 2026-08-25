@@ -23,9 +23,13 @@ dialog {
     height: 100%;
 }
 
-.backdrop-fade-in,
-.backdrop-fade-out {
-    animation: none;
+
+.backdrop-fade-in::backdrop {
+    animation: fade-in 0.3s ease-out;
+}
+
+.backdrop-fade-out::backdrop {
+    animation: fade-out 0.3s ease-in;
 }
 
 @keyframes fade-in {

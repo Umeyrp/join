@@ -1,6 +1,6 @@
 @if(overlayisOpen()){
-<dialog #dialog class="overlay-panel" (click)="onDialogClick($event)" (cancel)="onCancel($event)"
-    animate.enter="panel-slide-in" animate.leave="panel-slide-out">
+<dialog #dialog class="overlay-panel" animate.enter="panel-slide-in backdrop-fade-in"
+    animate.leave="panel-slide-out backdrop-fade-out" (click)="onDialogClick($event)" (cancel)="onCancel($event)">
     <div class="overlay-content">
         <button class="close-overlay" (click)="onCloseButtonClick()" aria-label="close">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
