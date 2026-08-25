@@ -1,4 +1,15 @@
-import { Component, input, signal, inject, computed, output, effect } from '@angular/core';
+import {
+    Component,
+    input,
+    signal,
+    inject,
+    computed,
+    output,
+    effect,
+    viewChild,
+    ElementRef,
+    HostListener,
+} from '@angular/core';
 import { ContactsService } from '../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 
@@ -16,6 +27,7 @@ export class Dropdown {
     mode = input.required<DropdownMode>();
 
     private contactsService = inject(ContactsService);
+    private el = inject(ElementRef);
 
     isOpen = signal(false);
     selectedContacts = signal<Contact[]>([]);
@@ -28,6 +40,7 @@ export class Dropdown {
 
     contactsChanged = output<Contact[]>();
     categoryChanged = output<string>();
+    searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
     getAvatarColor = getAvatarColor;
     getInitials = getInitials;
@@ -40,9 +53,18 @@ export class Dropdown {
             this.searchQuery.set('');
             this.isOpen.set(false);
         });
+
+        effect(() => {
+            if (this.isOpen()) {
+                setTimeout(() => this.searchInput()?.nativeElement.focus(), 170);
+            }
+        });
     }
 
     toggle() {
+        if (!this.isOpen()) {
+            window.dispatchEvent(new CustomEvent('dropdown-open', { detail: this }));
+        }
         this.isOpen.update((v) => !v);
     }
 
@@ -58,7 +80,6 @@ export class Dropdown {
                 ? current.filter((c) => c.id !== contact.id)
                 : [...current, contact],
         );
-
         this.contactsChanged.emit(this.selectedContacts());
     }
 
@@ -71,4 +92,18 @@ export class Dropdown {
             c.name.toLowerCase().includes(this.searchQuery().toLowerCase()),
         ),
     );
+
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent) {
+        if (!this.el.nativeElement.contains(event.target as Node)) {
+            this.isOpen.set(false);
+        }
+    }
+
+    @HostListener('window:dropdown-open', ['$event'])
+    onOtherDropdownOpen(event: Event) {
+        if ((event as CustomEvent).detail !== this) {
+            this.isOpen.set(false);
+        }
+    }
 }
