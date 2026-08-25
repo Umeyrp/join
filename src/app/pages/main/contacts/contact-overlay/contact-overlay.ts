@@ -1,25 +1,28 @@
-import { Component, effect, inject, input, output, signal } from '@angular/core';
+import {
+    Component,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    output,
+    signal,
+    viewChild,
+} from '@angular/core';
 import { ContactsService } from '../../../../core/contacts.service';
 import { Contact, getAvatarColor, getInitials, NewContact } from '../../../../interfaces/contact';
-import {
-    email,
-    form,
-    minLength,
-    pattern,
-    required,
-    FormField,
-    submit,
-} from '@angular/forms/signals';
+import { form, pattern, required, FormField, submit } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { Button } from '../../../../shared/components/button/button';
 
 @Component({
-    selector: 'app-overlay',
+    selector: 'app-contact-overlay',
     imports: [FormField, Button],
-    templateUrl: './overlay.html',
-    styleUrl: './overlay.scss',
+    templateUrl: './contact-overlay.html',
+    styleUrl: './contact-overlay.scss',
 })
-export class Overlay {
+export class ContactOverlay {
+    private dialogRef = viewChild<ElementRef<HTMLDialogElement>>('dialog');
+
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
     private contactsService = inject(ContactsService);
@@ -56,9 +59,15 @@ export class Overlay {
 
     constructor() {
         effect(() => {
-            this.overlayisOpen();
-            const contact = this.contact();
+            const dialog = this.dialogRef()?.nativeElement;
+            if (dialog && !dialog.open) {
+                dialog.showModal();
+            }
+        });
 
+        effect(() => {
+            if (!this.overlayisOpen()) return;
+            const contact = this.contact();
             this.contactForm().reset();
             this.contactModel.set({
                 name: contact?.name ?? '',
@@ -68,17 +77,30 @@ export class Overlay {
         });
     }
 
-    onClose(action: 'created' | 'edited' | 'deleted' | null = null) {
+    onDialogClick(event: MouseEvent) {
+        if (event.target === this.dialogRef()?.nativeElement) {
+            this.close();
+        }
+    }
+
+    onCancel(event: Event) {
+        event.preventDefault();
+        this.close();
+    }
+
+    onCloseButtonClick() {
+        this.close();
+    }
+
+    close(action: 'created' | 'edited' | 'deleted' | null = null) {
         this.closed.emit(action);
     }
 
     async onSubmit(event: Event): Promise<void> {
         event.preventDefault();
-
         await submit(this.contactForm, async (f) => {
             const { name, email, phone } = f().value();
             this.isSaving.set(true);
-
             try {
                 if (this.overlayisEditMode()) {
                     await this.contactsService.updateContact(this.contact()!.id, {
@@ -86,7 +108,7 @@ export class Overlay {
                         email,
                         phone,
                     });
-                    this.onClose('edited');
+                    this.close('edited');
                 } else {
                     const newContact = await this.contactsService.addContact({
                         name,
@@ -94,7 +116,7 @@ export class Overlay {
                         phone,
                     });
                     this.router.navigate(['/contacts', newContact.id]);
-                    this.onClose('created');
+                    this.close('created');
                 }
                 return null;
             } finally {
@@ -107,7 +129,7 @@ export class Overlay {
         this.isSaving.set(true);
         try {
             await this.contactsService.deleteContact(this.contact()!.id);
-            this.onClose('deleted');
+            this.close('deleted');
         } finally {
             this.isSaving.set(false);
         }

@@ -1,36 +1,30 @@
 <aside class="contact-list" [class.contact-list--hidden]="hasSelectedContact()">
-    <app-button
-        variant="primary-contact"
-        (click)="contactsOverlayService.openAddOverlay()"
-    ></app-button>
+    <app-button variant="primary-contact" (click)="contactsOverlayService.openAddOverlay()"></app-button>
 
     <app-contact-mobile-button />
 
     @if (isLoading()) {
-        <p>Loading...</p>
+    <p>Loading...</p>
     } @else if (loadError()) {
-        <p>Error while loading contacts.</p>
+    <p>Error while loading contacts.</p>
     } @else {
-        @for (group of groups(); track group.letter) {
-            <div class="contact-list__group">{{ group.letter }}</div>
-            <hr />
-            @for (contact of group.contacts; track contact.id) {
-                <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
-                    <div
-                        class="contact__avatar"
-                        [style.background-color]="getAvatarColor(contact.id)"
-                    >
-                        {{ getInitials(contact.name) }}
-                    </div>
-                    <div class="contact__info">
-                        <span class="contact__name">{{ contact.name }}</span>
-                        <span class="contact__email" [title]="contact.email">{{
-                            contact.email
-                        }}</span>
-                    </div>
-                </div>
-            }
-        }
+    @for (group of groups(); track group.letter) {
+    <div class="contact-list__group">{{ group.letter }}</div>
+    <hr />
+    @for (contact of group.contacts; track contact.id) {
+    <div class="contact" [routerLink]="[contact.id]" routerLinkActive="contact--active">
+        <div class="contact__avatar" [style.background-color]="getAvatarColor(contact.id)">
+            {{ getInitials(contact.name) }}
+        </div>
+        <div class="contact__info">
+            <span class="contact__name">{{ contact.name }}</span>
+            <span class="contact__email" [title]="contact.email">{{
+                contact.email
+                }}</span>
+        </div>
+    </div>
+    }
+    }
     }
 </aside>
 
@@ -41,8 +35,10 @@
         <span class="contact-detail__subtitle">Better with a team</span>
     </h1>
 
-    <router-outlet
-        (activate)="hasSelectedContact.set(true)"
-        (deactivate)="hasSelectedContact.set(false)"
-    ></router-outlet>
+    <router-outlet (activate)="hasSelectedContact.set(true)"
+        (deactivate)="hasSelectedContact.set(false)"></router-outlet>
 </section>
+
+<app-contact-overlay [overlayisOpen]="contactsOverlayService.isOpen()" [overlayisEditMode]="contactsOverlayService.isEditMode()"
+    (closed)="contactsOverlayService.closeOverlay($event)"
+    [contact]="contactsOverlayService.selectedContact()"></app-contact-overlay>

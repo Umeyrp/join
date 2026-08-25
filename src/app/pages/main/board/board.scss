@@ -1,0 +1,120 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    display: block;
+    min-height: 100%;
+    background-color: $color-section-bg;
+}
+
+.board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 64px 0;
+
+    h1 {
+        @include font($weight: 700, $size: 3.8125rem, $line-height: 120%);
+        margin: 0;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: stretch;
+        gap: 32px;
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: clamp(200px, 25vw, 312px);
+        padding: 0 16px;
+        border: 1px solid #a8a8a8;
+        border-radius: 10px;
+        background-color: $color-white;
+
+        &:hover {
+            border: 1px solid $color-light-text;
+        }
+
+        &:focus-within {
+            border-color: $color-input-border;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 8px 0;
+            color: black;
+            @include font($size: 1.25rem, $line-height: 120%);
+
+            &::placeholder {
+                color: #686868;
+            }
+        }
+    }
+
+    &__divider {
+        width: 1px;
+        height: 31px;
+        background-color: $color-divider;
+        flex-shrink: 0;
+    }
+}
+
+.board-columns {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(252px, 1fr));
+    gap: 24px;
+    padding: 24px 64px 40px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h2 {
+            @include font($weight: 700, $size: 1.25rem);
+            color: $color-board-menu;
+            margin: 0;
+        }
+    }
+
+    &__add {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    &__tasks {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__empty {
+        @include font($size: 1rem, $weight: 400, $line-height: 120%, $family: 'Open Sans');
+        background-color: $color-light-text;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+        border: 1px dashed #a8a8a8;
+        border-radius: 10px;
+        color: #a8a8a8;
+        text-align: center;
+        padding: 16px;
+        margin: 0;
+    }
+}
