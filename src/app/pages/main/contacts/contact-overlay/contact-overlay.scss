@@ -2,14 +2,14 @@
 @use 'variables' as *;
 
 dialog {
-    padding: 0;
-    margin: auto;
-    border: none;
     width: 1212px;
-    max-height: 592px;
-    overflow-y: auto;
-    border-radius: 30px;
     height: 100%;
+    max-height: 592px;
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    border: none;
+    border-radius: 30px;
     box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
 
     &::backdrop {
@@ -376,6 +376,7 @@ dialog {
 
         & input {
             height: 41px;
+            font-size: 16px;
         }
     }
 
@@ -430,8 +431,8 @@ dialog {
 
 @media (orientation: landscape) and (max-height: 768px) {
     dialog {
-        margin: 1rem;
         max-height: stretch;
+        margin: 1rem;
     }
 
     .overlay-content {
@@ -480,8 +481,8 @@ dialog {
         display: flex;
         flex: 1;
         align-items: center;
-        background: #ffffff;
         overflow: auto;
+        background: #ffffff;
     }
 
     .add-contact {
@@ -490,10 +491,10 @@ dialog {
         padding: 0 16px;
 
         & .initial {
-            transform: translate(260%, -108%);
+            display: none;
             width: 80px;
             height: 80px;
-            display: none;
+            transform: translate(260%, -108%);
         }
     }
 
@@ -506,8 +507,8 @@ dialog {
         margin-bottom: 0;
 
         & input {
-            font-size: 1rem;
             height: 40px;
+            font-size: 1rem;
         }
     }
 

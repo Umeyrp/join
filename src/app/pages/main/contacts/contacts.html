@@ -39,6 +39,6 @@
         (deactivate)="hasSelectedContact.set(false)"></router-outlet>
 </section>
 
-<app-overlay [overlayisOpen]="contactsOverlayService.isOpen()" [overlayisEditMode]="contactsOverlayService.isEditMode()"
+<app-contact-overlay [overlayisOpen]="contactsOverlayService.isOpen()" [overlayisEditMode]="contactsOverlayService.isEditMode()"
     (closed)="contactsOverlayService.closeOverlay($event)"
-    [contact]="contactsOverlayService.selectedContact()"></app-overlay>
+    [contact]="contactsOverlayService.selectedContact()"></app-contact-overlay>

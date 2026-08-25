@@ -3,15 +3,19 @@ import { RouterLink } from '@angular/router';
 import { TasksService } from '../../../core/tasks.service';
 import { Button } from '../../../shared/components/button/button';
 import { TaskCard } from './task-card/task-card';
+import { TaskOverlay } from './task-overlay/task-overlay';
+import { TasksOverlayService } from '../../../core/tasks-overlay-service';
+import { Task } from '../../../interfaces/task';
 
 @Component({
     selector: 'app-board',
-    imports: [Button, RouterLink, TaskCard],
+    imports: [Button, RouterLink, TaskCard, TaskOverlay],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
 export class Board {
     protected readonly tasksService = inject(TasksService);
+    protected tasksOverlayService = inject(TasksOverlayService);
 
     protected readonly todoTasks = computed(() =>
         this.tasksService.tasks().filter((task) => task.status === 'todo'),
