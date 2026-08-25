@@ -175,16 +175,49 @@
             </div>
             <div class="field-group">
                 <label>Subtasks</label>
-                <input
-                    type="text"
-                    [value]="newSubtask()"
-                    (input)="newSubtask.set($any($event.target).value)"
-                    (keydown.enter)="addSubtask()"
-                    placeholder="Add new subtask"
-                />
+                <div class="subtask-input-wrapper">
+                    <input
+                        type="text"
+                        [value]="newSubtask()"
+                        (input)="newSubtask.set($any($event.target).value)"
+                        (keydown.enter)="addSubtask()"
+                        placeholder="Add new subtask"
+                    />
+                    @if (newSubtask().length > 0) {
+                        <div class="subtask-input-actions">
+                            <svg
+                                (click)="newSubtask.set('')"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M6.575 7.975L1.675 12.875C1.49167 13.0583 1.25833 13.15 0.975 13.15C0.691667 13.15 0.458333 13.0583 0.275 12.875C0.0916667 12.6917 0 12.4583 0 12.175C0 11.8917 0.0916667 11.6583 0.275 11.475L5.175 6.575L0.275 1.675C0.0916667 1.49167 0 1.25833 0 0.975C0 0.691667 0.0916667 0.458333 0.275 0.275C0.458333 0.0916667 0.691667 0 0.975 0C1.25833 0 1.49167 0.0916667 1.675 0.275L6.575 5.175L11.475 0.275C11.6583 0.0916667 11.8917 0 12.175 0C12.4583 0 12.6917 0.0916667 12.875 0.275C13.0583 0.458333 13.15 0.691667 13.15 0.975C13.15 1.25833 13.0583 1.49167 12.875 1.675L7.975 6.575L12.875 11.475C13.0583 11.6583 13.15 11.8917 13.15 12.175C13.15 12.4583 13.0583 12.6917 12.875 12.875C12.6917 13.0583 12.4583 13.15 12.175 13.15C11.8917 13.15 11.6583 13.0583 11.475 12.875L6.575 7.975Z"
+                                    fill="#2A3647"
+                                />
+                            </svg>
+                            <div class="subtask-input-divider"></div>
+                            <svg
+                                (click)="addSubtask()"
+                                width="16"
+                                height="12"
+                                viewBox="0 0 16 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M5.288 8.775L13.763 0.3C13.963 0.1 14.2005 0 14.4755 0C14.7505 0 14.988 0.1 15.188 0.3C15.388 0.5 15.488 0.7375 15.488 1.0125C15.488 1.2875 15.388 1.525 15.188 1.725L5.988 10.925C5.788 11.125 5.55467 11.225 5.288 11.225C5.02133 11.225 4.788 11.125 4.588 10.925L0.288 6.625C0.088 6.425 -0.00783333 6.1875 0.0005 5.9125C0.00883333 5.6375 0.113 5.4 0.313 5.2C0.513 5 0.7505 4.9 1.0255 4.9C1.3005 4.9 1.538 5 1.738 5.2L5.288 8.775Z"
+                                    fill="#2A3647"
+                                />
+                            </svg>
+                        </div>
+                    }
+                </div>
                 @if (subtasks().length > 0) {
                     <ul [class.editing]="editingIndex() !== null">
-                        @for (subtask of subtasks(); track subtask; let i = $index) {
+                        @for (subtask of subtasks(); track i; let i = $index) {
                             <li class="subtask-item">
                                 @if (editingIndex() === i) {
                                     <div class="subtask-edit">
@@ -266,10 +299,16 @@
     <div class="add-task-footer">
         <span class="required-hint"><span class="required">*</span>This field is required</span>
         <div class="footer-buttons">
-            <button type="button" (click)="clearForm()">Clear <span>✕</span></button>
-            <button type="button" (click)="createTask()" [disabled]="!isFormValid()">
-                Create Task <span>✓</span>
-            </button>
+            <div class="footer-buttons">
+                <app-button variant="cancel" label="Clear" (click)="clearForm()" />
+                <app-button
+                    variant="primary-task"
+                    label="Create Task"
+                    iconVariant="check"
+                    [disabled]="!isFormValid()"
+                    (click)="isFormValid() && createTask()"
+                />
+            </div>
         </div>
     </div>
 </div>

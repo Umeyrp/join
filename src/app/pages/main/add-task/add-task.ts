@@ -2,10 +2,11 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
+import { Button } from '../../../shared/components/button/button';
 
 @Component({
     selector: 'app-add-task',
-    imports: [Dropdown],
+    imports: [Dropdown, Button],
     templateUrl: './add-task.html',
     styleUrl: './add-task.scss',
 })
@@ -47,6 +48,8 @@ export class AddTask {
         this.selectedContacts.set([]);
         this.selectedCategory.set(null);
         this.resetDropdown.update((v) => !v);
+        this.titleTouched.set(false);
+        this.dueDateTouched.set(false);
     }
 
     async createTask() {
@@ -59,13 +62,15 @@ export class AddTask {
             .single();
 
         const position = lastTask ? lastTask.position + 1 : 0;
+        const [day, month, year] = this.dueDate().split('/');
+        const formattedDate = `${year}-${month}-${day}`;
 
         const { data: task, error } = await this.supabase.client
             .from('tasks')
             .insert({
                 title: this.title(),
                 description: this.description(),
-                due_date: this.dueDate(),
+                due_date: formattedDate,
                 priority: this.priority(),
                 category: this.selectedCategory(),
                 status: 'todo',

@@ -29,6 +29,7 @@ h2 {
 
 .col-divider {
     background: $task-divider;
+    max-height: 424px;
 }
 
 .field-group {
@@ -194,7 +195,7 @@ ul {
     display: flex;
     align-items: center;
     height: 32px;
-    max-width: 402px;
+    max-width: 440px;
     padding: 4px 16px;
     border-radius: 10px;
     gap: 8px;
@@ -300,4 +301,47 @@ ul {
     font-size: 12px;
     top: 85px;
     display: block;
+}
+
+.add-task-footer {
+    width: 100%;
+    max-width: 1208px;
+    padding-right: 19px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.subtask-input-wrapper {
+    position: relative;
+
+    input {
+        width: 100%;
+        padding-right: 64px;
+    }
+
+    .subtask-input-actions {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+    .subtask-input-divider {
+        width: 1px;
+        height: 20px;
+        background: #a8a8a8;
+    }
 }
