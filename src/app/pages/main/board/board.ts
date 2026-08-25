@@ -10,7 +10,7 @@ import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-board',
-    imports: [Button, RouterLink, TaskCard, TaskOverlay, CdkDropList, CdkDrag],
+    imports: [Button, TaskCard, TaskOverlay, CdkDropList, CdkDrag],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
@@ -38,5 +38,9 @@ export class Board {
         const task = event.previousContainer.data[event.previousIndex];
         const newStatus = event.container.id as Status;
         this.tasksService.updateTaskStatusAndPosition(task.id, newStatus, event.currentIndex);
+    }
+
+    openAddTask() {
+        this.tasksOverlayService.openAddTask();
     }
 }
