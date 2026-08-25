@@ -7,6 +7,10 @@
     height: 100%;
     width: 100%;
     max-width: 1208px;
+
+    &.overlay {
+        padding: 64px 65px 64px 74px;
+    }
 }
 
 .add-task-wrapper {
@@ -306,7 +310,6 @@ ul {
 .add-task-footer {
     width: 100%;
     max-width: 1208px;
-    padding-right: 19px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, input, HostBinding } from '@angular/core';
 import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
@@ -24,6 +24,7 @@ export class AddTask {
     editingValue = signal('');
     titleTouched = signal(false);
     dueDateTouched = signal(false);
+    isOverlay = input<boolean>(false);
 
     private supabase = inject(Supabase);
 
@@ -155,4 +156,8 @@ export class AddTask {
 
         return false;
     });
+
+    @HostBinding('class.overlay') get overlayClass() {
+        return this.isOverlay();
+    }
 }

@@ -1,9 +1,10 @@
 import { Component, effect, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { Task } from '../../../../interfaces/task';
+import { AddTask } from '../../add-task/add-task';
 
 @Component({
     selector: 'app-task-overlay',
-    imports: [],
+    imports: [AddTask],
     templateUrl: './task-overlay.html',
     styleUrl: './task-overlay.scss',
 })
