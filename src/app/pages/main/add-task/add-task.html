@@ -9,16 +9,44 @@
                     [value]="title()"
                     (input)="title.set($any($event.target).value)"
                     placeholder="Enter a title"
+                    (blur)="titleTouched.set(true)"
+                    [class.invalid]="titleInvalid()"
                 />
+                @if (titleInvalid()) {
+                    <span class="error-msg">This field is required</span>
+                }
             </div>
 
             <div class="field-group">
                 <label>Description</label>
-                <textarea
-                    [value]="description()"
-                    (input)="description.set($any($event.target).value)"
-                    placeholder="Enter a Description"
-                ></textarea>
+                <div class="textarea-wrapper">
+                    <textarea
+                        [value]="description()"
+                        (input)="description.set($any($event.target).value)"
+                        placeholder="Enter a Description"
+                    ></textarea>
+                    <svg
+                        class="textarea-corner"
+                        width="19"
+                        height="19"
+                        viewBox="0 0 19 19"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M18.9 0V1.69C18.9017 2.31796 18.7788 2.94002 18.5385 3.52019C18.2982 4.10036 17.9452 4.62712 17.5 5.07L5.07 17.5C4.62712 17.9452 4.10036 18.2982 3.52019 18.5385C2.94002 18.7788 2.31796 18.9017 1.69 18.9H0L18.9 0Z"
+                            fill="#D1D1D1"
+                        />
+                        <path
+                            d="M18.9001 6.31006V8.00006C18.9006 8.62786 18.7772 9.2496 18.537 9.82961C18.2967 10.4096 17.9444 10.9365 17.5001 11.3801L11.3801 17.5001C10.9365 17.9444 10.4096 18.2967 9.82961 18.537C9.2496 18.7772 8.62786 18.9006 8.00006 18.9001H6.31006L18.9001 6.31006Z"
+                            fill="#D1D1D1"
+                        />
+                        <path
+                            d="M18.9002 12.4299V14.1199C18.9007 14.7477 18.7773 15.3695 18.5371 15.9495C18.2969 16.5295 17.9445 17.0564 17.5002 17.4999C17.0566 17.9442 16.5297 18.2966 15.9497 18.5369C15.3697 18.7771 14.748 18.9005 14.1202 18.8999H12.4302L18.9002 12.4299Z"
+                            fill="#D1D1D1"
+                        />
+                    </svg>
+                </div>
             </div>
 
             <div class="field-group">
@@ -27,8 +55,10 @@
                     <input
                         type="text"
                         [value]="dueDate()"
-                        (input)="dueDate.set($any($event.target).value)"
+                        (input)="formatDueDate($any($event.target).value, $any($event.target))"
                         placeholder="dd/mm/yyyy"
+                        (blur)="dueDateTouched.set(true)"
+                        [class.invalid]="dueDateInvalid()"
                     />
                     <svg
                         width="18"
@@ -43,6 +73,11 @@
                         />
                     </svg>
                 </div>
+                @if (dueDateTouched() && dueDate().length === 0) {
+                    <span class="error-msg">This field is required</span>
+                } @else if (dueDateFormatInvalid()) {
+                    <span class="error-msg">Invalid date</span>
+                }
             </div>
         </div>
         <div class="col-divider"></div>
@@ -229,7 +264,7 @@
         </div>
     </div>
     <div class="add-task-footer">
-        <span class="required-hint">*This field is required</span>
+        <span class="required-hint"><span class="required">*</span>This field is required</span>
         <div class="footer-buttons">
             <button type="button" (click)="clearForm()">Clear <span>✕</span></button>
             <button type="button" (click)="createTask()" [disabled]="!isFormValid()">

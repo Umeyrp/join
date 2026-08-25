@@ -21,6 +21,8 @@ export class AddTask {
     resetDropdown = signal(false);
     editingIndex = signal<number | null>(null);
     editingValue = signal('');
+    titleTouched = signal(false);
+    dueDateTouched = signal(false);
 
     private supabase = inject(Supabase);
 
@@ -116,4 +118,36 @@ export class AddTask {
     deleteSubtask(index: number) {
         this.subtasks.update((current) => current.filter((_, i) => i !== index));
     }
+
+    titleInvalid = computed(() => this.titleTouched() && this.title().trim().length === 0);
+    dueDateInvalid = computed(
+        () => (this.dueDateTouched() && this.dueDate().length === 0) || this.dueDateFormatInvalid(),
+    );
+
+    formatDueDate(value: string, input: HTMLInputElement) {
+        const digits = value.replace(/\D/g, '').slice(0, 8);
+        let formatted = digits;
+        if (digits.length >= 5) {
+            formatted = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4, 8)}`;
+        } else if (digits.length >= 3) {
+            formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+        }
+
+        this.dueDate.set(formatted);
+        input.value = formatted;
+    }
+
+    dueDateFormatInvalid = computed(() => {
+        const val = this.dueDate();
+        if (val.length === 0) return false;
+        if (val.length < 10) return true;
+
+        const [day, month, year] = val.split('/').map(Number);
+        if (month < 1 || month > 12) return true;
+
+        const maxDay = new Date(year, month, 0).getDate();
+        if (day < 1 || day > maxDay) return true;
+
+        return false;
+    });
 }

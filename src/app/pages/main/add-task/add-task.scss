@@ -5,6 +5,8 @@
     display: block;
     padding: 124px 96px 66px;
     height: 100%;
+    width: 100%;
+    max-width: 1208px;
 }
 
 .add-task-wrapper {
@@ -30,6 +32,7 @@ h2 {
 }
 
 .field-group {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -43,21 +46,46 @@ h2 {
         border: 1px solid $task-divider;
         padding: 12px 21px;
         @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        border: 1px solid #d1d1d1;
 
         &::placeholder {
             @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
         }
+
+        &:focus {
+            outline: none;
+            border: 1px solid #124658;
+        }
     }
 
-    textarea {
-        height: 120px;
-        border-radius: 10px;
-        border: 1px solid $task-divider;
-        padding: 18px 16px;
-        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+    .textarea-wrapper {
+        position: relative;
 
-        &::placeholder {
+        textarea {
+            width: 100%;
+            resize: none;
+            height: 120px;
+            border-radius: 10px;
+            border: 1px solid $task-divider;
+            padding: 18px 16px;
             @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+            border: 1px solid #d1d1d1;
+
+            &::placeholder {
+                @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+            }
+
+            &:focus {
+                outline: none;
+                border: 1px solid #124658;
+            }
+        }
+
+        .textarea-corner {
+            position: absolute;
+            bottom: 9.5px;
+            right: 4.5px;
+            pointer-events: none;
         }
     }
 }
@@ -68,6 +96,12 @@ h2 {
     input {
         width: 100%;
         padding-right: 40px;
+        border: 1px solid #d1d1d1;
+
+        &:focus {
+            outline: none;
+            border: 1px solid #124658;
+        }
     }
 
     svg {
@@ -245,4 +279,25 @@ ul {
 .edit-divider {
     border: 1px solid #a8a8a8;
     height: 24px;
+}
+
+.required {
+    color: #e60026;
+}
+
+.field-group input.invalid {
+    border-color: #e60026;
+
+    &:focus {
+        border-color: #e60026;
+    }
+}
+
+.error-msg {
+    position: absolute;
+    @include font($weight: 400, $size: 1rem, $line-height: 120%);
+    color: #e60026;
+    font-size: 12px;
+    top: 85px;
+    display: block;
 }
