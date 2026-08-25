@@ -7,7 +7,7 @@ import { ContactOverlay } from './contacts/contact-overlay/contact-overlay';
 
 @Component({
     selector: 'app-main',
-    imports: [Header, Navbar, RouterOutlet, ContactOverlay],
+    imports: [Header, Navbar, RouterOutlet],
     templateUrl: './main.html',
     styleUrl: './main.scss',
 })
