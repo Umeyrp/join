@@ -1,5 +1,17 @@
-import { Component, effect, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import {
+    Component,
+    computed,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    output,
+    signal,
+    viewChild,
+} from '@angular/core';
 import { Task } from '../../../../interfaces/task';
+import { TasksDisplayService } from '../../../../core/tasks-display.service';
+import { getAvatarColor, getInitials } from '../../../../interfaces/contact';
 
 @Component({
     selector: 'app-task-overlay',
@@ -9,10 +21,14 @@ import { Task } from '../../../../interfaces/task';
 })
 export class TaskOverlay {
     private dialogRef = viewChild<ElementRef<HTMLDialogElement>>('dialog');
+    tasksDisplayService = inject(TasksDisplayService);
+
+    protected readonly getAvatarColor = getAvatarColor;
+    protected readonly getInitials = getInitials;
 
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
-    task = input.required<Task | null>();
+    task = input.required<Task>();
     closed = output<'created' | 'edited' | 'deleted' | null>();
     isSaving = signal(false);
 
@@ -54,4 +70,6 @@ export class TaskOverlay {
     close(action: 'created' | 'edited' | 'deleted' | null = null) {
         this.closed.emit(action);
     }
+
+    assignedContacts = computed(() => this.tasksDisplayService.assignedContacts(this.task()));
 }

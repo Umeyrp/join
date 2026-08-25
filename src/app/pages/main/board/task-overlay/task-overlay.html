@@ -1,5 +1,6 @@
 @if(overlayisOpen()){
-<dialog #dialog class="overlay-panel" animate.enter="panel-slide-in" animate.leave="panel-slide-out" (click)="onDialogClick($event)" (cancel)="onCancel($event)">
+<dialog #dialog class="overlay-panel" animate.enter="panel-slide-in backdrop-fade-in"
+    animate.leave="panel-slide-out backdrop-fade-out" (click)="onDialogClick($event)" (cancel)="onCancel($event)">
     <div class="overlay-content">
         <button class="close-overlay" (click)="onCloseButtonClick()" aria-label="close">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,8 +21,14 @@
         <p>{{task()?.description}}</p>
         <p>{{task()?.due_date}}</p>
         <p>{{task()?.priority}}</p>
-        <p>{{task()?.contactIds}}</p>
-        <p>{{task()?.subtasks}}</p>
+        @for (contact of assignedContacts(); track contact.id) {
+        <div class="task-card__avatar" [style.background-color]="getAvatarColor(contact.id)">
+            {{ getInitials(contact.name) }}
+        </div>{{contact.name}}
+        }
+        @for (subtask of task().subtasks; track $index) {
+        <p> {{subtask.title}}</p>
+        }
     </div>
 </dialog>
 }
