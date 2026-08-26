@@ -37,7 +37,7 @@ export class Board {
         });
     }
 
-    drop(event: CdkDragDrop<Task[]>) {
+    async drop(event: CdkDragDrop<Task[]>) {
         const task = event.previousContainer.data[event.previousIndex];
         const newStatus = event.container.id as Status;
 
@@ -54,14 +54,22 @@ export class Board {
             position: index,
         }));
 
-        this.tasksService.applyReorderedTasks(reorderedTasks);
-        reorderedTasks.forEach((columnTask) => {
-            this.tasksService.updateTaskStatusAndPosition(
-                columnTask.id,
-                columnTask.status,
-                columnTask.position,
+        const previousTasks = this.tasksService.tasks();
+        this.tasksService.applyOptimisticReorder(reorderedTasks);
+
+        try {
+            await Promise.all(
+                reorderedTasks.map((columnTask) =>
+                    this.tasksService.updateTaskStatusAndPosition(
+                        columnTask.id,
+                        columnTask.status,
+                        columnTask.position,
+                    ),
+                ),
             );
-        });
+        } catch {
+            this.tasksService.applyOptimisticReorder(previousTasks);
+        }
     }
 
     openAddTask() {
