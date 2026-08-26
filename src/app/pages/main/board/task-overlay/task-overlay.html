@@ -5,6 +5,8 @@
         [class.add-task-mode]="!task()"
         (click)="onDialogClick($event)"
         (cancel)="onCancel($event)"
+        animate.enter="panel-slide-in backdrop-fade-in"
+        animate.leave="panel-slide-out backdrop-fade-out"
     >
         <div class="overlay-content">
             @if (task()) {
