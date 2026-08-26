@@ -3,19 +3,19 @@
 
 :host {
     display: block;
-    padding: clamp(70px, calc(70px + 54 * ((100vh - 900px) / 124)), 124px) 96px 0;
+    padding: clamp(12px, calc(12px + 112 * ((100vh - 790px) / 234)), 124px) 96px 0;
     height: 100%;
     width: 100%;
     max-width: 1208px;
 
     &.overlay {
-        padding: 64px 65px 0 74px;
+        padding: clamp(12px, calc(12px + 112 * ((100vh - 790px) / 234)), 124px) 65px 0 74px;
         max-height: 870px;
     }
 }
 
-:host(.overlay) ul {
-    max-height: 128px;
+:host(.overlay) .add-task-wrapper {
+    gap: 24px;
 }
 
 .add-task-wrapper {
@@ -23,7 +23,6 @@
     grid-template-rows: auto 1fr auto;
     height: 100%;
     gap: 48px;
-    overflow: hidden;
 }
 
 h2 {
@@ -35,7 +34,6 @@ h2 {
     grid-template-columns: 1fr 2px 1fr;
     gap: 0 48px;
     width: 100%;
-    overflow: hidden;
 }
 
 .col-divider {
@@ -53,7 +51,7 @@ h2 {
 .col-right {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 19px;
 }
 
 .field-group {
@@ -189,7 +187,7 @@ ul {
     width: 100%;
     padding: 0;
     gap: 8px;
-    max-height: 32px;
+    max-height: 64px;
     overflow-y: auto;
     --sb-track-color: #ffffff;
     --sb-thumb-color: #f0f0f0;

@@ -30,7 +30,7 @@ export class TaskOverlay {
 
     overlayisOpen = input.required<boolean>();
     overlayisEditMode = input.required<boolean>();
-    task = input.required<Task>();
+    task = input<Task | null>(null);
     closed = output<'created' | 'edited' | 'deleted' | null>();
     isSaving = signal(false);
 
@@ -73,6 +73,13 @@ export class TaskOverlay {
         this.closed.emit(action);
     }
 
-    assignedContacts = computed(() => this.tasksDisplayService.assignedContacts(this.task()));
-    categoryClass = computed(() => this.tasksDisplayService.categoryClass(this.task()));
+    assignedContacts = computed(() => {
+        const task = this.task();
+        return task ? this.tasksDisplayService.assignedContacts(task) : [];
+    });
+
+    categoryClass = computed(() => {
+        const task = this.task();
+        return task ? this.tasksDisplayService.categoryClass(task) : '';
+    });
 }
