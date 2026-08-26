@@ -86,6 +86,8 @@ export class TaskOverlay {
     });
 
     toggleSubtask(subtaskId: number, done: boolean) {
+        console.log(subtaskId, done);
+        
         this.tasksService.toggleSubtask(subtaskId, !done);
     }
 }
