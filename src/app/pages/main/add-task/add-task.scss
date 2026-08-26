@@ -3,13 +3,14 @@
 
 :host {
     display: block;
-    padding: 124px 96px 66px;
+    padding: clamp(70px, calc(70px + 54 * ((100vh - 900px) / 124)), 124px) 96px 0;
     height: 100%;
     width: 100%;
     max-width: 1208px;
 
     &.overlay {
-        padding: 64px 65px 64px 74px;
+        padding: 64px 65px 0 74px;
+        max-height: 870px;
     }
 }
 
@@ -18,6 +19,7 @@
     grid-template-rows: auto 1fr auto;
     height: 100%;
     gap: 48px;
+    overflow: hidden;
 }
 
 h2 {
@@ -29,11 +31,25 @@ h2 {
     grid-template-columns: 1fr 2px 1fr;
     gap: 0 48px;
     width: 100%;
+    overflow: hidden;
 }
 
 .col-divider {
     background: $task-divider;
     max-height: 424px;
+}
+
+.col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    overflow-y: auto;
+}
+
+.col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .field-group {
@@ -48,7 +64,6 @@ h2 {
     input {
         height: 48px;
         border-radius: 10px;
-        border: 1px solid $task-divider;
         padding: 12px 21px;
         @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
         border: 1px solid #d1d1d1;
@@ -71,7 +86,6 @@ h2 {
             resize: none;
             height: 120px;
             border-radius: 10px;
-            border: 1px solid $task-divider;
             padding: 18px 16px;
             @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
             border: 1px solid #d1d1d1;
@@ -118,21 +132,9 @@ h2 {
     }
 }
 
-.col-left {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.col-right {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
 .priority-buttons {
     display: flex;
-    gap: 16px;
+    gap: 12px;
 
     button {
         display: flex;
@@ -169,11 +171,9 @@ h2 {
     button:nth-child(1).active {
         background: #ff3d00;
     }
-
     button:nth-child(2).active {
         background: #ffa800;
     }
-
     button:nth-child(3).active {
         background: #7ae229;
     }
@@ -185,9 +185,33 @@ ul {
     width: 100%;
     padding: 0;
     gap: 8px;
+    max-height: 32px;
+    overflow-y: auto;
+    --sb-track-color: #ffffff;
+    --sb-thumb-color: #f0f0f0;
+    --sb-size: 5px;
 
     &:has(.subtask-edit) {
         padding-left: 0;
+    }
+}
+
+ul::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+ul::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+ul::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+    border: 1px solid #000000;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    ul {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
 }
 
@@ -308,11 +332,11 @@ ul {
 }
 
 .add-task-footer {
-    width: 100%;
-    max-width: 1208px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 0 24px;
+    background: white;
 }
 
 .footer-buttons {

@@ -164,7 +164,6 @@
                     (contactsChanged)="selectedContacts.set($event)"
                 />
             </div>
-
             <div class="field-group">
                 <label>Category<span class="required">*</span></label>
                 <app-dropdown
@@ -299,16 +298,14 @@
     <div class="add-task-footer">
         <span class="required-hint"><span class="required">*</span>This field is required</span>
         <div class="footer-buttons">
-            <div class="footer-buttons">
-                <app-button variant="cancel" label="Clear" (click)="clearForm()" />
-                <app-button
-                    variant="primary-task"
-                    label="Create Task"
-                    iconVariant="check"
-                    [disabled]="!isFormValid()"
-                    (click)="isFormValid() && createTask()"
-                />
-            </div>
+            <app-button variant="cancel" label="Clear" (click)="clearForm()" />
+            <app-button
+                variant="primary-task"
+                label="Create Task"
+                iconVariant="check"
+                [disabled]="!isFormValid()"
+                (click)="isFormValid() && createTask()"
+            />
         </div>
     </div>
 </div>
