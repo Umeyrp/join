@@ -145,9 +145,17 @@
 
                 <div class="contacts-wrapper">
                     <span class="span-title">Subtasks</span>
-                    @for (subtask of task()!.subtasks; track $index) {
-                        <p>{{ subtask.title }}</p>
-                    }
+            <div class="subtasks-wrapper">
+                        @for (subtask of task()!.subtasks; track $index) {
+                <label for="checkbox-{{$index}}" class="checkbox">
+                    <span class="checkbox-visual">
+                        <input type="checkbox" [checked]="subtask.done" id="checkbox-{{$index}}">
+                        <span class="checkmark"></span>
+                    </span>
+                                <p>{{ subtask.title }}</p>
+                </label>
+                        }
+            </div>
                 </div>
 
                 <div class="task-buttons">
