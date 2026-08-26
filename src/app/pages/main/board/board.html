@@ -67,7 +67,7 @@
                 <p class="column__empty">No tasks To do</p>
             } @else {
                 @for (task of tasksByStatus('todo'); track task.id) {
-                    <app-task-card [task]="task" cdkDrag />
+                    <app-task-card [task]="task" cdkDrag (click)="tasksOverlayService.openTaskOverlay(task)"/>
                 }
             }
         </div>
