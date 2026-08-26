@@ -14,6 +14,7 @@ import { TasksDisplayService } from '../../../../core/tasks-display.service';
 import { getAvatarColor, getInitials } from '../../../../interfaces/contact';
 import { DatePipe } from '@angular/common';
 import { AddTask } from '../../add-task/add-task';
+import { TasksService } from '../../../../core/tasks.service';
 
 @Component({
     selector: 'app-task-overlay',
@@ -24,6 +25,7 @@ import { AddTask } from '../../add-task/add-task';
 export class TaskOverlay {
     private dialogRef = viewChild<ElementRef<HTMLDialogElement>>('dialog');
     tasksDisplayService = inject(TasksDisplayService);
+    tasksService = inject(TasksService);
 
     protected readonly getAvatarColor = getAvatarColor;
     protected readonly getInitials = getInitials;
@@ -82,4 +84,8 @@ export class TaskOverlay {
         const task = this.task();
         return task ? this.tasksDisplayService.categoryClass(task) : '';
     });
+
+    toggleSubtask(subtaskId: number, done: boolean) {
+        this.tasksService.toggleSubtask(subtaskId, !done);
+    }
 }
