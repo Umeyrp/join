@@ -3,7 +3,8 @@
 
 :host {
     display: block;
-    padding: clamp(12px, calc(12px + 112 * ((100vh - 790px) / 234)), 124px) 96px 0;
+    padding: clamp(12px, calc(12px + 112 * ((100vh - 790px) / 234)), 124px)
+        clamp(1rem, -14.078rem + 31.373vw, 6rem) 0;
     height: 100%;
     width: 100%;
     max-width: 1208px;
@@ -15,7 +16,7 @@
 }
 
 :host(.overlay) ul {
-    max-height: 40px; 
+    max-height: 40px;
 }
 
 :host(.overlay) .add-task-wrapper {
@@ -26,6 +27,7 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 100%;
+    width: 100%;
     gap: 48px;
 }
 
@@ -46,6 +48,7 @@ h2 {
 }
 
 .col-left {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -53,9 +56,11 @@ h2 {
 }
 
 .col-right {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 19px;
+    overflow-y: auto;
 }
 
 .field-group {
@@ -157,7 +162,7 @@ h2 {
         background: #ffffff;
         box-shadow: 0 0 4px 0 #00000066;
         cursor: pointer;
-        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        @include font($weight: 400, $size: clamp(1rem, 1vw + 0.8rem, 1.25rem), $line-height: 120%);
         transition: all 170ms ease-in-out;
 
         &:hover {
@@ -376,5 +381,93 @@ ul::-webkit-scrollbar-thumb {
         width: 1px;
         height: 20px;
         background: #a8a8a8;
+    }
+}
+
+.mobile-hint {
+    display: none;
+}
+
+@include mobile {
+    :host {
+        padding: 48px 16px;
+    }
+
+    .add-task-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        h2 {
+            font-size: 3rem;
+        }
+    }
+
+    .add-task_form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+
+        .col-divider {
+            display: none;
+        }
+
+        .col-left {
+            gap: 16px;
+            align-items: center;
+        }
+
+        .col-right {
+            padding-bottom: 80px;
+            align-items: center;
+        }
+    }
+
+    .field-group {
+        font-size: 1rem;
+        max-width: 550px;
+    }
+    .priority-buttons {
+        button {
+            padding: 12px 3px;
+        }
+    }
+
+    .add-task-footer {
+        position: fixed;
+        bottom: 80px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: clamp(8px, 1.786vw + 2.286px, 16px);
+        padding: 12px 16px;
+    }
+
+    .required-hint {
+        display: none;
+    }
+
+    .mobile-hint {
+        display: flex;
+    }
+
+    .error-msg {
+        right: 0;
+        top: 0;
+    }
+}
+
+@include tablet {
+    .add-task_form {
+        gap: 0 25px;
+    }
+
+    .priority-buttons {
+        padding: 0 4px;
+
+        button {
+            padding: 16px 4px
+        }
     }
 }
