@@ -74,7 +74,7 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
-                        (click)="tasksOverlayService.openTaskOverlay(task)"
+                        (click)="tasksOverlayService.openTaskOverlay(task.id)"
                     />
                 }
             }
@@ -131,7 +131,7 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
-                        (click)="tasksOverlayService.openTaskOverlay(task)"
+                        (click)="tasksOverlayService.openTaskOverlay(task.id)"
                     />
                 }
             }
@@ -188,7 +188,7 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
-                        (click)="tasksOverlayService.openTaskOverlay(task)"
+                        (click)="tasksOverlayService.openTaskOverlay(task.id)"
                     />
                 }
             }
@@ -198,6 +198,7 @@
     <div class="column">
         <div class="column__header">
             <h2>Done</h2>
+            
         </div>
         <div
             class="column__tasks"
@@ -215,7 +216,7 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
-                        (click)="tasksOverlayService.openTaskOverlay(task)"
+                        (click)="tasksOverlayService.openTaskOverlay(task.id)"
                     />
                 }
             }
