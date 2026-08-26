@@ -14,6 +14,10 @@
     }
 }
 
+:host(.overlay) ul {
+    max-height: 40px; 
+}
+
 :host(.overlay) .add-task-wrapper {
     gap: 24px;
 }
