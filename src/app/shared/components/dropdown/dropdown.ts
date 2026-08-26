@@ -34,6 +34,7 @@ export class Dropdown {
     selectedCategory = signal<string | null>(null);
     searchQuery = signal('');
     reset = input<boolean>();
+    closed = output<void>();
 
     contacts = this.contactsService.contacts;
     categories = CATEGORIES;
@@ -62,6 +63,9 @@ export class Dropdown {
     }
 
     toggle() {
+        if (this.isOpen()) {
+            this.closed.emit();
+        }
         if (!this.isOpen()) {
             window.dispatchEvent(new CustomEvent('dropdown-open', { detail: this }));
         }
@@ -96,6 +100,7 @@ export class Dropdown {
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: MouseEvent) {
         if (!this.el.nativeElement.contains(event.target as Node)) {
+            if (this.isOpen()) this.closed.emit();
             this.isOpen.set(false);
         }
     }

@@ -25,6 +25,7 @@ export class AddTask {
     editingValue = signal('');
     titleTouched = signal(false);
     dueDateTouched = signal(false);
+    categoryTouched = signal(false);
     isOverlay = input<boolean>(false);
     private tasksOverlayService = inject(TasksOverlayService);
 
@@ -53,6 +54,7 @@ export class AddTask {
         this.resetDropdown.update((v) => !v);
         this.titleTouched.set(false);
         this.dueDateTouched.set(false);
+        this.categoryTouched.set(false);
     }
 
     async createTask() {
@@ -156,6 +158,11 @@ export class AddTask {
 
         const maxDay = new Date(year, month, 0).getDate();
         if (day < 1 || day > maxDay) return true;
+
+        const entered = new Date(year, month - 1, day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (entered < today) return true;
 
         return false;
     });

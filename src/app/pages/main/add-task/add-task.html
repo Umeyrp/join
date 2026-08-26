@@ -75,7 +75,7 @@
                 </div>
                 @if (dueDateTouched() && dueDate().length === 0) {
                     <span class="error-msg">This field is required</span>
-                } @else if (dueDateFormatInvalid()) {
+                } @else if (dueDateTouched() && dueDateFormatInvalid()) {
                     <span class="error-msg">Invalid date</span>
                 }
             </div>
@@ -170,7 +170,12 @@
                     mode="category"
                     [reset]="resetDropdown()"
                     (categoryChanged)="selectedCategory.set($event)"
+                    (closed)="categoryTouched.set(true)"
+                    [class.invalid]="categoryTouched() && selectedCategory() === null"
                 />
+                @if (categoryTouched() && selectedCategory() === null) {
+                    <span class="error-msg">This field is required</span>
+                }
             </div>
             <div class="field-group">
                 <label>Subtasks</label>

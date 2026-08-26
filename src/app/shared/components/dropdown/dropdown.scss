@@ -6,6 +6,10 @@
     width: 100%;
 }
 
+:host(.invalid) .dropdown-category .dropdown-header {
+    border-color: #e60026;
+}
+
 .dropdown-category {
     position: relative;
 }
