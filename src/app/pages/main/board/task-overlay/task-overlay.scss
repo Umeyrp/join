@@ -148,8 +148,8 @@ dialog {
     gap: 8px;
 
     .seperator::after {
-        border: 1px solid #D1D1D1;
-        content: "";
+        border: 1px solid #d1d1d1;
+        content: '';
     }
 
     & button {
@@ -222,4 +222,10 @@ dialog {
             margin-left: 0;
         }
     }
+}
+
+dialog.add-task-mode .close-overlay {
+    position: absolute;
+    top: 68px;
+    right: 44px;
 }
