@@ -163,10 +163,10 @@ dialog {
         @include font($weight: 400, $size: 1rem, $line-height: 120%);
 
         &:hover {
-            color: $color-hover-teal;
             font-weight: 700;
+            color: $color-hover-teal;
 
-            & path{
+            & path {
                 fill: $color-hover-teal;
             }
         }

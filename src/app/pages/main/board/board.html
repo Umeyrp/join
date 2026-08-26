@@ -198,7 +198,6 @@
     <div class="column">
         <div class="column__header">
             <h2>Done</h2>
-            
         </div>
         <div
             class="column__tasks"
@@ -224,12 +223,10 @@
     </div>
 </section>
 
-@if (tasksOverlayService.isOpen()) {
-    <app-task-overlay
-        [overlayisOpen]="tasksOverlayService.isOpen()"
-        [overlayisEditMode]="tasksOverlayService.isEditMode()"
-        [task]="tasksOverlayService.selectedTask()"
-        (closed)="tasksOverlayService.closeOverlay()"
-    >
-    </app-task-overlay>
-}
+<app-task-overlay
+    [overlayisOpen]="tasksOverlayService.isOpen()"
+    [overlayisEditMode]="tasksOverlayService.isEditMode()"
+    [task]="tasksOverlayService.selectedTask()"
+    (closed)="tasksOverlayService.closeOverlay()"
+>
+</app-task-overlay>
