@@ -18,7 +18,7 @@ export class TaskCard {
     protected readonly getInitials = getInitials;
 
     protected readonly categoryClass = computed(() =>
-        this.task().category === 'User Story' ? 'user-story' : 'technical-task',
+        this.tasksDisplayService.categoryClass(this.task()),
     );
 
     protected readonly assignedContacts = computed(() =>

@@ -7,6 +7,10 @@ import { ContactsService } from './contacts.service';
 export class TasksDisplayService {
     private readonly contactsService = inject(ContactsService);
 
+    categoryClass(task: Task) {
+        return task.category === 'User Story' ? 'user-story' : 'technical-task';
+    }
+
     assignedContacts(task: Task): Contact[] {
         return task.contactIds
             .map((id) => this.contactsService.contacts().find((contact) => contact.id === id))

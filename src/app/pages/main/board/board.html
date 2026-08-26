@@ -116,7 +116,7 @@
                 <p class="column__empty">No tasks In progress</p>
             } @else {
                 @for (task of tasksByStatus('in_progress'); track task.id) {
-                    <app-task-card [task]="task" cdkDrag />
+                    <app-task-card [task]="task" cdkDrag (click)="tasksOverlayService.openTaskOverlay(task)" />
                 }
             }
         </div>
@@ -165,7 +165,7 @@
                 <p class="column__empty">No tasks Await feedback</p>
             } @else {
                 @for (task of tasksByStatus('await_feedback'); track task.id) {
-                    <app-task-card [task]="task" cdkDrag />
+                    <app-task-card [task]="task" cdkDrag (click)="tasksOverlayService.openTaskOverlay(task)"/>
                 }
             }
         </div>
@@ -214,7 +214,7 @@
                 <p class="column__empty">No tasks Done</p>
             } @else {
                 @for (task of tasksByStatus('done'); track task.id) {
-                    <app-task-card [task]="task" cdkDrag />
+                    <app-task-card [task]="task" cdkDrag (click)="tasksOverlayService.openTaskOverlay(task)"/>
                 }
             }
         </div>
@@ -223,9 +223,8 @@
 
 <button class="debug-button" (click)="addTestTask()">Test-Task anlegen</button>
 
-<app-task-overlay
-    [overlayisOpen]="tasksOverlayService.isOpen()"
-    [overlayisEditMode]="tasksOverlayService.isEditMode()"
-    (closed)="tasksOverlayService.closeOverlay()"
-    [task]="tasksOverlayService.selectedTask()"
-></app-task-overlay>
+@if (tasksOverlayService.selectedTask(); as task) {
+<app-task-overlay [overlayisOpen]="tasksOverlayService.isOpen()" [overlayisEditMode]="tasksOverlayService.isEditMode()"
+    [task]="task" (closed)="tasksOverlayService.closeOverlay()">
+</app-task-overlay>
+}
