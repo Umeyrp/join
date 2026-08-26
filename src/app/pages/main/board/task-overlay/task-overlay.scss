@@ -287,6 +287,7 @@ label.checkbox {
         border-radius: 3px;
     }
 }
+
 dialog.add-task-mode .close-overlay {
     position: absolute;
     top: 68px;
@@ -295,68 +296,4 @@ dialog.add-task-mode .close-overlay {
 
 dialog.add-task-mode .overlay-content {
     padding: 0;
-}
-
-.subtasks-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-label.checkbox {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    width: fit-content;
-    padding: 6px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #ececec;
-
-        & input:checked+.checkmark::before{
-            background-color: #ececec;
-        }
-    }
-
-    & input {
-        display: none;
-
-        &:checked+.checkmark::after {
-            position: absolute;
-            top: -5px;
-            right: 1px;
-            width: 5px;
-            height: 13px;
-            margin-bottom: 5px;
-            border: 2px solid #2a3647;
-            border-radius: 1px;
-            content: "";
-            border-width: 0 2px 2px 0;
-            transform: rotate(42deg);
-        }
-
-        &:checked+.checkmark::before {
-            position: absolute;
-            top: -3px;
-            right: -4px;
-            width: 9px;
-            height: 9px;
-            background-color: white;
-            border-radius: 100%;
-            content: "";
-        }
-    }
-
-    & .checkmark {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 16px;
-        height: 16px;
-        border: 2px solid $color-dark;
-        border-radius: 3px;
-    }
 }
