@@ -31,5 +31,6 @@ export class TasksOverlayService {
 
     closeOverlay() {
         this.isOpen.set(false);
+        this.selectedTaskId.set(null);
     }
 }

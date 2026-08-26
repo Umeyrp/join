@@ -105,6 +105,10 @@ export class AddTask {
         }
 
         this.clearForm();
+
+        if (this.isOverlay()) {
+            this.tasksOverlayService.closeOverlay();
+        }
     }
 
     isFormValid = computed(
