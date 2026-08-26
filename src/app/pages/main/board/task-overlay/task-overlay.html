@@ -96,9 +96,17 @@
 
         <div class="contacts-wrapper">
             <span class="span-title">Subtasks</span>
-            @for (subtask of task().subtasks; track $index) {
-            <p> {{subtask.title}}</p>
-            }
+            <div class="subtasks-wrapper">
+                @for (subtask of task().subtasks; track $index) {
+                <label for="checkbox-{{$index}}" class="checkbox">
+                    <span class="checkbox-visual">
+                        <input type="checkbox" [checked]="subtask.done" id="checkbox-{{$index}}">
+                        <span class="checkmark"></span>
+                    </span>
+                    <p> {{subtask.title}}</p>
+                </label>
+                }
+            </div>
         </div>
 
         <div class="task-buttons">
@@ -113,7 +121,7 @@
                             fill="#2A3647" />
                     </g>
                 </svg>
-                 Delete</button>
+                Delete</button>
             <div class="seperator"></div>
             <button><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_497032_3926" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
