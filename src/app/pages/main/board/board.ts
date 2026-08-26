@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TasksService } from '../../../core/tasks.service';
 import { Button } from '../../../shared/components/button/button';
@@ -17,12 +17,24 @@ import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk
 export class Board {
     protected readonly tasksService = inject(TasksService);
     protected tasksOverlayService = inject(TasksOverlayService);
+    protected readonly searchTerm = signal('');
 
     protected tasksByStatus(status: Status): Task[] {
+        const term = this.searchTerm().trim().toLowerCase();
+
         return this.tasksService
             .tasks()
             .filter((task) => task.status === status)
+            .filter((task) => this.matchesSearch(task, term))
             .sort((a, b) => a.position - b.position);
+    }
+
+    private matchesSearch(task: Task, term: string): boolean {
+        if (!term) return true;
+        return (
+            task.title.toLowerCase().includes(term) ||
+            (task.description ?? '').toLowerCase().includes(term)
+        );
     }
 
     async drop(event: CdkDragDrop<Task[]>) {

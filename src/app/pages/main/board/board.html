@@ -3,7 +3,12 @@
 
     <div class="board-header__actions">
         <div class="board-header__search">
-            <input type="text" placeholder="Find Task" />
+            <input
+                type="text"
+                placeholder="Find Task"
+                [value]="searchTerm()"
+                (input)="searchTerm.set($any($event.target).value)"
+            />
             <span class="board-header__divider"></span>
             <svg
                 width="18"
@@ -198,7 +203,6 @@
     <div class="column">
         <div class="column__header">
             <h2>Done</h2>
-            
         </div>
         <div
             class="column__tasks"
