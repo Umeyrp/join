@@ -224,7 +224,7 @@ dialog {
     }
 }
 
-.subtasks-wrapper{
+.subtasks-wrapper {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -242,7 +242,7 @@ label.checkbox {
     &:hover {
         background-color: #ececec;
 
-        & input:checked+.checkmark::before{
+        & input:checked+.checkmark::before {
             background-color: #ececec;
         }
     }

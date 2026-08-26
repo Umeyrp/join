@@ -25,18 +25,6 @@ export class Board {
             .sort((a, b) => a.position - b.position);
     }
 
-    protected addTestTask() {
-        this.tasksService.addTask({
-            title: 'Testeintrag ' + Date.now(),
-            description: null,
-            due_date: '2026-09-01',
-            priority: 'medium',
-            category: 'Technical Task',
-            status: 'todo',
-            position: 0,
-        });
-    }
-
     async drop(event: CdkDragDrop<Task[]>) {
         const task = event.previousContainer.data[event.previousIndex];
         const newStatus = event.container.id as Status;
