@@ -162,6 +162,15 @@ dialog {
         cursor: pointer;
         @include font($weight: 400, $size: 1rem, $line-height: 120%);
 
+        &:hover {
+            color: $color-hover-teal;
+            font-weight: 700;
+
+            & path{
+                fill: $color-hover-teal;
+            }
+        }
+
         & svg {
             width: 24px;
             height: 24px;
