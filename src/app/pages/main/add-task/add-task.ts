@@ -3,6 +3,7 @@ import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
 import { Button } from '../../../shared/components/button/button';
+import { TasksOverlayService } from '../../../core/tasks-overlay-service';
 
 @Component({
     selector: 'app-add-task',
@@ -25,6 +26,7 @@ export class AddTask {
     titleTouched = signal(false);
     dueDateTouched = signal(false);
     isOverlay = input<boolean>(false);
+    private tasksOverlayService = inject(TasksOverlayService);
 
     private supabase = inject(Supabase);
 
@@ -54,10 +56,11 @@ export class AddTask {
     }
 
     async createTask() {
+        const status = this.isOverlay() ? this.tasksOverlayService.defaultStatus() : 'todo';
         const { data: lastTask } = await this.supabase.client
             .from('tasks')
             .select('position')
-            .eq('status', 'todo')
+            .eq('status', status)
             .order('position', { ascending: false })
             .limit(1)
             .single();
@@ -74,7 +77,7 @@ export class AddTask {
                 due_date: formattedDate,
                 priority: this.priority(),
                 category: this.selectedCategory(),
-                status: 'todo',
+                status: status,
                 position,
             })
             .select('id')

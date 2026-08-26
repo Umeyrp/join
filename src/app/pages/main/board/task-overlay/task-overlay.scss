@@ -12,9 +12,9 @@ dialog {
     box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
 
     &.add-task-mode {
-        width: 100%;
+        width: calc(100vw - 96px);
         max-width: 1116px;
-        max-height: 870px;
+        max-height: calc(100dvh - 96px);
     }
 
     &::backdrop {

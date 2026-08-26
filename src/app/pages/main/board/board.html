@@ -27,7 +27,11 @@
     <div class="column">
         <div class="column__header">
             <h2>To do</h2>
-            <button type="button" class="column__add">
+            <button
+                type="button"
+                class="column__add"
+                (click)="tasksOverlayService.openAddTask('todo')"
+            >
                 <svg
                     width="24"
                     height="24"
@@ -67,7 +71,11 @@
                 <p class="column__empty">No tasks To do</p>
             } @else {
                 @for (task of tasksByStatus('todo'); track task.id) {
-                    <app-task-card [task]="task" cdkDrag (click)="tasksOverlayService.openTaskOverlay(task)"/>
+                    <app-task-card
+                        [task]="task"
+                        cdkDrag
+                        (click)="tasksOverlayService.openTaskOverlay(task)"
+                    />
                 }
             }
         </div>
@@ -76,7 +84,11 @@
     <div class="column">
         <div class="column__header">
             <h2>In progress</h2>
-            <button type="button" class="column__add">
+            <button
+                type="button"
+                class="column__add"
+                (click)="tasksOverlayService.openAddTask('in_progress')"
+            >
                 <svg
                     width="24"
                     height="24"
@@ -129,7 +141,11 @@
     <div class="column">
         <div class="column__header">
             <h2>Await feedback</h2>
-            <button type="button" class="column__add">
+            <button
+                type="button"
+                class="column__add"
+                (click)="tasksOverlayService.openAddTask('await_feedback')"
+            >
                 <svg
                     width="24"
                     height="24"
