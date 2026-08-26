@@ -9,6 +9,18 @@
                 [value]="searchTerm()"
                 (input)="searchTerm.set($any($event.target).value)"
             />
+
+            @if (assigneeFilter(); as contact) {
+                <div
+                    class="board-header__assignee-avatar"
+                    [style.background-color]="getAvatarColor(contact.id)"
+                    (click)="clearAssigneeFilter()"
+                    title="Remove assignee filter"
+                >
+                    {{ getInitials(contact.name) }}
+                </div>
+            }
+
             <span class="board-header__divider"></span>
             <svg
                 width="18"
@@ -22,6 +34,13 @@
                     fill="#2A3647"
                 />
             </svg>
+            @if (nameSuggestions().length > 0) {
+                <ul class="board-header__suggestions">
+                    @for (contact of nameSuggestions(); track contact.id) {
+                        <li (click)="selectAssignee(contact)">assigned to: {{ contact.name }}</li>
+                    }
+                </ul>
+            }
         </div>
 
         <app-button variant="primary-task" (click)="openAddTask()"></app-button>

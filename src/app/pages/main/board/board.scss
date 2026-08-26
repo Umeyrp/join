@@ -64,6 +64,43 @@
     }
 }
 
+.board-header__search {
+    position: relative;
+}
+
+.board-header__suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+
+    li {
+        padding: 8px 16px;
+        cursor: pointer;
+
+        &:hover {
+            background: #f0f0f0;
+        }
+    }
+}
+
+.board-header__assignee-avatar {
+    @include avatar-circle($size: 28px);
+    border: 1px solid $color-white;
+    font-size: 0.875rem;
+    font-weight: 400;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
 .board-columns {
     display: grid;
     grid-template-columns: repeat(4, minmax(252px, 1fr));

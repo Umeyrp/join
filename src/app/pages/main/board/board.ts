@@ -1,10 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { ContactsService } from '../../../core/contacts.service';
+import { Contact, getAvatarColor, getInitials } from '../../../interfaces/contact';
 import { RouterLink } from '@angular/router';
 import { TasksService } from '../../../core/tasks.service';
 import { Button } from '../../../shared/components/button/button';
 import { TaskCard } from './task-card/task-card';
 import { TaskOverlay } from './task-overlay/task-overlay';
 import { TasksOverlayService } from '../../../core/tasks-overlay-service';
+import { TasksDisplayService } from '../../../core/tasks-display.service';
 import { Status, Task } from '../../../interfaces/task';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -15,18 +18,53 @@ import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk
     styleUrl: './board.scss',
 })
 export class Board {
+    protected readonly getAvatarColor = getAvatarColor;
+    protected readonly getInitials = getInitials;
+
     protected readonly tasksService = inject(TasksService);
     protected tasksOverlayService = inject(TasksOverlayService);
+    private readonly contactsService = inject(ContactsService);
+
     protected readonly searchTerm = signal('');
+    protected readonly assigneeFilter = signal<Contact | null>(null);
+
+    private readonly tasksDisplayService = inject(TasksDisplayService);
+
+    protected readonly nameSuggestions = computed(() => {
+        const term = this.searchTerm().trim().toLowerCase();
+        if (!term || this.assigneeFilter()) return [];
+
+        return this.contactsService
+            .contacts()
+            .filter((contact) => contact.name.toLowerCase().includes(term));
+    });
+
+    protected selectAssignee(contact: Contact) {
+        this.assigneeFilter.set(contact);
+        this.searchTerm.set('');
+    }
+
+    protected clearAssigneeFilter() {
+        this.assigneeFilter.set(null);
+    }
 
     protected tasksByStatus(status: Status): Task[] {
         const term = this.searchTerm().trim().toLowerCase();
+        const assignee = this.assigneeFilter();
 
         return this.tasksService
             .tasks()
             .filter((task) => task.status === status)
             .filter((task) => this.matchesSearch(task, term))
+            .filter((task) => this.matchesAssignee(task, assignee))
             .sort((a, b) => a.position - b.position);
+    }
+
+    private matchesAssignee(task: Task, assignee: Contact | null): boolean {
+        if (!assignee) return true;
+        return this.tasksDisplayService
+            .assignedContacts(task)
+            .some((contact) => contact.id === assignee.id);
     }
 
     private matchesSearch(task: Task, term: string): boolean {
