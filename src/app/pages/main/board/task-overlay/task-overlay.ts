@@ -13,10 +13,11 @@ import { Task } from '../../../../interfaces/task';
 import { TasksDisplayService } from '../../../../core/tasks-display.service';
 import { getAvatarColor, getInitials } from '../../../../interfaces/contact';
 import { DatePipe } from '@angular/common';
+import { AddTask } from '../../add-task/add-task';
 
 @Component({
     selector: 'app-task-overlay',
-    imports: [DatePipe],
+    imports: [DatePipe, AddTask],
     templateUrl: './task-overlay.html',
     styleUrl: './task-overlay.scss',
 })

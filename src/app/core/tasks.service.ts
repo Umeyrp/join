@@ -1,5 +1,5 @@
 import { Service, inject, signal, type OnDestroy } from '@angular/core';
-import { Task } from '../interfaces/task';
+import { Status, Task } from '../interfaces/task';
 import { Supabase } from './supabase';
 
 const TASK_SELECT = '*, subtasks(*), task_contacts(contact_id, created_at)';
@@ -78,6 +78,21 @@ export class TasksService implements OnDestroy {
             .eq('task_id', taskId)
             .eq('contact_id', contactId);
         if (error) throw error;
+    }
+
+    async updateTaskStatusAndPosition(id: number, status: Status, position: number): Promise<void> {
+        const { error } = await this.supabase
+            .from('tasks')
+            .update({ status, position })
+            .eq('id', id);
+        if (error) throw error;
+    }
+
+    applyReorderedTasks(tasks: Task[]): void {
+        this.tasks.update((current) => {
+            const updatedById = new Map(tasks.map((task) => [task.id, task]));
+            return current.map((task) => updatedById.get(task.id) ?? task);
+        });
     }
 
     ngOnDestroy(): void {

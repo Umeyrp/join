@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { Header } from '../../shared/header/header';
 import { Navbar } from '../../shared/navbar/navbar';
 import { RouterOutlet } from '@angular/router';
-import { ContactsOverlayService } from '../../core/contacts-overlay-service';
 
 @Component({
     selector: 'app-main',
@@ -10,6 +9,4 @@ import { ContactsOverlayService } from '../../core/contacts-overlay-service';
     templateUrl: './main.html',
     styleUrl: './main.scss',
 })
-export class Main {
-    contactsOverlayService = inject(ContactsOverlayService);
-}
+export class Main {}

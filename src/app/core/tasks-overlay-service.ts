@@ -13,6 +13,12 @@ export class TasksOverlayService {
         this.isOpen.set(true);
     }
 
+    openAddTask() {
+        this.isEditMode.set(false);
+        this.selectedTask.set(null);
+        this.isOpen.set(true);
+    }
+
     closeOverlay() {
         this.isOpen.set(false);
     }

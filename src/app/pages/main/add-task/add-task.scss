@@ -1,0 +1,378 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    display: block;
+    padding: clamp(70px, calc(70px + 54 * ((100vh - 900px) / 124)), 124px) 96px 0;
+    height: 100%;
+    width: 100%;
+    max-width: 1208px;
+
+    &.overlay {
+        padding: 64px 65px 0 74px;
+        max-height: 870px;
+    }
+}
+
+:host(.overlay) ul {
+    max-height: 128px;
+}
+
+.add-task-wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    gap: 48px;
+    overflow: hidden;
+}
+
+h2 {
+    @include font($weight: 700, $size: 3.8rem, $line-height: 120%);
+}
+
+.add-task_form {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 0 48px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.col-divider {
+    background: $task-divider;
+    max-height: 424px;
+}
+
+.col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    overflow-y: auto;
+}
+
+.col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.field-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 440px;
+    gap: 8px;
+    @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+
+    input {
+        height: 48px;
+        border-radius: 10px;
+        padding: 12px 21px;
+        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        border: 1px solid #d1d1d1;
+
+        &::placeholder {
+            @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        }
+
+        &:focus {
+            outline: none;
+            border: 1px solid #124658;
+        }
+    }
+
+    .textarea-wrapper {
+        position: relative;
+
+        textarea {
+            width: 100%;
+            resize: none;
+            height: 120px;
+            border-radius: 10px;
+            padding: 18px 16px;
+            @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+            border: 1px solid #d1d1d1;
+
+            &::placeholder {
+                @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+            }
+
+            &:focus {
+                outline: none;
+                border: 1px solid #124658;
+            }
+        }
+
+        .textarea-corner {
+            position: absolute;
+            bottom: 9.5px;
+            right: 4.5px;
+            pointer-events: none;
+        }
+    }
+}
+
+.date-input-wrapper {
+    position: relative;
+
+    input {
+        width: 100%;
+        padding-right: 40px;
+        border: 1px solid #d1d1d1;
+
+        &:focus {
+            outline: none;
+            border: 1px solid #124658;
+        }
+    }
+
+    svg {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+}
+
+.priority-buttons {
+    display: flex;
+    gap: 12px;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        max-width: 136px;
+        height: 100%;
+        max-height: 56px;
+        padding: 16px 10px;
+        border-radius: 10px;
+        border: none;
+        background: #ffffff;
+        box-shadow: 0 0 4px 0 #00000066;
+        cursor: pointer;
+        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        transition: all 170ms ease-in-out;
+
+        &:hover {
+            box-shadow: 0 4px 4px 0 #00000040;
+        }
+
+        &.active {
+            color: white;
+            border-color: transparent;
+
+            svg path {
+                fill: white;
+            }
+        }
+    }
+
+    button:nth-child(1).active {
+        background: #ff3d00;
+    }
+    button:nth-child(2).active {
+        background: #ffa800;
+    }
+    button:nth-child(3).active {
+        background: #7ae229;
+    }
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    gap: 8px;
+    max-height: 32px;
+    overflow-y: auto;
+    --sb-track-color: #ffffff;
+    --sb-thumb-color: #f0f0f0;
+    --sb-size: 5px;
+
+    &:has(.subtask-edit) {
+        padding-left: 0;
+    }
+}
+
+ul::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+ul::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+ul::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+    border: 1px solid #000000;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    ul {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
+
+.field-group .subtask-edit input {
+    height: 32px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    max-width: 440px;
+    padding: 4px 16px;
+    border-radius: 10px;
+    gap: 8px;
+
+    &::before {
+        content: '•';
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        background: #eeeeee;
+    }
+
+    &:hover .subtask-actions {
+        display: flex;
+    }
+
+    &:has(.subtask-edit) {
+        padding: 0;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.subtask-item span {
+    max-width: 402px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.subtask-actions {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.subtask-divider {
+    width: 0px;
+    height: 24px;
+    border: 1px solid #a8a8a8;
+    background: #a8a8a8;
+}
+
+.subtask-edit {
+    position: relative;
+    width: 100%;
+    height: 32px;
+
+    input {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding-right: 64px;
+        border: none;
+        border-radius: 0;
+        outline: none;
+        border-bottom: 1px solid #124658;
+    }
+
+    .subtask-edit-actions {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.subtask-edit input {
+    width: 440px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.edit-divider {
+    border: 1px solid #a8a8a8;
+    height: 24px;
+}
+
+.required {
+    color: #e60026;
+}
+
+.field-group input.invalid {
+    border-color: #e60026;
+
+    &:focus {
+        border-color: #e60026;
+    }
+}
+
+.error-msg {
+    position: absolute;
+    @include font($weight: 400, $size: 1rem, $line-height: 120%);
+    color: #e60026;
+    font-size: 12px;
+    top: 85px;
+    display: block;
+}
+
+.add-task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 24px;
+    background: white;
+}
+
+.footer-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.subtask-input-wrapper {
+    position: relative;
+
+    input {
+        width: 100%;
+        padding-right: 64px;
+    }
+
+    .subtask-input-actions {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+    .subtask-input-divider {
+        width: 1px;
+        height: 20px;
+        background: #a8a8a8;
+    }
+}

@@ -11,6 +11,12 @@ dialog {
     border-radius: 30px;
     box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
 
+    &.add-task-mode {
+        width: 100%;
+        max-width: 1116px;
+        max-height: 870px;
+    }
+
     &::backdrop {
         background: $color-backdrop;
         backdrop-filter: blur(3px);
