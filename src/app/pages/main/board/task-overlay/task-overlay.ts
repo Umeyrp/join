@@ -12,10 +12,11 @@ import {
 import { Task } from '../../../../interfaces/task';
 import { TasksDisplayService } from '../../../../core/tasks-display.service';
 import { getAvatarColor, getInitials } from '../../../../interfaces/contact';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-task-overlay',
-    imports: [],
+    imports: [DatePipe],
     templateUrl: './task-overlay.html',
     styleUrl: './task-overlay.scss',
 })
@@ -72,4 +73,5 @@ export class TaskOverlay {
     }
 
     assignedContacts = computed(() => this.tasksDisplayService.assignedContacts(this.task()));
+    categoryClass = computed(() => this.tasksDisplayService.categoryClass(this.task()));
 }
