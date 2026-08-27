@@ -245,7 +245,7 @@ export class TaskOverlay {
 
             await this.syncSubtasks(t.id);
 
-            this.close('edited');
+            this.tasksOverlayService.isEditMode.set(false);
         } finally {
             this.isSaving.set(false);
         }
