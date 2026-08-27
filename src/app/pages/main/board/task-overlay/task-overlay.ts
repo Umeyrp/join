@@ -20,6 +20,11 @@ import { Button } from '../../../../shared/components/button/button';
 import { form, required } from '@angular/forms/signals';
 import { Dropdown } from '../../../../shared/components/dropdown/dropdown';
 
+interface EditableSubtask {
+    id: number | null; // null = neu, noch nicht gespeichert
+    title: string;
+}
+
 @Component({
     selector: 'app-task-overlay',
     imports: [DatePipe, AddTask, Dropdown],
@@ -31,30 +36,39 @@ export class TaskOverlay {
     tasksDisplayService = inject(TasksDisplayService);
     tasksService = inject(TasksService);
     tasksOverlayService = inject(TasksOverlayService);
+
     newSubtask = signal('');
-    subtasks = signal<string[]>([]);
+    subtasks = signal<EditableSubtask[]>([]);
     editingIndex = signal<number | null>(null);
     editingValue = signal('');
 
+    // IDs bestehender Subtasks, die im Edit-Mode gelöscht wurden
+    private deletedSubtaskIds: number[] = [];
+
     deleteSubtask(index: number) {
+        const item = this.subtasks()[index];
+        if (item.id !== null) {
+            this.deletedSubtaskIds.push(item.id);
+        }
         this.subtasks.update((current) => current.filter((_, i) => i !== index));
     }
 
     editSubtask(index: number) {
         this.subtasks.update((current) =>
-            current.map((s, i) => (i === index ? this.editingValue() : s)),
+            current.map((s, i) => (i === index ? { ...s, title: this.editingValue() } : s)),
         );
         this.editingIndex.set(null);
     }
 
-        startSubtaskEdit(index: number) {
+    startSubtaskEdit(index: number) {
         this.editingIndex.set(index);
-        this.editingValue.set(this.subtasks()[index]);
+        this.editingValue.set(this.subtasks()[index].title);
     }
 
     addSubtask() {
-        if (this.newSubtask().trim()) {
-            this.subtasks.update((current) => [...current, this.newSubtask().trim()]);
+        const value = this.newSubtask().trim();
+        if (value) {
+            this.subtasks.update((current) => [...current, { id: null, title: value }]);
             this.newSubtask.set('');
         }
     }
@@ -101,23 +115,25 @@ export class TaskOverlay {
             this.editPriority.set(t.priority);
             this.editCategory.set(t.category);
             this.editContacts.set(this.tasksDisplayService.assignedContacts(t));
+
+            this.subtasks.set(t.subtasks.map((st) => ({ id: st.id, title: st.title })));
+            this.deletedSubtaskIds = [];
+            this.newSubtask.set('');
+            this.editingIndex.set(null);
+
             this.titleTouched.set(false);
             this.dueDateTouched.set(false);
         });
     }
 
     private toDisplayDate(iso: string | null | undefined): string {
-        if (!iso) {
-            return '';
-        }
+        if (!iso) return '';
         const [year, month, day] = iso.split('-');
         return `${day}/${month}/${year}`;
     }
 
     private toIsoDate(display: string): string {
-        if (!display) {
-            return '';
-        }
+        if (!display) return '';
         const [day, month, year] = display.split('/');
         return `${year}-${month}-${day}`;
     }
@@ -201,9 +217,28 @@ export class TaskOverlay {
                 this.editContacts().map((c) => c.id),
             );
 
+            await this.syncSubtasks(t.id);
+
             this.close('edited');
         } finally {
             this.isSaving.set(false);
         }
+    }
+
+    private async syncSubtasks(taskId: number): Promise<void> {
+        const current = this.subtasks();
+
+        const deletions = this.deletedSubtaskIds.map((id) =>
+            this.tasksService.deleteSubtask(id),
+        );
+        const updates = current
+            .filter((s) => s.id !== null)
+            .map((s) => this.tasksService.updateSubtaskTitle(s.id as number, s.title));
+        const inserts = current
+            .filter((s) => s.id === null)
+            .map((s) => this.tasksService.addSubtask(taskId, s.title));
+
+        await Promise.all([...deletions, ...updates, ...inserts]);
+        this.deletedSubtaskIds = [];
     }
 }

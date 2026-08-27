@@ -232,8 +232,9 @@
                                                 </div>
                                             } @else {
                                                 <span (dblclick)="startSubtaskEdit(i)">{{
-                                                    subtask
+                                                    subtask.title
                                                 }}</span>
+
                                                 <div class="subtask-actions">
                                                     <svg
                                                         (click)="startSubtaskEdit(i)"
@@ -269,11 +270,7 @@
                                 </ul>
                             }
                         </div>
-                        <button
-                            type="submit"
-                            class="save-button"
-                            (click)="tasksOverlayService.openEditTask(task()!.id)"
-                        >
+                        <button type="submit" class="save-button" (click)="saveEdit()">
                             <span>Ok</span>
                             <svg
                                 width="24"
