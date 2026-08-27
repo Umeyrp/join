@@ -11,6 +11,7 @@ export class TasksOverlayService {
     defaultStatus = signal<Status>('todo');
     tasksService = inject(TasksService);
     private router = inject(Router);
+    showToast = signal(false);
 
     readonly selectedTask = computed(() => {
         const id = this.selectedTaskId();
@@ -30,7 +31,7 @@ export class TasksOverlayService {
         this.defaultStatus.set(status);
 
         if (window.innerWidth <= 900) {
-            this.router.navigate(['/add-task']);
+            this.router.navigate(['/add-task'], { queryParams: { status } });
         } else {
             this.isOpen.set(true);
         }
@@ -39,5 +40,7 @@ export class TasksOverlayService {
     closeOverlay() {
         this.isOpen.set(false);
         this.selectedTaskId.set(null);
+        this.showToast.set(true);
+        setTimeout(() => this.showToast.set(false), 900);
     }
 }
