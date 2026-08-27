@@ -124,7 +124,7 @@ export class AddTask {
         this.clearForm();
 
         if (this.isOverlay()) {
-            this.tasksOverlayService.closeOverlay();
+            this.tasksOverlayService.closeOverlay(true);
         } else {
             this.showToast.set(true);
             setTimeout(() => {

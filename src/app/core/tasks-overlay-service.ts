@@ -37,10 +37,12 @@ export class TasksOverlayService {
         }
     }
 
-    closeOverlay() {
+    closeOverlay(showToast = false) {
         this.isOpen.set(false);
         this.selectedTaskId.set(null);
-        this.showToast.set(true);
-        setTimeout(() => this.showToast.set(false), 900);
+        if (showToast) {
+            this.showToast.set(true);
+            setTimeout(() => this.showToast.set(false), 900);
+        }
     }
 }
