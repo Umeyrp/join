@@ -6,7 +6,7 @@ import { TasksService } from './tasks.service';
 export class TasksOverlayService {
     isOpen = signal(false);
     isEditMode = signal(false);
-    private selectedTaskId = signal<number | null>(null);
+    selectedTaskId = signal<number | null>(null);
     defaultStatus = signal<Status>('todo');
     tasksService = inject(TasksService);
 
@@ -26,6 +26,12 @@ export class TasksOverlayService {
         this.isEditMode.set(false);
         this.selectedTaskId.set(null);
         this.defaultStatus.set(status);
+        this.isOpen.set(true);
+    }
+
+    openEditTask(taskId: number) {
+        this.isEditMode.set(true);
+        this.selectedTaskId.set(taskId);
         this.isOpen.set(true);
     }
 
