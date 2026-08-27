@@ -33,6 +33,29 @@ dialog {
     overflow: hidden;
 }
 
+.content-wrapper{
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d1d1 transparent;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d1d1;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+}
+
 .backdrop-fade-in::backdrop {
     animation: fade-in 0.175s ease-out;
 }
