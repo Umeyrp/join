@@ -1,9 +1,11 @@
-import { Component, inject, signal, computed, input, HostBinding } from '@angular/core';
+import { Component, inject, signal, computed, input, HostBinding, output } from '@angular/core';
 import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
 import { Button } from '../../../shared/components/button/button';
 import { TasksOverlayService } from '../../../core/tasks-overlay-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Status } from '../../../interfaces/task';
 
 @Component({
     selector: 'app-add-task',
@@ -27,9 +29,22 @@ export class AddTask {
     dueDateTouched = signal(false);
     categoryTouched = signal(false);
     isOverlay = input<boolean>(false);
+    closeRequested = output<void>();
+    showToast = signal(false);
     private tasksOverlayService = inject(TasksOverlayService);
+    private route = inject(ActivatedRoute);
+    private defaultStatus = signal<Status>('todo');
+    private router = inject(Router);
 
     private supabase = inject(Supabase);
+
+    constructor() {
+        this.route.queryParams.subscribe((params) => {
+            if (params['status']) {
+                this.defaultStatus.set(params['status']);
+            }
+        });
+    }
 
     setPriority(value: 'urgent' | 'medium' | 'low') {
         this.priority.set(value);
@@ -58,7 +73,9 @@ export class AddTask {
     }
 
     async createTask() {
-        const status = this.isOverlay() ? this.tasksOverlayService.defaultStatus() : 'todo';
+        const status = this.isOverlay()
+            ? this.tasksOverlayService.defaultStatus()
+            : this.defaultStatus();
         const { data: lastTask } = await this.supabase.client
             .from('tasks')
             .select('position')
@@ -107,7 +124,12 @@ export class AddTask {
         this.clearForm();
 
         if (this.isOverlay()) {
-            this.tasksOverlayService.closeOverlay();
+            this.tasksOverlayService.closeOverlay(true);
+        } else {
+            this.showToast.set(true);
+            setTimeout(() => {
+                this.router.navigate(['/board']);
+            }, 3000);
         }
     }
 

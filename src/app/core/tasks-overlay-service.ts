@@ -1,4 +1,5 @@
 import { computed, inject, Service, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { Task, Status } from '../interfaces/task';
 import { TasksService } from './tasks.service';
 
@@ -9,6 +10,8 @@ export class TasksOverlayService {
     selectedTaskId = signal<number | null>(null);
     defaultStatus = signal<Status>('todo');
     tasksService = inject(TasksService);
+    private router = inject(Router);
+    showToast = signal(false);
 
     readonly selectedTask = computed(() => {
         const id = this.selectedTaskId();
@@ -26,7 +29,12 @@ export class TasksOverlayService {
         this.isEditMode.set(false);
         this.selectedTaskId.set(null);
         this.defaultStatus.set(status);
-        this.isOpen.set(true);
+
+        if (window.innerWidth <= 900) {
+            this.router.navigate(['/add-task'], { queryParams: { status } });
+        } else {
+            this.isOpen.set(true);
+        }
     }
 
     openEditTask(taskId: number) {
@@ -34,9 +42,13 @@ export class TasksOverlayService {
         this.selectedTaskId.set(taskId);
         this.isOpen.set(true);
     }
-
-    closeOverlay() {
+  
+    closeOverlay(showToast = false) {
         this.isOpen.set(false);
         this.selectedTaskId.set(null);
+        if (showToast) {
+            this.showToast.set(true);
+            setTimeout(() => this.showToast.set(false), 900);
+        }
     }
 }

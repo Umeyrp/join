@@ -3,59 +3,71 @@
 
 :host {
     display: block;
-    padding: clamp(12px, calc(12px + 112 * ((100vh - 790px) / 234)), 124px) 96px 0;
+    padding: clamp(12px, calc(12px + 112 * ((100vh - 700px) / 364)), 124px)
+        clamp(1rem, -3.2rem + 5.5vw, 6rem) 0;
     height: 100%;
     width: 100%;
     max-width: 1208px;
 
     &.overlay {
-        padding: clamp(12px, calc(12px + 112 * ((100vh - 790px) / 234)), 124px) 65px 0 74px;
+        padding: clamp(12px, calc(12px + 112 * ((100vh - 700px) / 364)), 124px)
+            clamp(1rem, -3.2rem + 5.5vw, 6rem) 0;
         max-height: 870px;
     }
 }
 
 :host(.overlay) ul {
-    max-height: 40px; 
+    max-height: 40px;
 }
 
 :host(.overlay) .add-task-wrapper {
-    gap: 24px;
+    gap: clamp(12px, calc(12px + 12 * ((100vh - 700px) / 364)), 24px);
 }
 
 .add-task-wrapper {
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 100%;
-    gap: 48px;
+    width: 100%;
+    gap: clamp(16px, calc(16px + 32 * ((100vh - 700px) / 364)), 48px);
 }
 
 h2 {
-    @include font($weight: 700, $size: 3.8rem, $line-height: 120%);
+    @include font(
+        $weight: 700,
+        $size: clamp(2.4rem, calc(2.4rem + 1.4 * ((100vh - 700px) / 364)), 3.8rem),
+        $line-height: 120%
+    );
 }
 
 .add-task_form {
     display: grid;
     grid-template-columns: 1fr 2px 1fr;
-    gap: 0 48px;
+    gap: 0 clamp(24px, calc(24px + 24 * ((100vh - 700px) / 364)), 48px);
     width: 100%;
+    height: 100%;
+    min-height: 0;
 }
 
 .col-divider {
     background: $task-divider;
-    max-height: 424px;
+    height: 424px;
 }
 
 .col-left {
+    width: 100%;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    overflow-y: auto;
+    gap: clamp(12px, calc(12px + 20 * ((100vh - 700px) / 364)), 32px);
 }
 
 .col-right {
+    width: 100%;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 19px;
+    gap: clamp(8px, calc(8px + 11 * ((100vh - 700px) / 364)), 19px);
 }
 
 .field-group {
@@ -64,18 +76,30 @@ h2 {
     flex-direction: column;
     width: 100%;
     max-width: 440px;
-    gap: 8px;
-    @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+    gap: clamp(4px, calc(4px + 4 * ((100vh - 700px) / 364)), 8px);
+    @include font(
+        $weight: 400,
+        $size: clamp(1rem, calc(1rem + 0.25 * ((100vh - 700px) / 364)), 1.25rem),
+        $line-height: 120%
+    );
 
     input {
-        height: 48px;
+        height: clamp(40px, calc(40px + 8 * ((100vh - 700px) / 364)), 48px);
         border-radius: 10px;
         padding: 12px 21px;
-        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        @include font(
+            $weight: 400,
+            $size: clamp(1rem, calc(1rem + 0.25 * ((100vh - 700px) / 364)), 1.25rem),
+            $line-height: 120%
+        );
         border: 1px solid #d1d1d1;
 
         &::placeholder {
-            @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+            @include font(
+                $weight: 400,
+                $size: clamp(1rem, calc(1rem + 0.25 * ((100vh - 700px) / 364)), 1.25rem),
+                $line-height: 120%
+            );
         }
 
         &:focus {
@@ -90,14 +114,22 @@ h2 {
         textarea {
             width: 100%;
             resize: none;
-            height: 120px;
+            height: clamp(72px, calc(72px + 48 * ((100vh - 700px) / 364)), 120px);
             border-radius: 10px;
             padding: 18px 16px;
-            @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+            @include font(
+                $weight: 400,
+                $size: clamp(1rem, calc(1rem + 0.25 * ((100vh - 700px) / 364)), 1.25rem),
+                $line-height: 120%
+            );
             border: 1px solid #d1d1d1;
 
             &::placeholder {
-                @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+                @include font(
+                    $weight: 400,
+                    $size: clamp(1rem, calc(1rem + 0.25 * ((100vh - 700px) / 364)), 1.25rem),
+                    $line-height: 120%
+                );
             }
 
             &:focus {
@@ -141,6 +173,7 @@ h2 {
 .priority-buttons {
     display: flex;
     gap: 12px;
+    padding: 4px;
 
     button {
         display: flex;
@@ -148,16 +181,14 @@ h2 {
         align-items: center;
         gap: 8px;
         width: 100%;
-        max-width: 136px;
-        height: 100%;
-        max-height: 56px;
-        padding: 16px 10px;
+        height: clamp(40px, calc(40px + 16 * ((100vh - 700px) / 364)), 56px);
+        padding: clamp(10px, calc(10px + 6 * ((100vh - 700px) / 364)), 16px) 10px;
         border-radius: 10px;
         border: none;
         background: #ffffff;
         box-shadow: 0 0 4px 0 #00000066;
         cursor: pointer;
-        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        @include font($weight: 400, $size: clamp(1rem, 1vw + 0.8rem, 1.25rem), $line-height: 120%);
         transition: all 170ms ease-in-out;
 
         &:hover {
@@ -229,6 +260,7 @@ ul::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     height: 32px;
+    width: 100%;
     max-width: 440px;
     padding: 4px 16px;
     border-radius: 10px;
@@ -242,14 +274,12 @@ ul::-webkit-scrollbar-thumb {
     &:hover {
         background: #eeeeee;
     }
-
     &:hover .subtask-actions {
         display: flex;
     }
 
     &:has(.subtask-edit) {
         padding: 0;
-
         &::before {
             display: none;
         }
@@ -322,7 +352,6 @@ ul::-webkit-scrollbar-thumb {
 
 .field-group input.invalid {
     border-color: #e60026;
-
     &:focus {
         border-color: #e60026;
     }
@@ -376,5 +405,132 @@ ul::-webkit-scrollbar-thumb {
         width: 1px;
         height: 20px;
         background: #a8a8a8;
+    }
+}
+
+.mobile-hint {
+    display: none;
+}
+
+.toast {
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px;
+    width: 100%;
+    max-width: clamp(300px, calc(292.57px + 2.321vw), 326px);
+    height: 74px;
+    background: #2a3647;
+    border-radius: 20px;
+    box-shadow: 0 0 4px 0 #00000026;
+    @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+    color: white;
+    animation: toast-in 300ms ease-out;
+    z-index: 99999;
+}
+
+@keyframes toast-in {
+    from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.toast--overlay {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    animation: none;
+}
+
+@include mobile {
+    .add-task-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        height: auto;
+
+        h2 {
+            font-size: 3rem;
+        }
+    }
+
+    .add-task_form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+
+        .col-divider {
+            display: none;
+        }
+        .col-left {
+            gap: 16px;
+            align-items: center;
+        }
+        .col-right {
+            padding-bottom: 20px;
+            align-items: center;
+        }
+    }
+
+    .field-group {
+        font-size: 1rem;
+        max-width: 550px;
+    }
+
+    .priority-buttons {
+        button {
+            padding: 12px 3px;
+        }
+    }
+
+    .add-task-footer {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: clamp(8px, 1.786vw + 2.286px, 16px);
+        padding: 12px 16px;
+    }
+
+    .required-hint {
+        display: none;
+    }
+    .mobile-hint {
+        margin-top: 16px;
+        display: flex;
+    }
+
+    .error-msg {
+        right: 0;
+        top: 0;
+    }
+
+    ul {
+        align-items: center;
+    }
+}
+
+@include tablet {
+    .add-task_form {
+        gap: 0 25px;
+    }
+
+    .priority-buttons {
+        padding: 0 4px;
+        button {
+            padding: 16px 4px;
+        }
     }
 }

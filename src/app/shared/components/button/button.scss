@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .button {
     display: flex;
@@ -66,5 +67,12 @@
     &.disabled {
         background-color: #5e6266;
         cursor: not-allowed;
+    }
+}
+
+@include mobile {
+    .button {
+        max-height: 56px;
+        padding: 12px 10px;
     }
 }

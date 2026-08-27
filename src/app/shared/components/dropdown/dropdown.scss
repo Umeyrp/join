@@ -41,7 +41,11 @@
         cursor: pointer;
         pointer-events: none;
         background: transparent;
-        @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+        @include font(
+            $weight: 400,
+            $size: clamp(1rem, 0.5rem + 1.042vw, 1.25rem),
+            $line-height: 120%
+        );
     }
 }
 
@@ -92,7 +96,7 @@
 .dropdown-item {
     padding: 12px 0;
     cursor: pointer;
-    @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+    @include font($weight: 400, $size: clamp(1rem, 0.5rem + 1.042vw, 1.25rem), $line-height: 120%);
 
     &:hover {
         background: #f6f7f8;
@@ -144,7 +148,8 @@
     padding: 12px 21px;
     cursor: pointer;
     border-radius: 10px;
-    @include font($weight: 400, $size: 1.25rem, $line-height: 120%);
+    @include font($weight: 400, $size: clamp(1rem, 0.5rem + 1.042vw, 1.25rem), $line-height: 120%);
+
     transition:
         background 170ms ease-in-out,
         color 170ms ease-in-out;
@@ -181,7 +186,7 @@
     justify-content: center;
     color: white;
     flex-shrink: 0;
-    @include font($weight: 400, $size: 1rem, $line-height: 120%);
+    @include font($weight: 400, $size: clamp(1rem, 0.5rem + 1.042vw, 1.25rem), $line-height: 120%);
 }
 
 .selected-avatars {

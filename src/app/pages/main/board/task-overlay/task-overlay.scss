@@ -256,6 +256,10 @@ label.checkbox {
 
     &:hover {
         background-color: #ececec;
+
+        & input:checked + .checkmark::before {
+            background-color: #ececec;
+        }
     }
 
     & input {
@@ -268,8 +272,6 @@ label.checkbox {
         &:checked+.checkmark>.checkboxsvg {
             display: block;
         }
-
-
     }
 
     & .checkmark {
