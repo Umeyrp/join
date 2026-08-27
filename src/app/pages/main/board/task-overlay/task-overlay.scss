@@ -33,7 +33,7 @@ dialog {
     overflow: hidden;
 }
 
-.content-wrapper{
+.content-wrapper {
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #d1d1d1 transparent;
@@ -268,6 +268,15 @@ dialog {
     gap: 4px;
 }
 
+.error-msg {
+    position: absolute;
+    top: 85px;
+    display: block;
+    font-size: 12px;
+    color: #e60026;
+    @include font($weight: 400, $size: 1rem, $line-height: 120%);
+}
+
 label.checkbox {
     display: flex;
     align-items: center;
@@ -280,7 +289,7 @@ label.checkbox {
     &:hover {
         background-color: #ececec;
 
-        & input:checked + .checkmark::before {
+        & input:checked+.checkmark::before {
             background-color: #ececec;
         }
     }
@@ -357,7 +366,7 @@ dialog.add-task-mode .overlay-content {
 .content-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
     margin-top: 40px;
 }
 
@@ -366,10 +375,15 @@ dialog.add-task-mode .overlay-content {
     color: $color-dark;
 }
 
+.input-error-wrapper {
+    position: relative;
+}
+
 .input-wrapper {
     display: flex;
+    position: relative;
     flex-direction: column;
-    gap: 24px;
+    gap: 8px;
 
     & input {
         padding: 12px 21px;
@@ -498,15 +512,15 @@ dialog.add-task-mode .overlay-content {
 .subtask-item {
     display: flex;
     align-items: center;
-    height: 32px;
+    gap: 8px;
     max-width: 440px;
+    height: 32px;
     padding: 4px 16px;
     border-radius: 10px;
-    gap: 8px;
 
     &::before {
-        content: '•';
         flex-shrink: 0;
+        content: '•';
     }
 
     &:hover {
@@ -552,27 +566,27 @@ dialog.add-task-mode .overlay-content {
 
     .subtask-edit-actions {
         position: absolute;
-        right: 12px;
         top: 50%;
-        transform: translateY(-50%);
+        right: 12px;
         display: flex;
         align-items: center;
         gap: 8px;
+        transform: translateY(-50%);
     }
 }
 
 .edit-divider {
-    border: 1px solid #a8a8a8;
     height: 24px;
+    border: 1px solid #a8a8a8;
 }
 
 ul {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding: 0;
     gap: 8px;
+    width: 100%;
     max-height: 64px;
+    padding: 0;
     overflow-y: auto;
     --sb-track-color: #ffffff;
     --sb-thumb-color: #f0f0f0;
@@ -594,8 +608,8 @@ ul::-webkit-scrollbar-track {
 
 ul::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
-    border-radius: 3px;
     border: 1px solid #000000;
+    border-radius: 3px;
 }
 
 @supports not selector(::-webkit-scrollbar) {

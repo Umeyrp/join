@@ -19,7 +19,11 @@
                                 [value]="editTitle()"
                                 (input)="editTitle.set($any($event.target).value)"
                                 (blur)="titleTouched.set(true)"
+                                [class.invalid]="titleInvalid()"
                             />
+                            @if (titleInvalid()) {
+                                <span class="error-msg">This field is required</span>
+                            }
                         </div>
                         <div class="input-wrapper">
                             <p class="input-title">Description</p>
@@ -45,6 +49,7 @@
                                         )
                                     "
                                     (blur)="titleTouched.set(true)"
+                                    [class.invalid]="dueDateInvalid()"
                                 />
                                 <svg
                                     width="18"
@@ -59,6 +64,11 @@
                                     />
                                 </svg>
                             </div>
+                            @if (dueDateTouched() && editDueDate().length === 0) {
+                                <span class="error-msg">This field is required</span>
+                            } @else if (dueDateTouched() && dueDateFormatInvalid()) {
+                                <span class="error-msg">Invalid date</span>
+                            }
                         </div>
                         <div class="input-wrapper">
                             <p class="input-title">Priority</p>

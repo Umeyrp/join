@@ -138,6 +138,32 @@ export class TaskOverlay {
         return `${year}-${month}-${day}`;
     }
 
+    titleInvalid = computed(() => this.titleTouched() && this.editTitle().trim().length === 0);
+    dueDateInvalid = computed(
+        () =>
+            (this.dueDateTouched() && this.editDueDate().length === 0) ||
+            this.dueDateFormatInvalid(),
+    );
+
+    dueDateFormatInvalid = computed(() => {
+        const val = this.editDueDate();
+        if (val.length === 0) return false;
+        if (val.length < 10) return true;
+
+        const [day, month, year] = val.split('/').map(Number);
+        if (month < 1 || month > 12) return true;
+
+        const maxDay = new Date(year, month, 0).getDate();
+        if (day < 1 || day > maxDay) return true;
+
+        const entered = new Date(year, month - 1, day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (entered < today) return true;
+
+        return false;
+    });
+
     formatDueDate(value: string, input: HTMLInputElement) {
         const digits = value.replace(/\D/g, '').slice(0, 8);
         let formatted = digits;
@@ -228,9 +254,7 @@ export class TaskOverlay {
     private async syncSubtasks(taskId: number): Promise<void> {
         const current = this.subtasks();
 
-        const deletions = this.deletedSubtaskIds.map((id) =>
-            this.tasksService.deleteSubtask(id),
-        );
+        const deletions = this.deletedSubtaskIds.map((id) => this.tasksService.deleteSubtask(id));
         const updates = current
             .filter((s) => s.id !== null)
             .map((s) => this.tasksService.updateSubtaskTitle(s.id as number, s.title));
