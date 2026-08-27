@@ -251,7 +251,7 @@ label.checkbox {
     &:hover {
         background-color: #ececec;
 
-        & input:checked+.checkmark::before {
+        & input:checked + .checkmark::before {
             background-color: #ececec;
         }
     }
@@ -259,7 +259,7 @@ label.checkbox {
     & input {
         display: none;
 
-        &:checked+.checkmark::after {
+        &:checked + .checkmark::after {
             position: absolute;
             top: -5px;
             right: 1px;
@@ -268,12 +268,12 @@ label.checkbox {
             margin-bottom: 5px;
             border: 2px solid #2a3647;
             border-radius: 1px;
-            content: "";
+            content: '';
             border-width: 0 2px 2px 0;
             transform: rotate(42deg);
         }
 
-        &:checked+.checkmark::before {
+        &:checked + .checkmark::before {
             position: absolute;
             top: -3px;
             right: -4px;
@@ -281,7 +281,7 @@ label.checkbox {
             height: 9px;
             background-color: white;
             border-radius: 100%;
-            content: "";
+            content: '';
         }
     }
 

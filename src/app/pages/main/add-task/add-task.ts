@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, input, HostBinding } from '@angular/core';
+import { Component, inject, signal, computed, input, HostBinding, output } from '@angular/core';
 import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
@@ -27,6 +27,7 @@ export class AddTask {
     dueDateTouched = signal(false);
     categoryTouched = signal(false);
     isOverlay = input<boolean>(false);
+    closeRequested = output<void>();
     private tasksOverlayService = inject(TasksOverlayService);
 
     private supabase = inject(Supabase);
