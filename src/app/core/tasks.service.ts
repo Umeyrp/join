@@ -100,4 +100,36 @@ export class TasksService implements OnDestroy {
         this.subtaskChannel.unsubscribe();
         this.assignmentChannel.unsubscribe();
     }
+
+    async updateTask(
+        id: number,
+        changes: Partial<Omit<Task, 'id' | 'created_at' | 'subtasks' | 'contactIds'>>,
+    ): Promise<void> {
+        const { error } = await this.supabase.from('tasks').update(changes).eq('id', id);
+        if (error) throw error;
+    }
+
+    async deleteSubtask(subtaskId: number): Promise<void> {
+        const { error } = await this.supabase.from('subtasks').delete().eq('id', subtaskId);
+        if (error) throw error;
+    }
+
+    async updateSubtaskTitle(subtaskId: number, title: string): Promise<void> {
+        const { error } = await this.supabase
+            .from('subtasks')
+            .update({ title })
+            .eq('id', subtaskId);
+        if (error) throw error;
+    }
+
+    async syncTaskContacts(taskId: number, contactIds: number[]): Promise<void> {
+        const current = this.tasks().find((t) => t.id === taskId)?.contactIds ?? [];
+        const toAdd = contactIds.filter((id) => !current.includes(id));
+        const toRemove = current.filter((id) => !contactIds.includes(id));
+
+        await Promise.all([
+            ...toAdd.map((id) => this.assignContact(taskId, id)),
+            ...toRemove.map((id) => this.unassignContact(taskId, id)),
+        ]);
+    }
 }

@@ -36,6 +36,9 @@ export class Dropdown {
     reset = input<boolean>();
     closed = output<void>();
 
+    initialContacts = input<Contact[]>([]);
+    initialCategory = input<string | null>(null);
+
     contacts = this.contactsService.contacts;
     categories = CATEGORIES;
 
@@ -49,8 +52,11 @@ export class Dropdown {
     constructor() {
         effect(() => {
             this.reset();
-            this.selectedContacts.set([]);
-            this.selectedCategory.set(null);
+            const initialContacts = this.initialContacts();
+            const initialCategory = this.initialCategory();
+
+            this.selectedContacts.set(initialContacts);
+            this.selectedCategory.set(initialCategory);
             this.searchQuery.set('');
             this.isOpen.set(false);
         });

@@ -7,7 +7,7 @@ import { TasksService } from './tasks.service';
 export class TasksOverlayService {
     isOpen = signal(false);
     isEditMode = signal(false);
-    private selectedTaskId = signal<number | null>(null);
+    selectedTaskId = signal<number | null>(null);
     defaultStatus = signal<Status>('todo');
     tasksService = inject(TasksService);
     private router = inject(Router);
@@ -37,6 +37,12 @@ export class TasksOverlayService {
         }
     }
 
+    openEditTask(taskId: number) {
+        this.isEditMode.set(true);
+        this.selectedTaskId.set(taskId);
+        this.isOpen.set(true);
+    }
+  
     closeOverlay(showToast = false) {
         this.isOpen.set(false);
         this.selectedTaskId.set(null);
