@@ -182,3 +182,108 @@
     color: white;
     z-index: 99999;
 }
+
+@include laptop {
+    .board-columns {
+        grid-template-columns: repeat(3, minmax(252px, 1fr));
+    }
+}
+
+@media (max-width: 1164px) {
+    .board-columns {
+        grid-template-columns: repeat(2, minmax(252px, 1fr));
+    }
+}
+
+@include tablet {
+    .board-header {
+        flex-wrap: wrap;
+        row-gap: 16px;
+    }
+
+    .board-header__actions {
+        display: contents;
+    }
+
+    .board-header__search {
+        order: 2;
+        width: 100%;
+    }
+
+    app-button {
+        order: 1;
+    }
+}
+
+@media (max-width: 900px) {
+    .board-header {
+        padding: 40px 32px 0;
+    }
+
+    .board-columns {
+        padding: 24px 32px 40px;
+    }
+}
+
+@include mobile {
+    .board-header {
+        flex-wrap: wrap;
+        row-gap: 16px;
+    }
+
+    .board-header__actions {
+        display: contents;
+    }
+
+    .board-header__search {
+        order: 2;
+        width: 100%;
+    }
+
+    app-button {
+        order: 1;
+    }
+}
+
+@media (max-width: 656px) {
+    .board-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .column__header h2 {
+        font-size: 1.6875rem;
+    }
+
+    .column__add {
+        width: 32px;
+        height: 32px;
+
+        svg {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .board-header {
+        padding: 48px 16px 0;
+    }
+
+    .board-header h1 {
+        font-size: 2.9375rem;
+    }
+
+    .board-columns {
+        padding: 24px 16px 40px;
+    }
+
+    app-button {
+        font-size: 0;
+    }
+
+    ::ng-deep app-button .button {
+        gap: 0 !important;
+        padding: 12px !important;
+    }
+}

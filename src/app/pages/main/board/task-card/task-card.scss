@@ -6,6 +6,7 @@
 }
 
 .task-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: $color-white;
@@ -101,5 +102,106 @@
 
     &__priority {
         flex-shrink: 0;
+    }
+}
+
+.task-card__move-toggle {
+    display: none;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 2;
+
+    svg {
+        display: block;
+    }
+}
+
+.task-card__move-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background: transparent;
+}
+
+.task-card__move-menu {
+    position: absolute;
+    top: 15px;
+    right: 16px;
+    z-index: 4;
+    min-width: 190px;
+    padding: 16px 20px;
+    background-color: $color-dark;
+    border-radius: 20px 0 20px 20px;
+    color: $color-white;
+    animation: task-card-move-menu-in 0.2s ease-out;
+
+    &--closing {
+        animation: task-card-move-menu-out 0.2s ease-in forwards;
+    }
+
+    &-title {
+        display: block;
+        @include font($weight: 700, $size: 1.25rem, $line-height: 120%);
+        margin: 0 0 12px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        @include font($weight: 400, $size: 1rem, $line-height: 120%, $family: 'Open Sans');
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+@keyframes task-card-move-menu-in {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes task-card-move-menu-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+@include tablet {
+    .task-card__move-toggle {
+        display: flex;
+    }
+}
+
+@include mobile {
+    .task-card__move-toggle {
+        display: flex;
     }
 }

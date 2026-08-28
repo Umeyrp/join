@@ -27,6 +27,7 @@ export class Board {
 
     protected readonly searchTerm = signal('');
     protected readonly assigneeFilter = signal<Contact | null>(null);
+    protected readonly isTouchLayout = signal(window.innerWidth <= 900);
 
     private readonly tasksDisplayService = inject(TasksDisplayService);
 
@@ -105,6 +106,22 @@ export class Board {
                     ),
                 ),
             );
+        } catch {
+            this.tasksService.applyOptimisticReorder(previousTasks);
+        }
+    }
+
+    async onMoveTask(task: Task, newStatus: Status) {
+        const position = this.tasksByStatus(newStatus).length;
+        const previousTasks = this.tasksService.tasks();
+
+        const updatedTasks = previousTasks.map((t) =>
+            t.id === task.id ? { ...t, status: newStatus, position } : t,
+        );
+        this.tasksService.applyOptimisticReorder(updatedTasks);
+
+        try {
+            await this.tasksService.updateTaskStatusAndPosition(task.id, newStatus, position);
         } catch {
             this.tasksService.applyOptimisticReorder(previousTasks);
         }
