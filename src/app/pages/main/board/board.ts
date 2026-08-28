@@ -40,6 +40,14 @@ export class Board {
             .filter((contact) => contact.name.toLowerCase().includes(term));
     });
 
+    private readonly statuses: Status[] = ['todo', 'in_progress', 'await_feedback', 'done'];
+
+    protected readonly hasNoSearchResults = computed(() => {
+        const term = this.searchTerm().trim();
+        if (!term) return false;
+        return this.statuses.every((status) => this.tasksByStatus(status).length === 0);
+    });
+
     protected selectAssignee(contact: Contact) {
         this.assigneeFilter.set(contact);
         this.searchTerm.set('');

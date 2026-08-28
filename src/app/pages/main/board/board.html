@@ -34,13 +34,22 @@
                     fill="#2A3647"
                 />
             </svg>
-            @if (nameSuggestions().length > 0) {
-                <ul class="board-header__suggestions">
-                    @for (contact of nameSuggestions(); track contact.id) {
-                        <li (click)="selectAssignee(contact)">assigned to: {{ contact.name }}</li>
-                    }
-                </ul>
-            }
+            <div class="board-header__search-feedback">
+                @if (nameSuggestions().length > 0) {
+                    <ul class="board-header__suggestions">
+                        @for (contact of nameSuggestions(); track contact.id) {
+                            <li (click)="selectAssignee(contact)">
+                                assigned to: {{ contact.name }}
+                            </li>
+                        }
+                    </ul>
+                }
+                @if (hasNoSearchResults()) {
+                    <span class="board-header__search-error"
+                        >No results for "{{ searchTerm() }}"</span
+                    >
+                }
+            </div>
         </div>
 
         <app-button variant="primary-task" (click)="openAddTask()"></app-button>
