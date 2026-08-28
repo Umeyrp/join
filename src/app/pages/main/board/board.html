@@ -98,7 +98,9 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
+                        [cdkDragDisabled]="isTouchLayout()"
                         (click)="tasksOverlayService.openTaskOverlay(task.id)"
+                        (move)="onMoveTask(task, $event)"
                     />
                 }
             }
@@ -155,7 +157,9 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
+                        [cdkDragDisabled]="isTouchLayout()"
                         (click)="tasksOverlayService.openTaskOverlay(task.id)"
+                        (move)="onMoveTask(task, $event)"
                     />
                 }
             }
@@ -212,7 +216,9 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
+                        [cdkDragDisabled]="isTouchLayout()"
                         (click)="tasksOverlayService.openTaskOverlay(task.id)"
+                        (move)="onMoveTask(task, $event)"
                     />
                 }
             }
@@ -239,7 +245,9 @@
                     <app-task-card
                         [task]="task"
                         cdkDrag
+                        [cdkDragDisabled]="isTouchLayout()"
                         (click)="tasksOverlayService.openTaskOverlay(task.id)"
+                        (move)="onMoveTask(task, $event)"
                     />
                 }
             }
