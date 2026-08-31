@@ -39,6 +39,12 @@
         @include font($weight: 700, $size: 1rem, $line-height: 120%);
         color: $color-dark;
         margin: 24px 0 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        overflow-wrap: break-word;
     }
 
     &__description {
