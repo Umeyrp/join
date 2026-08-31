@@ -34,10 +34,29 @@
         border-radius: 10px;
         background-color: $color-white;
 
-        svg {
-            width: 18px;
-            height: 18px;
+        &-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            background: none;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 170ms ease-in-out;
             flex-shrink: 0;
+
+            svg {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+            }
+
+            &:hover {
+                background: #d9d9d9;
+            }
         }
 
         &:hover {
