@@ -228,6 +228,12 @@ dialog {
     &-title {
         @include font($weight: 700, $size: 61px, $line-height: 120%);
         color: $color-dark;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        overflow-wrap: break-word;
     }
 
     &-description {
@@ -289,7 +295,7 @@ label.checkbox {
     &:hover {
         background-color: #ececec;
 
-        & input:checked+.checkmark::before {
+        & input:checked + .checkmark::before {
             background-color: #ececec;
         }
     }
@@ -297,11 +303,11 @@ label.checkbox {
     & input {
         display: none;
 
-        &:checked+.checkmark {
+        &:checked + .checkmark {
             border: none;
         }
 
-        &:checked+.checkmark>.checkboxsvg {
+        &:checked + .checkmark > .checkboxsvg {
             display: block;
         }
     }
@@ -387,7 +393,7 @@ dialog.add-task-mode .overlay-content {
 
     & input {
         padding: 12px 21px;
-        border: 1px solid #D1D1D1;
+        border: 1px solid #d1d1d1;
         border-radius: 10px;
         color: black;
         @include font($weight: 400, $size: 20px, $line-height: 120%);
@@ -400,11 +406,10 @@ dialog.add-task-mode .overlay-content {
 
     & textarea {
         padding: 18px 16px;
-        border: 1px solid #D1D1D1;
+        border: 1px solid #d1d1d1;
         border-radius: 10px;
         color: black;
         @include font($weight: 400, $size: 19px, $line-height: 120%);
-
 
         &:focus {
             border: 1px solid #124658;
@@ -478,7 +483,6 @@ dialog.add-task-mode .overlay-content {
     }
 }
 
-
 .subtask-input-wrapper {
     position: relative;
 
@@ -507,7 +511,6 @@ dialog.add-task-mode .overlay-content {
         background: #a8a8a8;
     }
 }
-
 
 .subtask-item {
     display: flex;
@@ -546,7 +549,6 @@ dialog.add-task-mode .overlay-content {
     gap: 4px;
     margin-left: auto;
 }
-
 
 .subtask-edit {
     position: relative;
