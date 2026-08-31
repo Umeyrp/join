@@ -30,13 +30,23 @@ dialog {
     gap: 24px;
     height: 100%;
     padding: 48px 40px;
+    padding-right: 16px;
+    padding-bottom: 100px;
     overflow: hidden;
 }
 
 .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-right: 24px;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #d1d1d1 transparent;
+
+    &.edit {
+        margin-top: 40px;
+    }
 
     &::-webkit-scrollbar {
         width: 4px;
@@ -276,7 +286,7 @@ dialog {
 
 .error-msg {
     position: absolute;
-    top: 85px;
+    bottom: -21px;
     display: block;
     font-size: 12px;
     color: #e60026;
@@ -369,13 +379,6 @@ dialog.add-task-mode .overlay-content {
     }
 }
 
-.content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    margin-top: 40px;
-}
-
 .input-title {
     @include font($weight: 400, $size: 20px, $line-height: 120%);
     color: $color-dark;
@@ -386,8 +389,8 @@ dialog.add-task-mode .overlay-content {
 }
 
 .input-wrapper {
-    display: flex;
     position: relative;
+    display: flex;
     flex-direction: column;
     gap: 8px;
 
@@ -436,6 +439,7 @@ dialog.add-task-mode .overlay-content {
 
 .prio-buttons {
     display: flex;
+    justify-content: center;
     gap: 12px;
 
     button {
@@ -587,7 +591,7 @@ ul {
     flex-direction: column;
     gap: 8px;
     width: 100%;
-    max-height: 64px;
+    max-height: 147px;
     padding: 0;
     overflow-y: auto;
     --sb-track-color: #ffffff;
@@ -617,5 +621,144 @@ ul::-webkit-scrollbar-thumb {
 @supports not selector(::-webkit-scrollbar) {
     ul {
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
+
+@include mobile {
+    dialog {
+        width: calc(100% - 20px);
+        max-width: 440px;
+        height: auto;
+        max-height: calc(100dvh - 48px);
+        margin: 24px auto;
+        border-radius: 24px;
+
+        &.add-task-mode {
+            width: calc(100% - 24px);
+            max-width: 440px;
+            max-height: calc(100dvh - 48px);
+        }
+    }
+
+    .overlay-content {
+        gap: 16px;
+        padding: 24px 24px 96px;
+        padding-right: 5px;
+    }
+
+    .content-wrapper {
+        gap: 20px;
+        padding-right: 9px;
+    }
+
+    .task-category-wrapper {
+        align-items: flex-start;
+    }
+
+    .task-title {
+        font-size: clamp(1.75rem, 1.393rem + 1.786vw, 2rem);
+    }
+
+    .task-description,
+    .task-date,
+    .task-priority,
+    .span-title,
+    .input-title {
+        font-size: 1rem;
+    }
+
+    .span-wrapper {
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+
+    .contacts-wrapper {
+        gap: 6px;
+    }
+
+    .avatar-wrapper {
+        padding: 6px 8px;
+    }
+
+    .prio-buttons {
+        gap: 7px;
+
+        button {
+            gap: 5px;
+            min-width: 29%;
+            padding: 11px 3px;
+            font-size: 1rem;
+
+            & svg {
+                width: 16px;
+            }
+        }
+    }
+
+    .input-wrapper {
+
+        input,
+        textarea {
+            font-size: 1rem;
+        }
+    }
+
+    .close-overlay.close-overlay-edit {
+        top: 20px;
+        right: 16px;
+    }
+
+    dialog.add-task-mode .close-overlay {
+        top: 20px;
+        right: 16px;
+    }
+
+    dialog.add-task-mode .overlay-content {
+        padding: 0;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    dialog {
+        width: calc(100% - 32px);
+        max-width: 600px;
+        height: auto;
+        max-height: calc(100dvh - 24px);
+        margin: 12px auto;
+
+        &.add-task-mode {
+            width: calc(100% - 32px);
+            max-width: 900px;
+            max-height: calc(100dvh - 24px);
+        }
+    }
+
+    .overlay-content {
+        gap: 12px;
+        padding: 20px 16px 88px;
+        overflow-y: auto;
+    }
+
+    .content-wrapper {
+        gap: 16px;
+        margin-top: 12px;
+    }
+
+    .task-title {
+        font-size: 2rem;
+    }
+
+    .close-overlay.close-overlay-edit {
+        top: 16px;
+        right: 16px;
+    }
+
+    dialog.add-task-mode .close-overlay {
+        top: 16px;
+        right: 16px;
+    }
+
+    dialog.add-task-mode .overlay-content {
+        padding: 0;
     }
 }

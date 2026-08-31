@@ -9,15 +9,13 @@ import {
     signal,
     viewChild,
 } from '@angular/core';
-import { NewTask, Task } from '../../../../interfaces/task';
+import { Task } from '../../../../interfaces/task';
 import { TasksDisplayService } from '../../../../core/tasks-display.service';
 import { Contact, getAvatarColor, getInitials } from '../../../../interfaces/contact';
 import { DatePipe } from '@angular/common';
 import { AddTask } from '../../add-task/add-task';
 import { TasksService } from '../../../../core/tasks.service';
 import { TasksOverlayService } from '../../../../core/tasks-overlay-service';
-import { Button } from '../../../../shared/components/button/button';
-import { form, required } from '@angular/forms/signals';
 import { Dropdown } from '../../../../shared/components/dropdown/dropdown';
 
 interface EditableSubtask {
@@ -92,9 +90,7 @@ export class TaskOverlay {
     titleTouched = signal(false);
     dueDateTouched = signal(false);
 
-    isFormValid = computed(
-        () => this.editTitle().trim().length > 0 && this.editDueDate().length > 0,
-    );
+    isFormValid = computed(() => !this.titleInvalid() && !this.dueDateInvalid());
 
     constructor() {
         effect(() => {
@@ -158,8 +154,8 @@ export class TaskOverlay {
 
         const entered = new Date(year, month - 1, day);
         const today = new Date();
+
         today.setHours(0, 0, 0, 0);
-        if (entered < today) return true;
 
         return false;
     });
