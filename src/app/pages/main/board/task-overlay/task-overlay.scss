@@ -247,9 +247,13 @@ dialog {
 
     &-description {
         display: -webkit-box;
-        overflow: clip;
+        overflow: auto;
         color: black;
+        -webkit-line-clamp: 13;
+        line-clamp: 13;
         -webkit-box-orient: vertical;
+        scrollbar-width: thin;
+        scrollbar-color: #808080 transparent;
         overflow-wrap: break-word;
         @include font($weight: 400, $size: 20px, $line-height: 120%);
     }
@@ -307,8 +311,12 @@ label.checkbox {
 
     & p {
         display: -webkit-box;
+        overflow: auto;
+        line-clamp: 5;
+        -webkit-line-clamp: 5;
+        scrollbar-width: thin;
+        scrollbar-color: #808080 transparent;   
         overflow-wrap: anywhere;
-        overflow: clip;
         -webkit-box-orient: vertical;
     }
 
@@ -539,10 +547,10 @@ dialog.add-task-mode .overlay-content {
 
     & span {
         display: -webkit-box;
+        overflow: clip;
         -webkit-line-clamp: 2;
         line-clamp: 2;
         overflow-wrap: anywhere;
-        overflow: clip;
         -webkit-box-orient: vertical;
     }
 
