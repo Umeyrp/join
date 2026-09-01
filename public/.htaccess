@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Existierende Dateien/Ordner (JS, CSS, Icons, ...) normal ausliefern
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Alles andere (z.B. /contacts/3) auf index.html umleiten,
+    # damit Angular Router das Routing übernimmt
+    RewriteRule ^ index.html [L]
+</IfModule>

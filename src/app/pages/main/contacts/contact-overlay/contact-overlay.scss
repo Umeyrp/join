@@ -1,0 +1,527 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+dialog {
+    width: 1212px;
+    height: 100%;
+    max-height: 592px;
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    border: none;
+    border-radius: 30px;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+
+    &::backdrop {
+        background: $color-backdrop;
+        backdrop-filter: blur(3px);
+    }
+}
+
+.overlay-content {
+    display: flex;
+    height: 100%;
+}
+
+
+.backdrop-fade-in::backdrop {
+    animation: fade-in 0.3s ease-out;
+}
+
+.backdrop-fade-out::backdrop {
+    animation: fade-out 0.3s ease-in;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.panel-slide-in {
+    animation: slide-in 0.3s ease-out;
+}
+
+.panel-slide-out {
+    animation: slide-out 0.3s ease-in;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-in-bottom {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-out-bottom {
+    from {
+        transform: translateY(0%);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+.brand-panel {
+    display: flex;
+    align-items: center;
+    padding: 0 44px;
+    background-color: $color-dark;
+}
+
+.text-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+
+    & h2 {
+        @include font('Inter', 700, clamp(33px, 7.5vw + 0.5rem, 61px), 120%, 0%);
+        color: $color-white;
+    }
+
+    & p {
+        @include font('Inter', 400, clamp(16px, 2.5vw + 0.5rem, 26px), 120%, 0%);
+        color: $color-white;
+    }
+
+    &::after {
+        position: relative;
+        bottom: -8px;
+        width: 25%;
+        height: 3px;
+        background-color: currentColor;
+        border-radius: 3px;
+        color: $color-hover-blue;
+        content: '';
+    }
+}
+
+.brand-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 37px;
+    text-align: center;
+}
+
+.form-panel {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    background: $color-white;
+}
+
+.form-wrapper {
+    width: 100%;
+    margin-top: 35px;
+    align-self: center;
+}
+
+.close-overlay {
+    position: absolute;
+    z-index: 2;
+    top: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 170ms ease-in-out;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    &:hover {
+        background: #d9d9d9;
+        scale: 1.1;
+        transition: all 170ms ease-in-out;
+    }
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+
+    & .input-wrapper {
+        position: relative;
+        width: 100%;
+
+        & svg {
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            transform: translateY(-50%);
+        }
+    }
+
+    & input {
+        @include font('Inter', 400, 20px, 120%, 0%);
+        width: 100%;
+        height: 50px;
+        padding: 13px 21px;
+        border: 1px solid $color-input-border;
+        border-radius: 10px;
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px $color-white inset;
+            -webkit-text-fill-color: #000;
+        }
+    }
+}
+
+.form-buttons {
+    display: flex;
+    gap: 24px;
+    padding-top: 48px;
+}
+
+.add-contact {
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    width: 100%;
+    padding-right: 48px;
+    padding-left: 80px;
+
+    & .initial {
+        flex-shrink: 0;
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.cancel-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px;
+    background: none;
+    border: 1px solid $color-dark;
+    border-radius: 10px;
+    box-shadow: 0 0 0 0px transparent;
+    color: $color-dark;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+    @include font('Inter', 400, 20px, 100%, 0%);
+
+    &:hover {
+        box-shadow:
+            0 0 0 1px $color-hover-teal,
+            0 4px 4px 0 #00000040;
+        border-color: $color-hover-teal;
+        transition: all 125ms ease-in-out;
+    }
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 4px;
+    width: 120px;
+    height: 120px;
+    padding: 16px;
+    background: $color-dark;
+    border: 3px solid $color-white;
+    border: 1px solid $color-dark;
+    border-radius: 70px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    font-size: 2.9375rem;
+    font-weight: 500;
+    color: $color-white;
+    color: $color-white;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+    @include font('Inter', 700, 21px, 100%, 0%);
+
+    &:hover {
+        background: $color-hover-teal;
+        box-shadow: 0 4px 4px 0 #00000040;
+        transition: all 125ms ease-in-out;
+    }
+}
+
+.contact-initial {
+    @include avatar-circle();
+}
+
+.error {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    color: $color-error;
+}
+
+@include mobile {
+    .panel-slide-in {
+        animation: slide-in-bottom 0.3s ease-out;
+    }
+
+    .panel-slide-out {
+        animation: slide-out-bottom 0.3s ease-in;
+    }
+
+    app-button[variant='cancel'] {
+        display: none;
+    }
+
+    .overlay-content {
+        flex-direction: column;
+        max-height: none;
+        overflow: hidden;
+    }
+
+    .close-overlay {
+        top: 24px;
+        right: 16px;
+
+        & path {
+            fill: white;
+        }
+    }
+
+    .brand-content {
+        margin-bottom: 0;
+
+        & svg {
+            display: none;
+        }
+    }
+
+    .brand-panel {
+        flex: 1;
+        height: 35%;
+        padding: 0 24px;
+    }
+
+    .text-wrapper {
+        padding-top: 58px;
+        padding-bottom: 58px;
+        text-align: left;
+
+        &::after {
+            width: 32%;
+        }
+    }
+
+    .add-contact {
+        flex-direction: column;
+        height: 100%;
+        padding: 0 16px;
+
+        & .initial {
+            position: absolute;
+            transform: translateY(-50%);
+        }
+    }
+
+    .form-buttons {
+        justify-content: center;
+        padding-top: 0;
+    }
+
+    .form-inputs {
+        gap: 22px;
+        margin-bottom: 13px;
+
+        & input {
+            height: 41px;
+            font-size: 16px;
+        }
+    }
+
+    .form-wrapper {
+        margin-top: 10vh;
+    }
+
+    .error {
+        top: 41px;
+        font-size: 15px;
+    }
+}
+
+@include tablet-laptop {
+    .add-contact {
+        flex-direction: column;
+        gap: 0;
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .text-wrapper {
+        text-align: left;
+
+        & h2 {
+            font-size: 44px;
+        }
+
+        & p {
+            font-size: 19px;
+        }
+
+        &::after {
+            width: 33%;
+        }
+    }
+
+    .form-buttons {
+        justify-content: center;
+    }
+
+    .form-inputs .input-wrapper {
+        width: 80%;
+        min-width: 328px;
+    }
+
+    .close-overlay {
+        top: 24px;
+        right: 24px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 768px) {
+    dialog {
+        max-height: stretch;
+        margin: 1rem;
+    }
+
+    .overlay-content {
+        flex-direction: column;
+        max-height: none;
+        overflow: hidden;
+    }
+
+    .close-overlay {
+        top: 20px;
+        right: 16px;
+
+        & path {
+            fill: white;
+        }
+    }
+
+    .brand-panel {
+        flex: unset;
+        height: 28%;
+        padding: 0 24px;
+    }
+
+    .brand-content {
+        margin-bottom: 0;
+
+        &>svg {
+            display: none;
+        }
+    }
+
+    .text-wrapper {
+        gap: 0;
+
+        & h2 {
+            font-size: 29px;
+        }
+
+        & p {
+            font-size: 1rem;
+        }
+    }
+
+    .form-panel {
+        position: relative;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        overflow: auto;
+        background: #ffffff;
+    }
+
+    .add-contact {
+        flex-direction: column;
+        height: 100%;
+        padding: 0 16px;
+
+        & .initial {
+            display: none;
+            width: 80px;
+            height: 80px;
+            transform: translate(260%, -108%);
+        }
+    }
+
+    .form-wrapper {
+        margin-top: 2vh;
+    }
+
+    .form-inputs {
+        gap: 22px;
+        margin-bottom: 0;
+
+        & input {
+            height: 40px;
+            font-size: 1rem;
+        }
+    }
+
+    .form-buttons {
+        justify-content: center;
+        padding-top: 4px;
+    }
+
+    .error {
+        top: 42px;
+    }
+}

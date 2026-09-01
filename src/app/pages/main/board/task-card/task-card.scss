@@ -1,0 +1,215 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    display: block;
+}
+
+.task-card {
+    width: 100%;
+    max-width: 252px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-white;
+    border-radius: 24px;
+    padding: 16px;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+
+    cursor: pointer;
+
+    &__category {
+        display: inline-block;
+        align-self: flex-start;
+        @include font($weight: 400, $size: 1rem, $line-height: 120%);
+        color: $color-white;
+        padding: 4px 16px;
+        border-radius: 8px;
+
+        &.user-story {
+            background-color: $color-category-user-story;
+        }
+
+        &.technical-task {
+            background-color: $color-category-technical-task;
+        }
+    }
+
+    &__title {
+        @include font($weight: 700, $size: 1rem, $line-height: 120%);
+        color: $color-dark;
+        margin: 24px 0 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        overflow-wrap: break-word;
+    }
+
+    &__description {
+        @include font($weight: 400, $size: 1rem, $line-height: 120%);
+        color: #a8a8a8;
+        margin: 8px 0 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__subtasks {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 24px 0 0;
+    }
+
+    &__progress {
+        width: 110px;
+        height: 8px;
+        background-color: $color-light-text;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    &__progress-fill {
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    &__subtasks-count {
+        @include font($weight: 400, $size: 1rem, $line-height: 120%);
+        color: black;
+        white-space: nowrap;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 16px 0 0;
+    }
+
+    &__avatars {
+        display: flex;
+    }
+
+    &__avatar {
+        @include avatar-circle($size: 32px);
+        @include font($weight: 400, $size: 1rem, $line-height: 120%);
+        border: 1px solid $color-white;
+        box-shadow: none;
+        margin-left: -8px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    &__priority {
+        flex-shrink: 0;
+    }
+}
+
+.task-card__move-toggle {
+    display: none;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 2;
+
+    svg {
+        display: block;
+    }
+}
+
+.task-card__move-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background: transparent;
+}
+
+.task-card__move-menu {
+    position: absolute;
+    top: 15px;
+    right: 16px;
+    z-index: 4;
+    min-width: 190px;
+    padding: 16px 20px;
+    background-color: $color-dark;
+    border-radius: 20px 0 20px 20px;
+    color: $color-white;
+    animation: task-card-move-menu-in 0.2s ease-out;
+
+    &--closing {
+        animation: task-card-move-menu-out 0.2s ease-in forwards;
+    }
+
+    &-title {
+        display: block;
+        @include font($weight: 700, $size: 1.25rem, $line-height: 120%);
+        margin: 0 0 12px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        @include font($weight: 400, $size: 1rem, $line-height: 120%, $family: 'Open Sans');
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+@keyframes task-card-move-menu-in {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes task-card-move-menu-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+@include tablet {
+    .task-card__move-toggle {
+        display: flex;
+    }
+}
+
+@include mobile {
+    .task-card__move-toggle {
+        display: flex;
+    }
+}

@@ -1,49 +1,84 @@
+<a class="contact-card__back" routerLink="../"
+    ><svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M12.0361 16.9129H29.2135C30.0626 16.9129 30.751 17.6013 30.751 18.4504C30.751 19.2996 30.0626 19.988 29.2135 19.988H12.0361L19.1964 27.1483C19.7968 27.7486 19.7968 28.722 19.1964 29.3223C18.596 29.9227 17.6227 29.9227 17.0223 29.3223L7.5646 19.8646C6.78356 19.0836 6.78356 17.8173 7.5646 17.0362L17.0223 7.57849C17.6227 6.97814 18.596 6.97814 19.1964 7.57849C19.7968 8.17885 19.7968 9.15222 19.1964 9.75257L12.0361 16.9129Z"
+            fill="#124658"
+        />
+    </svg>
+</a>
 @if (contact(); as contact) {
-    <div class="contact-card">
-        <div class="contact-card__header">
-            <div class="contact-card__avatar" [style.background-color]="getAvatarColor(contact.id)">
-                {{ getInitials(contact.name) }}
-            </div>
-            <div class="contact-card__heading">
-                <h2 class="contact-card__name">{{ contact.name }}</h2>
-                <div class="contact-card__actions">
-                    <button
-                        type="button"
-                        class="contact-card__action"
-                        (click)="contactsOverlayService.openEditOverlay(contact)"
-                    >
-                        <img src="icons/edit.svg" alt="" />
-                        Edit
-                    </button>
-                    <button type="button" class="contact-card__action" (click)="onDelete()">
-                        <img src="icons/delete.svg" alt="" />
-                        Delete
-                    </button>
-                </div>
-            </div>
+    <app-contact-mobile-button [contact]="contact" />
+}
+
+<div class="contact-card-viewport">
+    @if (outgoingContact(); as outgoing) {
+        <div
+            class="contact-card contact-card--outgoing"
+            [class.contact-card--exit-up]="direction() === 'up'"
+            [class.contact-card--exit-down]="direction() === 'down'"
+        >
+            <ng-container
+                *ngTemplateOutlet="cardContent; context: { $implicit: outgoing }"
+            ></ng-container>
         </div>
+    }
 
-        <h3 class="contact-card__section-title">Contact Information</h3>
-
-        <div class="contact-card__field">
-            <span class="contact-card__label">Email</span>
-            <a
-                class="contact-card__value contact-card__value--link"
-                [href]="'mailto:' + contact.email"
-                >{{ contact.email }}</a
-            >
+    @if (contact(); as contact) {
+        <div
+            class="contact-card"
+            [class.contact-card--enter-right]="direction() === 'first'"
+            [class.contact-card--enter-up]="direction() === 'up'"
+            [class.contact-card--enter-down]="direction() === 'down'"
+        >
+            <ng-container
+                *ngTemplateOutlet="cardContent; context: { $implicit: contact }"
+            ></ng-container>
         </div>
+    }
+</div>
 
-        <div class="contact-card__field">
-            <span class="contact-card__label">Phone</span>
-            <a
-                class="contact-card__value contact-card__value--tel"
-                [href]="telLink(contact.phone)"
-                >{{ contact.phone | phoneFormat }}</a
-            >
+<ng-template #cardContent let-contact>
+    <div class="contact-card__header">
+        <div class="contact-card__avatar" [style.background-color]="getAvatarColor(contact.id)">
+            {{ getInitials(contact.name) }}
+        </div>
+        <div class="contact-card__heading">
+            <h2 class="contact-card__name">{{ contact.name }}</h2>
+            <div class="contact-card__actions">
+                <button
+                    type="button"
+                    class="contact-card__action"
+                    (click)="contactsOverlayService.openEditOverlay(contact)"
+                >
+                    <img src="/app-icons/edit.svg" alt="" />
+                    Edit
+                </button>
+                <button type="button" class="contact-card__action" (click)="onDelete()">
+                    <img src="/app-icons/delete.svg" alt="" />
+                    Delete
+                </button>
+            </div>
         </div>
     </div>
-}
+
+    <h3 class="contact-card__section-title">Contact Information</h3>
+
+    <div class="contact-card__field">
+        <span class="contact-card__label">Email</span>
+        <a
+            class="contact-card__value contact-card__value--link"
+            [href]="'mailto:' + contact.email"
+            >{{ contact.email }}</a
+        >
+    </div>
+
+    <div class="contact-card__field">
+        <span class="contact-card__label">Phone</span>
+        <a class="contact-card__value contact-card__value--tel" [href]="telLink(contact.phone)">{{
+            contact.phone | phoneFormat
+        }}</a>
+    </div>
+</ng-template>
 
 @if (contactsOverlayService.lastAction()) {
     <div class="toast">Contact successfully {{ contactsOverlayService.lastAction() }}</div>

@@ -19,4 +19,6 @@ export class Button {
         if (variant === 'delete') return 'cancel';
         return variant;
     });
+    label = input<string>();
+    iconVariant = input<'check' | 'plus'>('plus');
 }

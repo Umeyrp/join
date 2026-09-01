@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 :host {
     display: block;
@@ -15,34 +16,126 @@
     }
 }
 
+@keyframes slide-out-up {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-bottom {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-down {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-top {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toast-slide-in {
+    from {
+        transform: translateX(calc(-50% + 40px));
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+
+.contact-card__back {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    z-index: 2;
+    color: $color-dark;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.contact-card-viewport {
+    position: relative;
+    overflow: hidden;
+}
+
 .contact-card {
-    animation: slide-in 0.3s ease-out;
     margin-top: 32px;
+    position: relative;
+    z-index: 1;
+
+    &--outgoing {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    &--enter-right {
+        animation: slide-in 0.3s ease-out;
+    }
+
+    &--enter-up {
+        animation: slide-in-bottom 0.3s ease-out;
+    }
+
+    &--enter-down {
+        animation: slide-in-top 0.3s ease-out;
+    }
+
+    &--exit-up {
+        animation: slide-out-up 0.3s ease-out forwards;
+    }
+
+    &--exit-down {
+        animation: slide-out-down 0.3s ease-out forwards;
+    }
 
     &__header {
         display: flex;
         align-items: center;
         gap: 54px;
+        padding-left: 8px;
     }
 
     &__avatar {
-        width: 120px;
-        height: 120px;
-        border: 3px solid $color-white;
-        border-radius: 70px;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: $color-white;
-        font-size: 2.9375rem;
-        font-weight: 500;
-        flex-shrink: 0;
+        @include avatar-circle();
     }
 
     &__name {
         margin: 0 0 8px;
-        font-size: 2.9375rem;
+        font-size: clamp(2rem, 0.4325rem + 2.783vw, 2.9375rem);
         font-weight: 500;
     }
 
@@ -120,15 +213,62 @@
     background-color: $color-dark;
     box-shadow: 0 0 4px 0 #00000026;
 
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 120%;
-    letter-spacing: 0%;
+    @include font($size: 1.25rem, $line-height: 120%);
     color: $color-white;
 
-    position: fixed;
-    bottom: 80px;
-    right: 50%;
-    animation: slide-in 0.3s ease-out;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: toast-slide-in 0.3s ease-out;
+}
+
+// Responsive
+@include mobile {
+    .contact-card__back {
+        display: inline-block;
+    }
+
+    .contact-card__header {
+        gap: 20px;
+    }
+
+    .contact-card__avatar {
+        @include avatar-circle($size: 72px);
+        font-size: 1.75rem;
+    }
+
+    .contact-card__name {
+        font-weight: 700;
+    }
+
+    .contact-card__section-title {
+        margin: 21px 0 21px;
+    }
+
+    .toast {
+        width: calc(100% - 32px);
+        right: 16px;
+        bottom: 16px;
+    }
+    .contact-card__actions {
+        display: none;
+    }
+}
+
+@include tablet {
+    .contact-card__header {
+        gap: 32px;
+    }
+
+    .contact-card__avatar {
+        @include avatar-circle($size: 90px);
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .contact-card__name {
+        font-size: clamp(1.75rem, 1.393rem + 1.786vw, 2rem);
+    }
 }
