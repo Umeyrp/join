@@ -46,21 +46,21 @@
 
 // 769px – 1440px – tablets / laptops
 @mixin tablet-laptop {
-    @media (min-width: 769px) and (max-width: 1440px) {
+    @media (min-width: 769px) and (max-width: 1439px) {
         @content;
     }
 }
 
-// 1025px – 1441px – smaller desktops (design was built for ~1920px)
+// 1025px – 1439px – smaller desktops (design was built for ~1920px)
 @mixin laptop {
-    @media (min-width: 1025px) and (max-width: 1441px) {
+    @media (min-width: 1025px) and (max-width: 1439px) {
         @content;
     }
 }
 
 // >= 1920px – large / ultra-wide screens
 @mixin wide {
-    @media (min-width: 1442px) and (max-width: 1920px) {
+    @media (min-width: 1440px) and (max-width: 1920px) {
         @content;
     }
 }
