@@ -134,7 +134,7 @@ export class TaskOverlay {
         return `${year}-${month}-${day}`;
     }
 
-    readonly titleMaxLength = 50;
+    readonly titleMaxLength = 100;
     titleInvalid = computed(
         () =>
             (this.titleTouched() && this.editTitle().trim().length === 0) ||
