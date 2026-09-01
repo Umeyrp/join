@@ -143,12 +143,18 @@
 
     <div class="task-card__footer">
         <div class="task-card__avatars">
-            @for (contact of assignedContacts(); track contact.id) {
+            @for (contact of visibleContacts(); track contact.id) {
                 <div
                     class="task-card__avatar"
                     [style.background-color]="getAvatarColor(contact.id)"
                 >
                     {{ getInitials(contact.name) }}
+                </div>
+            }
+
+            @if (overflowCount() > 0) {
+                <div class="task-card__avatar task-card__avatar--overflow">
+                    +{{ overflowCount() }}
                 </div>
             }
         </div>
