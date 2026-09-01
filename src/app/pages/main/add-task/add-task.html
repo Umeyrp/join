@@ -7,11 +7,15 @@
                 <input
                     type="text"
                     [value]="title()"
-                    (input)="title.set($any($event.target).value)"
+                    (input)="title.set($any($event.target).value.slice(0, 100))"
                     placeholder="Enter a title"
                     (blur)="titleTouched.set(true)"
                     [class.invalid]="titleInvalid()"
+                    maxlength="100"
                 />
+                <span class="char-count" [class.char-count--limit]="title().length === 100">
+                    {{ title().length }}/100
+                </span>
                 @if (titleInvalid()) {
                     <span class="error-msg">This field is required</span>
                 }
