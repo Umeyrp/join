@@ -241,8 +241,6 @@ dialog {
         display: -webkit-box;
         overflow: clip;
         color: $color-dark;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow-wrap: break-word;
     }
@@ -252,8 +250,6 @@ dialog {
         overflow: clip;
         color: black;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 5;
-        line-clamp: 5;
         overflow-wrap: break-word;
         @include font($weight: 400, $size: 20px, $line-height: 120%);
     }
@@ -311,8 +307,6 @@ label.checkbox {
 
     & p {
         display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
         overflow-wrap: anywhere;
         overflow: clip;
         -webkit-box-orient: vertical;
