@@ -76,6 +76,16 @@ export class TaskCard {
         this.tasksDisplayService.assignedContacts(this.task()),
     );
 
+    private readonly maxVisibleAvatars = 4;
+
+    protected readonly visibleContacts = computed(() =>
+        this.assignedContacts().slice(0, this.maxVisibleAvatars),
+    );
+
+    protected readonly overflowCount = computed(() =>
+        Math.max(0, this.assignedContacts().length - this.maxVisibleAvatars),
+    );
+
     protected readonly subtaskProgress = computed(() =>
         this.tasksDisplayService.subtaskProgress(this.task()),
     );
