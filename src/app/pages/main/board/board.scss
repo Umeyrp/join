@@ -200,6 +200,7 @@
 
     &__empty {
         @include font($size: 1rem, $weight: 400, $line-height: 120%, $family: 'Open Sans');
+        max-width: 252px;
         background-color: $color-light-text;
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
         border: 1px dashed #a8a8a8;
