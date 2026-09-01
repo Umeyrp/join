@@ -134,7 +134,12 @@ export class TaskOverlay {
         return `${year}-${month}-${day}`;
     }
 
-    titleInvalid = computed(() => this.titleTouched() && this.editTitle().trim().length === 0);
+    readonly titleMaxLength = 100;
+    titleInvalid = computed(
+        () =>
+            (this.titleTouched() && this.editTitle().trim().length === 0) ||
+            this.editTitle().length > this.titleMaxLength,
+    );
     dueDateInvalid = computed(
         () =>
             (this.dueDateTouched() && this.editDueDate().length === 0) ||

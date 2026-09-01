@@ -21,8 +21,13 @@
                                 (blur)="titleTouched.set(true)"
                                 [class.invalid]="titleInvalid()"
                             />
-                            @if (titleInvalid()) {
+                            @if (editTitle().length === 0) {
                                 <span class="error-msg">This field is required</span>
+                            }
+                            @if (editTitle().length > titleMaxLength) {
+                                <span class="error-msg"
+                                    >Title cannot exceed {{ titleMaxLength }} characters</span
+                                >
                             }
                         </div>
                         <div class="input-wrapper">
@@ -380,7 +385,10 @@
                         </div>
 
                         <h3 class="task-title">{{ task()!.title }}</h3>
-                        <p class="task-description">{{ task()!.description }}</p>
+
+                        <div class="description-wrapper">
+                            <p class="task-description">{{ task()!.description }}</p>
+                        </div>
 
                         <div class="span-wrapper">
                             <span class="span-title">Due date:</span>
