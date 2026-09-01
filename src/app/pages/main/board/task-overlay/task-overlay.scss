@@ -41,6 +41,7 @@ dialog {
     gap: 32px;
     padding-right: 24px;
     overflow: auto;
+    outline: unset;
     scrollbar-width: thin;
     scrollbar-color: #d1d1d1 transparent;
 
@@ -247,8 +248,14 @@ dialog {
     }
 
     &-description {
-        @include font($weight: 400, $size: 20px, $line-height: 120%);
+        display: -webkit-box;
+        overflow: clip;
         color: black;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+        overflow-wrap: break-word;
+        @include font($weight: 400, $size: 20px, $line-height: 120%);
     }
 
     &-date {
@@ -301,6 +308,15 @@ label.checkbox {
     padding: 6px 16px;
     border-radius: 10px;
     cursor: pointer;
+
+    & p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        overflow-wrap: anywhere;
+        overflow: clip;
+        -webkit-box-orient: vertical;
+    }
 
     &:hover {
         background-color: #ececec;
@@ -525,6 +541,16 @@ dialog.add-task-mode .overlay-content {
     height: 32px;
     padding: 4px 16px;
     border-radius: 10px;
+    overflow-wrap: anywhere;
+
+    & span {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow-wrap: anywhere;
+        overflow: clip;
+        -webkit-box-orient: vertical;
+    }
 
     &::before {
         flex-shrink: 0;
@@ -532,6 +558,7 @@ dialog.add-task-mode .overlay-content {
     }
 
     &:hover {
+        overflow: clip;
         background: #eeeeee;
     }
 
