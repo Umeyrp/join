@@ -237,12 +237,12 @@ dialog {
 
     &-title {
         @include font($weight: 700, $size: 61px, $line-height: 120%);
-        color: $color-dark;
         display: -webkit-box;
+        overflow: hidden;
+        color: $color-dark;
         -webkit-line-clamp: 3;
         line-clamp: 3;
         -webkit-box-orient: vertical;
-        overflow: hidden;
         overflow-wrap: break-word;
     }
 
@@ -305,7 +305,7 @@ label.checkbox {
     &:hover {
         background-color: #ececec;
 
-        & input:checked + .checkmark::before {
+        & input:checked+.checkmark::before {
             background-color: #ececec;
         }
     }
@@ -313,11 +313,11 @@ label.checkbox {
     & input {
         display: none;
 
-        &:checked + .checkmark {
+        &:checked+.checkmark {
             border: none;
         }
 
-        &:checked + .checkmark > .checkboxsvg {
+        &:checked+.checkmark>.checkboxsvg {
             display: block;
         }
     }
@@ -441,6 +441,7 @@ dialog.add-task-mode .overlay-content {
     display: flex;
     justify-content: center;
     gap: 12px;
+    padding: 0 1px;
 
     button {
         display: flex;
@@ -682,10 +683,11 @@ ul::-webkit-scrollbar-thumb {
 
     .prio-buttons {
         gap: 7px;
+        padding: 0 1px;
 
         button {
             gap: 5px;
-            min-width: 29%;
+            width: 33%;
             padding: 11px 3px;
             font-size: 1rem;
 
