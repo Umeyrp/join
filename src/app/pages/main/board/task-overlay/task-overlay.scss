@@ -238,7 +238,7 @@ dialog {
     &-title {
         @include font($weight: 700, $size: 61px, $line-height: 120%);
         display: -webkit-box;
-        overflow: hidden;
+        overflow: clip;
         color: $color-dark;
         -webkit-line-clamp: 3;
         line-clamp: 3;
