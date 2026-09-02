@@ -64,3 +64,10 @@
         @content;
     }
 }
+
+// >= 1920px – large / ultra-wide screens
+@mixin ultrawide {
+    @media (min-width: 1921px) {
+        @content;
+    }
+}

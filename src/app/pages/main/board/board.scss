@@ -336,3 +336,10 @@
         padding: 12px !important;
     }
 }
+
+@include ultrawide {
+    .board-header,
+    .board-columns {
+        max-width: 1440px;
+    }
+}
