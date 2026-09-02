@@ -45,7 +45,9 @@ export class Board {
     protected readonly hasNoSearchResults = computed(() => {
         const term = this.searchTerm().trim();
         if (!term) return false;
-        return this.statuses.every((status) => this.tasksByStatus(status).length === 0);
+        const noTasks = this.statuses.every((status) => this.tasksByStatus(status).length === 0);
+        const noContacts = this.nameSuggestions().length === 0;
+        return noTasks && noContacts;
     });
 
     protected selectAssignee(contact: Contact) {
