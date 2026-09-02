@@ -161,8 +161,18 @@ h2 {
         right: 12px;
         top: 50%;
         transform: translateY(-50%);
-        pointer-events: none;
+        cursor: pointer;
+        z-index: 9999;
     }
+}
+
+input[type='date'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    left: 50%;
+    pointer-events: none;
 }
 
 .priority-buttons {
@@ -334,6 +344,10 @@ ul::-webkit-scrollbar-thumb {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.subtask-edit input::placeholder {
+    color: #e60026;
 }
 
 .edit-divider {

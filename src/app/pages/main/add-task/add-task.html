@@ -43,7 +43,14 @@
                         (blur)="dueDateTouched.set(true)"
                         [class.invalid]="dueDateInvalid()"
                     />
+                    <input
+                        type="date"
+                        #datePicker
+                        (change)="onDatePickerChange($any($event.target).value)"
+                    />
+
                     <svg
+                        (click)="openDatePicker()"
                         width="18"
                         height="20"
                         viewBox="0 0 18 20"
@@ -213,6 +220,11 @@
                                             [value]="editingValue()"
                                             (input)="editingValue.set($any($event.target).value)"
                                             (keydown.enter)="saveEdit(i)"
+                                            [placeholder]="
+                                                editingValue().length === 0
+                                                    ? 'Subtask cannot be empty'
+                                                    : ''
+                                            "
                                         />
                                         <div class="subtask-edit-actions">
                                             <svg

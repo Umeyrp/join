@@ -1,4 +1,14 @@
-import { Component, inject, signal, computed, input, HostBinding, output } from '@angular/core';
+import {
+    Component,
+    inject,
+    signal,
+    computed,
+    input,
+    HostBinding,
+    output,
+    ViewChild,
+    ElementRef,
+} from '@angular/core';
 import { Dropdown } from '../../../shared/components/dropdown/dropdown';
 import { Supabase } from '../../../core/supabase';
 import { Contact } from '../../../interfaces/contact';
@@ -146,9 +156,13 @@ export class AddTask {
     }
 
     saveEdit(index: number) {
-        this.subtasks.update((current) =>
-            current.map((s, i) => (i === index ? this.editingValue() : s)),
-        );
+        if (this.editingValue().trim().length === 0) {
+            this.deleteSubtask(index);
+        } else {
+            this.subtasks.update((current) =>
+                current.map((s, i) => (i === index ? this.editingValue().trim() : s)),
+            );
+        }
         this.editingIndex.set(null);
     }
 
@@ -195,5 +209,16 @@ export class AddTask {
 
     @HostBinding('class.overlay') get overlayClass() {
         return this.isOverlay();
+    }
+
+    @ViewChild('datePicker') datePickerRef!: ElementRef<HTMLInputElement>;
+
+    openDatePicker() {
+        this.datePickerRef.nativeElement.showPicker();
+    }
+
+    onDatePickerChange(value: string) {
+        const [year, month, day] = value.split('-');
+        this.dueDate.set(`${day}/${month}/${year}`);
     }
 }
