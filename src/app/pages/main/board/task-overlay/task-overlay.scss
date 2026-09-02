@@ -2,11 +2,13 @@
 @use 'variables' as *;
 
 dialog {
+    display: flex;
+    flex-direction: column;
     width: 525px;
-    height: 100%;
+    max-height: calc(100dvh - 96px);
     margin: auto;
     padding: 0;
-    overflow-y: auto;
+    overflow: hidden;
     border: none;
     border-radius: 30px;
     box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
@@ -28,7 +30,7 @@ dialog {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    height: 100%;
+    min-height: 0; // erlaubt dem Flex-Kind, kleiner als sein Inhalt zu werden
     padding: 48px 40px;
     padding-right: 16px;
     padding-bottom: 100px;
@@ -39,8 +41,9 @@ dialog {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    min-height: 0; // wichtig: sonst verhindert der automatische Mindestinhalt das Schrumpfen
     padding-right: 24px;
-    overflow: auto;
+    overflow-y: auto; // hier – und nur hier – wird gescrollt
     outline: unset;
     scrollbar-width: thin;
     scrollbar-color: #d1d1d1 transparent;
@@ -659,9 +662,8 @@ ul::-webkit-scrollbar-thumb {
     dialog {
         width: calc(100% - 20px);
         max-width: 440px;
-        height: auto;
         max-height: calc(100dvh - 48px);
-        margin: 24px auto;
+        margin: auto;
         border-radius: 24px;
 
         &.add-task-mode {
@@ -754,9 +756,8 @@ ul::-webkit-scrollbar-thumb {
     dialog {
         width: calc(100% - 32px);
         max-width: 600px;
-        height: auto;
         max-height: calc(100dvh - 24px);
-        margin: 12px auto;
+        margin: auto;
 
         &.add-task-mode {
             width: calc(100% - 32px);
