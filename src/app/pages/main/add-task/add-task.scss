@@ -123,6 +123,8 @@ h2 {
                 $line-height: 120%
             );
             border: 1px solid #d1d1d1;
+            scrollbar-width: thin;
+            scrollbar-color: #808080 transparent;
 
             &::placeholder {
                 @include font(
@@ -136,13 +138,6 @@ h2 {
                 outline: none;
                 border: 1px solid #124658;
             }
-        }
-
-        .textarea-corner {
-            position: absolute;
-            bottom: 9.5px;
-            right: 4.5px;
-            pointer-events: none;
         }
     }
 }
@@ -363,6 +358,16 @@ ul::-webkit-scrollbar-thumb {
     color: #e60026;
     font-size: 12px;
     top: 85px;
+    display: block;
+}
+
+.error-msg-subtask {
+    position: absolute;
+    @include font($weight: 400, $size: 1rem, $line-height: 120%);
+    color: #e60026;
+    font-size: 12px;
+    top: 85px;
+    right: 0;
     display: block;
 }
 
