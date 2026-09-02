@@ -108,7 +108,7 @@ span {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-height: 500px) and (orientation: landscape) {
     :host {
         padding: 20px 16px;
     }
@@ -137,5 +137,34 @@ span {
         &__help {
             display: block;
         }
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    :host {
+        padding: 4px 16px;
+    }
+
+    .logo--mobile {
+        width: 18px;
+        height: 22px;
+    }
+
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .profile_box {
+        gap: 12px;
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .dropdown {
+        top: 40px;
     }
 }

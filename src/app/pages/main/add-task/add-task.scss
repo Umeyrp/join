@@ -340,7 +340,8 @@ ul::-webkit-scrollbar-thumb {
 }
 
 .subtask-edit input {
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -561,5 +562,48 @@ ul::-webkit-scrollbar-thumb {
         button {
             padding: 16px 4px;
         }
+    }
+}
+
+// Breite Smartphones im Querformat (z.B. Pixel 9 Pro XL: 997px breit, aber wenig Höhe):
+// @include mobile greift hier nicht (>768px breit), das Grid braucht aber mehr Höhe als
+// verfügbar ist. Wrapper auf Flex umstellen: Formular scrollt intern, Footer bleibt fixiert.
+@media (min-width: 769px) and (orientation: landscape) and (max-height: 500px) {
+    .add-task-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 12px;
+        overflow: hidden;
+
+        h2 {
+            font-size: 1.75rem;
+        }
+    }
+
+    .add-task_form {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding-right: 4px;
+    }
+
+    .col-divider {
+        height: auto;
+    }
+
+    .add-task-footer {
+        flex: 0 0 auto;
+        padding: 8px 0;
+    }
+}
+
+// Sehr hohe Viewports (z.B. 4K-Monitor im Hochformat, 3840px hoch): die mittlere
+// 1fr-Zeile würde sonst jeden freien Platz aufsaugen und den Footer ganz nach unten
+// drücken. Zeilen nicht mehr strecken, Inhalt rutscht oben zusammen.
+@media (min-height: 1800px) {
+    .add-task-wrapper {
+        grid-template-rows: auto auto auto;
+        align-content: start;
     }
 }

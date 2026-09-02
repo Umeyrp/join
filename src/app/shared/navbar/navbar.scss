@@ -78,7 +78,7 @@ nav {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-height: 500px) and (orientation: landscape) {
     :host {
         display: block;
         height: 80px;
@@ -123,6 +123,50 @@ nav {
                 svg {
                     width: 20px;
                     height: 20px;
+                }
+            }
+        }
+    }
+}
+
+// Sehr hohe Viewports (z.B. 4K-Monitor im Hochformat, 3840px hoch): die mittlere
+// 1fr-Zeile würde die Privacy-Links sonst ganz nach unten drücken. Zeilen nicht mehr
+// strecken, Privacy-Links rutschen mit normalem Abstand direkt unter die Navigation.
+@media (min-height: 1800px) {
+    :host {
+        grid-template-rows: auto auto auto;
+        align-content: start;
+    }
+
+    .privacy__links {
+        padding-bottom: 0;
+        margin-top: 32px;
+    }
+}
+
+// Smartphones im Querformat: Navbar auf 40px verkleinert (siehe main.scss), Text ausgeblendet
+@media (max-height: 500px) and (orientation: landscape) {
+    :host {
+        height: 40px;
+    }
+
+    nav {
+        height: 40px;
+
+        ul {
+            height: 40px;
+
+            li {
+                padding: 4px 2px;
+                gap: 0;
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
+
+                p {
+                    display: none;
                 }
             }
         }

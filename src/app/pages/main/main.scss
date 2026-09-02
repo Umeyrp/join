@@ -17,9 +17,10 @@ app-header {
 .content {
   grid-area: content;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-height: 500px) and (orientation: landscape) {
   .container {
     display: block;
     height: 100dvh;
@@ -50,5 +51,22 @@ app-header {
     left: 0;
     right: 0;
     overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+// Smartphones im Querformat: Header/Navbar deutlich niedriger, da kaum Höhe verfügbar ist
+@media (max-height: 500px) and (orientation: landscape) {
+  app-header {
+    height: 40px;
+  }
+
+  app-navbar {
+    height: 40px;
+  }
+
+  .content {
+    top: 40px; // Header-Höhe (Landscape)
+    bottom: 40px; // Navbar-Höhe (Landscape)
   }
 }
