@@ -752,6 +752,10 @@ ul::-webkit-scrollbar-thumb {
     }
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 @media (orientation: landscape) and (max-height: 500px) {
     dialog {
         width: calc(100% - 32px);

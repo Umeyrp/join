@@ -1,0 +1,36 @@
+.login-page {
+    align-items: center;
+    background: #f6f7f8;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.logo { left: 48px; position: absolute; top: 36px; }
+.logo img { width: 100px; }
+
+.card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px #0000001a;
+    display: grid;
+    gap: 16px;
+    max-width: 380px;
+    padding: 36px;
+    width: 100%;
+}
+
+h1 { color: #2a3647; margin: 0 0 8px; text-align: center; }
+label { color: #2a3647; display: grid; font-weight: 600; gap: 6px; }
+input { border: 1px solid #d1d1d1; border-radius: 8px; box-sizing: border-box; font: inherit; padding: 12px; width: 100%; }
+.check { display: flex; font-size: 14px; font-weight: 400; }
+.check input { width: auto; }
+a { color: #007cee; }
+button { background: #2a3647; border: 0; border-radius: 8px; color: white; cursor: pointer; font: inherit; font-weight: 700; padding: 12px; }
+button:disabled { opacity: .6; }
+button.link { background: transparent; color: #007cee; font-weight: 400; padding: 0; }
+.error { color: #e53e3e; font-size: 14px; margin: 0; }
+
+@media (max-width: 600px) { .logo { left: 24px; top: 24px; } .logo img { width: 72px; } .card { padding: 28px 20px; } }
