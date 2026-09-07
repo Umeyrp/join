@@ -121,6 +121,12 @@
 
 @if (showWelcome()) {
     <div class="welcome">
-        <p>Good morning, <span>User</span></p>
+        <p>
+            @if (currentUser()) {
+                {{ greeting() }}, <span>{{ currentUser() }}</span>
+            } @else {
+                {{ greeting() }}!
+            }
+        </p>
     </div>
 }
