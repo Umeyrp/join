@@ -118,6 +118,9 @@
         </div>
     </div>
 </div>
-<div class="welcome">
-    <p>Good morning, <span>User</span></p>
-</div>
+
+@if (showWelcome()) {
+    <div class="welcome">
+        <p>Good morning, <span>User</span></p>
+    </div>
+}

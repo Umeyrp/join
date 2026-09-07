@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TasksService } from '../../../core/tasks.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -36,4 +36,19 @@ export class Summary {
                 .find((t) => new Date(t.due_date) >= today) ?? null
         );
     });
+
+    showWelcome = signal(window.innerWidth > 1234);
+
+    ngOnInit() {
+        if (window.innerWidth <= 1234) {
+            if (!sessionStorage.getItem('welcomeShown')) {
+                this.showWelcome.set(true);
+                sessionStorage.setItem('welcomeShown', 'true');
+
+                setTimeout(() => {
+                    this.showWelcome.set(false);
+                }, 3300);
+            }
+        }
+    }
 }
