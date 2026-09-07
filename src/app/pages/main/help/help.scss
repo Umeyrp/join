@@ -20,8 +20,16 @@
     }
 
     button {
+        width: 32px;
+        height: 32px;
         border: none;
         background: none;
+        cursor: pointer;
+        &:hover {
+            scale: 1.08;
+            border-radius: 50%;
+            background: #d9d9d9;
+        }
     }
 }
 
