@@ -14,4 +14,8 @@ export class Header {
     toggleMenu() {
         this.isMenuOpen.update((v) => !v);
     }
+
+    logout() {
+        console.log('logout');
+    }
 }
