@@ -1,0 +1,395 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    padding: clamp(12px, calc(12px + 112 * ((100vh - 700px) / 364)), 124px)
+        clamp(1rem, -3.2rem + 5.5vw, 6rem) 0;
+    display: grid;
+    grid-template-rows: 73px 1fr;
+    grid-template-columns: 560px 385px;
+    grid-template-areas:
+        'header header'
+        'overview welcoming';
+    gap: 56px 80px;
+}
+
+.headline {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    grid-area: header;
+
+    h2 {
+        @include font($size: clamp(2.938rem, 2.454rem + 2.415vw, 3.813rem), $weight: 700);
+    }
+
+    p {
+        @include font($size: clamp(1.25rem, 1.009rem + 1.207vw, 1.688rem), $weight: 400);
+    }
+}
+
+.divider {
+    height: 59px;
+    border: 1.5px solid #29abe2;
+    border-radius: 50px;
+}
+
+.task-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    .top-row {
+        display: flex;
+        gap: clamp(1.25rem, 1.036rem + 1.071vw, 2rem);
+        width: 100%;
+        max-width: 560px;
+
+        .todo {
+            grid-area: todo;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 264px;
+            height: 100%;
+            max-height: 168px;
+            border: 1px solid #00000066;
+            border-radius: 30px;
+            padding: 38px 19px;
+            gap: clamp(0.5rem, 0.321rem + 0.893vw, 1.125rem);
+            box-shadow: 0 0 4px 0 #00000066;
+            transition: all 170ms ease-in-out;
+            cursor: pointer;
+
+            svg {
+                width: clamp(2.5rem, 1.982rem + 2.589vw, 4.313rem);
+            }
+
+            &:hover {
+                background: #2a3647;
+                color: #ffffff;
+                transition: all 170ms ease-in-out;
+                scale: 1.1;
+
+                svg {
+                    circle {
+                        fill: white;
+                    }
+                    path {
+                        fill: #2a3647;
+                    }
+                }
+            }
+        }
+
+        .done {
+            grid-area: done;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 264px;
+            height: 100%;
+            max-height: 168px;
+            border: 1px solid #00000066;
+            border-radius: 30px;
+            padding: 38px 19px;
+            gap: clamp(0.5rem, 0.321rem + 0.893vw, 1.125rem);
+            box-shadow: 0 0 4px 0 #00000066;
+            transition: all 170ms ease-in-out;
+            cursor: pointer;
+
+            svg {
+                width: clamp(2.5rem, 1.982rem + 2.589vw, 4.313rem);
+            }
+
+            &:hover {
+                background: #2a3647;
+                color: #ffffff;
+                transition: all 170ms ease-in-out;
+                scale: 1.1;
+
+                svg {
+                    circle {
+                        fill: white;
+                    }
+                    path {
+                        stroke: #2a3647;
+                    }
+                }
+            }
+        }
+    }
+
+    .priority {
+        grid-area: urgent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 560px;
+        height: 100%;
+        max-height: 168px;
+        border: 1px solid #00000066;
+        border-radius: 30px;
+        padding: 28px 48px;
+        gap: clamp(1.25rem, 0.714rem + 2.679vw, 3.125rem);
+        box-shadow: 0 0 4px 0 #00000066;
+        transition: all 170ms ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            background: #2a3647;
+            color: #ffffff;
+            transition: all 170ms ease-in-out;
+            scale: 1.1;
+            .col-right span,
+            .col-right p {
+                color: white;
+            }
+        }
+
+        .col-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .urgent_divider {
+            height: 102px;
+            border: 1px solid #d1d1d1;
+        }
+
+        .col-right {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+
+            span {
+                @include font(
+                    $size: clamp(1.15rem, 1.103rem + 0.233vw, 1.313rem),
+                    $weight: 700,
+                    $line-height: 120%
+                );
+                color: #2a3647;
+            }
+
+            p {
+                @include font(
+                    $size: clamp(1rem, 0.857rem + 0.714vw, 1.5rem),
+                    $weight: 400,
+                    $line-height: 120%
+                );
+                color: #2a3647;
+            }
+        }
+    }
+
+    .board-row {
+        grid-area: board-row;
+        display: flex;
+        max-width: 560px;
+        gap: clamp(0.625rem, 0.304rem + 1.607vw, 1.75rem);
+
+        .board {
+            grid-area: board;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 168px;
+            height: 100%;
+            max-height: 168px;
+            border: 1px solid #00000066;
+            border-radius: 30px;
+            padding-block: 25px;
+            gap: 13px;
+            box-shadow: 0 0 4px 0 #00000066;
+            transition: all 170ms ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                background: #2a3647;
+                color: #ffffff;
+                transition: all 170ms ease-in-out;
+                scale: 1.1;
+            }
+        }
+
+        .progress {
+            grid-area: progress;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 168px;
+            height: 100%;
+            max-height: 168px;
+            border: 1px solid #00000066;
+            border-radius: 30px;
+            padding-block: 25px;
+            gap: 13px;
+            box-shadow: 0 0 4px 0 #00000066;
+            transition: all 170ms ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                background: #2a3647;
+                color: #ffffff;
+                transition: all 170ms ease-in-out;
+                scale: 1.1;
+            }
+        }
+
+        .feedback {
+            grid-area: feedback;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 168px;
+            height: 100%;
+            max-height: 168px;
+            border: 1px solid #00000066;
+            border-radius: 30px;
+            padding-block: 25px;
+            gap: 13px;
+            box-shadow: 0 0 4px 0 #00000066;
+            transition: all 170ms ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                background: #2a3647;
+                color: #ffffff;
+                transition: all 170ms ease-in-out;
+                scale: 1.1;
+            }
+        }
+    }
+}
+
+.count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span {
+        @include font(
+            $size: clamp(3rem, 2.714rem + 1.429vw, 4rem),
+            $weight: 600,
+            $line-height: 120%
+        );
+    }
+
+    p {
+        @include font(
+            $size: clamp(1rem, 0.857rem + 0.714vw, 1.5rem),
+            $weight: 400,
+            $line-height: 120%
+        );
+        text-align: center;
+    }
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    p {
+        @include font(
+            $size: clamp(2.25rem, 1.87rem + 1.898vw, 2.938rem),
+            $weight: 500,
+            $line-height: 120%
+        );
+    }
+
+    span {
+        @include font($size: clamp(2.938rem, 2.351rem + 2.931vw, 4rem), $weight: 700);
+        color: #124658;
+    }
+}
+
+@media (max-width: 900px) {
+    :host {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 10px;
+    }
+
+    .headline {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+
+        .divider {
+            order: 3;
+            height: 0;
+            width: 90px;
+        }
+
+        p {
+            order: 2;
+        }
+    }
+
+    .task-overview {
+        align-items: center;
+    }
+
+    .task-overview .board-row {
+        justify-content: center;
+    }
+
+    .task-overview .board-row .board {
+        padding-inline: clamp(0.5rem, -0.603rem + 5.517vw, 2.5rem);
+    }
+
+    .task-overview .board-row .progress {
+        padding-inline: clamp(0.5rem, -0.603rem + 5.517vw, 2.5rem);
+    }
+
+    .task-overview .board-row .feedback {
+        padding-inline: clamp(0.5rem, -0.603rem + 5.517vw, 2.5rem);
+    }
+}
+
+@media (min-width: 900px) and (orientation: landscape) {
+    .task-overview .board-row {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1234px) {
+    :host {
+        position: relative;
+    }
+
+    .welcome {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        z-index: 999;
+        animation: fadeOut 0.8s ease-in-out 2.5s forwards;
+        pointer-events: none;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
