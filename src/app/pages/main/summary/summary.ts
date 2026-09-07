@@ -44,7 +44,7 @@ export class Summary {
 
     async ngOnInit() {
         const user = await this.authService.getCurrentUser();
-        this.displayName.set(user?.user_metadata['name'] ?? '');
+        this.displayName.set(user?.user_metadata['name'] ?? 'Guest');
 
         if (window.innerWidth <= 1234) {
             if (!sessionStorage.getItem('welcomeShown')) {
