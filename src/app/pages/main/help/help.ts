@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, inject } from '@angular/core';
 
 @Component({
     selector: 'app-help',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
     templateUrl: './help.html',
     styleUrl: './help.scss',
 })
-export class Help {}
+export class Help {
+    private location = inject(Location);
+
+    goBack() {
+        this.location.back();
+    }
+}
