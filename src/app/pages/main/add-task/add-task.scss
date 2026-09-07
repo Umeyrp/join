@@ -303,6 +303,7 @@ ul::-webkit-scrollbar-thumb {
     align-items: center;
     gap: 4px;
     margin-left: auto;
+    cursor: pointer;
 }
 
 .subtask-divider {
@@ -336,6 +337,7 @@ ul::-webkit-scrollbar-thumb {
         display: flex;
         align-items: center;
         gap: 8px;
+        cursor: pointer;
     }
 }
 
