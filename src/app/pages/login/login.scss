@@ -31,6 +31,9 @@ a { color: #007cee; }
 button { background: #2a3647; border: 0; border-radius: 8px; color: white; cursor: pointer; font: inherit; font-weight: 700; padding: 12px; }
 button:disabled { opacity: .6; }
 button.link { background: transparent; color: #007cee; font-weight: 400; padding: 0; }
+.actions { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.actions.single { grid-template-columns: 1fr; }
+button.guest { background: white; border: 1px solid #2a3647; color: #2a3647; }
 .error { color: #e53e3e; font-size: 14px; margin: 0; }
 
 @media (max-width: 600px) { .logo { left: 24px; top: 24px; } .logo img { width: 72px; } .card { padding: 28px 20px; } }

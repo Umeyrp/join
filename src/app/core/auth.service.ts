@@ -10,6 +10,13 @@ export class AuthService {
         return error?.message ?? null;
     }
 
+    async loginAsGuest() {
+        const { error } = await this.supabase.client.auth.signInAnonymously({
+            options: { data: { name: 'Guest' } },
+        });
+        return error?.message ?? null;
+    }
+
     async signup(name: string, email: string, password: string) {
         const { data, error } = await this.supabase.client.auth.signUp({
             email,

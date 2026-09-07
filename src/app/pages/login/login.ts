@@ -64,4 +64,14 @@ export class Login {
         if (error) this.error.set(error);
         else await this.router.navigate(['/summary']);
     }
+
+    async guestLogin() {
+        this.loading.set(true);
+        this.error.set('');
+        const error = await this.auth.loginAsGuest();
+        this.loading.set(false);
+
+        if (error) this.error.set(error);
+        else await this.router.navigate(['/summary']);
+    }
 }
