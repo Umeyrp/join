@@ -1,0 +1,49 @@
+@use 'variables' as *;
+
+.intro-backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-section-bg;
+    transition: opacity 0.6s ease;
+
+    &.done {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.intro-logo-big {
+    width: 274px;
+    transform: scale(1);
+    opacity: 1;
+    transition:
+        transform 0.6s ease,
+        opacity 0.4s ease 0.2s;
+
+    &.done {
+        transform: translate(calc(-50vw + 128px), calc(-50vh + 128px)) scale(0.37);
+        opacity: 0;
+    }
+
+    svg {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.intro-logo-small {
+    position: fixed;
+    top: 67px;
+    left: 77px;
+    width: 101px;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.2s;
+
+    &.done {
+        opacity: 1;
+    }
+}
