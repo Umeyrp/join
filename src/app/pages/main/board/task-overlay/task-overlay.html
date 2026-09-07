@@ -397,8 +397,8 @@
 
                         <div class="span-wrapper">
                             <span class="span-title">Priority:</span>
-                            <p class="task-priority">
-                                {{ task()!.priority }}
+                            <p class="task-priority capitalize">
+                                {{ task()!.priority}}
                                 @switch (task()!.priority) {
                                     @case ('urgent') {
                                         <svg
