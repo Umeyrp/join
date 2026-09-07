@@ -36,4 +36,14 @@ export class AuthService {
         const { data } = await this.supabase.client.auth.getSession();
         return !!data.session;
     }
+
+    async getCurrentUser() {
+        const {
+            data: { user },
+            error,
+        } = await this.supabase.client.auth.getUser();
+        if (error) return null;
+
+        return user;
+    }
 }
