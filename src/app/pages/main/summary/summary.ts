@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { TasksService } from '../../../core/tasks.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/auth.service';
 
 @Component({
     selector: 'app-summary',
@@ -11,6 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Summary {
     private tasksService = inject(TasksService);
+    private authService = inject(AuthService);
 
     readonly tasks = this.tasksService.tasks;
 
@@ -37,12 +39,14 @@ export class Summary {
         );
     });
 
-    showWelcome = signal(false);
+    showWelcome = signal(window.innerWidth > 1234);
+    readonly displayName = signal('');
 
-    ngOnInit() {
-        if (window.innerWidth > 1234) {
-            this.showWelcome.set(true);
-        } else {
+    async ngOnInit() {
+        const user = await this.authService.getCurrentUser();
+        this.displayName.set(user?.user_metadata['name'] ?? 'Guest');
+
+        if (window.innerWidth <= 1234) {
             if (!sessionStorage.getItem('welcomeShown')) {
                 this.showWelcome.set(true);
                 sessionStorage.setItem('welcomeShown', 'true');
