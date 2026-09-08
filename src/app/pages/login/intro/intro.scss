@@ -24,7 +24,7 @@
         opacity 0.4s ease 0.2s;
 
     &.done {
-        transform: translate(calc(-50vw + 128px), calc(-50vh + 128px)) scale(0.37);
+        transform: translate(calc(-50vw + 98px), calc(-50vh + 97px)) scale(0.365);
         opacity: 0;
     }
 
@@ -37,13 +37,21 @@
 
 .intro-logo-small {
     position: fixed;
-    top: 67px;
-    left: 77px;
-    width: 101px;
+    top: 36px;
+    left: 48px;
+    width: 100px;
     opacity: 0;
     transition: opacity 0.4s ease 0.2s;
 
     &.done {
         opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .intro-logo-small {
+        top: 24px;
+        left: 24px;
+        width: 72px;
     }
 }
