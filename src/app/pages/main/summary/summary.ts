@@ -50,11 +50,17 @@ export class Summary {
             if (!sessionStorage.getItem('welcomeShown')) {
                 this.showWelcome.set(true);
                 sessionStorage.setItem('welcomeShown', 'true');
-
-                setTimeout(() => {
-                    this.showWelcome.set(false);
-                }, 3300);
+                setTimeout(() => this.showWelcome.set(false), 3300);
             }
         }
     }
+
+    greeting = computed(() => {
+        const hour = new Date().getHours();
+        if (hour < 12) return 'Good morning';
+        if (hour < 18) return 'Good afternoon';
+        return 'Good evening';
+    });
+
+    currentUser = signal<string | null>(null);
 }

@@ -122,7 +122,11 @@
 @if (showWelcome()) {
     <div class="welcome">
         <p>
-            Good morning, <span>{{ displayName() }}</span>
+            @if (currentUser()) {
+                {{ greeting() }}, <span>{{ currentUser() }}</span>
+            } @else {
+                {{ greeting() }}!
+            }
         </p>
     </div>
 }
