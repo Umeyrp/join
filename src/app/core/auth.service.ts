@@ -1,9 +1,23 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Supabase } from './supabase';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private supabase = inject(Supabase);
+    currentUser = signal<{ name: string; isGuest: boolean } | null>(null);
+
+    constructor() {
+        this.supabase.client.auth.onAuthStateChange((_, session) => {
+            const user = session?.user;
+            if (!user) {
+                this.currentUser.set(null);
+                return;
+            }
+            const name = user.user_metadata?.['name'] ?? 'Guest';
+            const isGuest = user.is_anonymous ?? false;
+            this.currentUser.set({ name, isGuest });
+        });
+    }
 
     async login(email: string, password: string) {
         const { error } = await this.supabase.client.auth.signInWithPassword({ email, password });

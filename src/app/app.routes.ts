@@ -13,7 +13,16 @@ import { authGuardLogin, authGuardMain } from './core/auth.guard';
 
 export const routes: Routes = [
     { path: 'login', component: Login, canActivate: [authGuardLogin] },
-    { path: 'privacy-policy', component: PrivacyPolicy },
+
+    {
+        path: '',
+        component: Main,
+        children: [
+            { path: 'privacy-policy', component: PrivacyPolicy },
+            { path: 'legal-notice', component: LegalNotice },
+        ],
+    },
+
     {
         path: '',
         component: Main,
@@ -28,7 +37,6 @@ export const routes: Routes = [
             { path: 'add-task', component: AddTask },
             { path: 'board', component: Board },
             { path: 'help', component: Help },
-            { path: 'legal-notice', component: LegalNotice },
             { path: '', redirectTo: 'summary', pathMatch: 'full' },
         ],
     },

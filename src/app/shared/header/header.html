@@ -1,7 +1,7 @@
 <img class="logo--mobile" src="/app-icons/join_dark.svg" alt="Join Logo" />
 <span>Kanban Project Management Tool</span>
 
-@if (isLoggedIn) {
+@if (isLoggedIn()) {
     <div class="profile_box">
         <a routerLink="/help">
             <svg
@@ -18,7 +18,7 @@
             </svg>
         </a>
 
-        <div class="avatar" (click)="toggleMenu()">SM</div>
+        <div class="avatar" (click)="toggleMenu()">{{ initials() }}</div>
     </div>
 
     <div class="dropdown" [class.open]="isMenuOpen()">
