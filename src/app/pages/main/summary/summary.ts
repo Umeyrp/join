@@ -62,5 +62,10 @@ export class Summary {
         return 'Good evening';
     });
 
-    currentUser = signal<string | null>(null);
+    currentUser = computed(() => {
+        const user = this.authService.currentUser();
+        if (!user) return null;
+        if (user.isGuest) return null;
+        return user.name;
+    });
 }
