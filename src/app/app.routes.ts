@@ -9,12 +9,15 @@ import { Board } from './pages/main/board/board';
 import { Help } from './pages/main/help/help';
 import { PrivacyPolicy } from './pages/main/privacy-policy/privacy-policy';
 import { LegalNotice } from './pages/main/legal-notice/legal-notice';
+import { authGuardLogin, authGuardMain } from './core/auth.guard';
 
 export const routes: Routes = [
-    { path: 'login', component: Login },
+    { path: 'login', component: Login, canActivate: [authGuardLogin] },
+    { path: 'privacy-policy', component: PrivacyPolicy },
     {
         path: '',
         component: Main,
+        canActivate: [authGuardMain],
         children: [
             { path: 'summary', component: Summary },
             {
@@ -25,9 +28,9 @@ export const routes: Routes = [
             { path: 'add-task', component: AddTask },
             { path: 'board', component: Board },
             { path: 'help', component: Help },
-            { path: 'privacy-policy', component: PrivacyPolicy },
             { path: 'legal-notice', component: LegalNotice },
             { path: '', redirectTo: 'summary', pathMatch: 'full' },
         ],
     },
+    { path: '**', redirectTo: '' },
 ];
