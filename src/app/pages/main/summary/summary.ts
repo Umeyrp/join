@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, AfterViewInit } from '@angular/core';
 import { TasksService } from '../../../core/tasks.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -39,20 +39,22 @@ export class Summary {
         );
     });
 
-    showWelcome = signal(window.innerWidth > 1234);
-    readonly displayName = signal('');
+    showWelcome = signal(false);
 
-    async ngOnInit() {
-        const user = await this.authService.getCurrentUser();
-        this.displayName.set(user?.user_metadata['name'] ?? 'Guest');
+    private el = inject(ElementRef);
 
-        if (window.innerWidth <= 1234) {
-            if (!sessionStorage.getItem('welcomeShown')) {
+    ngAfterViewInit() {
+        setTimeout(() => {
+            if (window.innerWidth <= 1234) {
+                if (!sessionStorage.getItem('welcomeShown')) {
+                    this.showWelcome.set(true);
+                    sessionStorage.setItem('welcomeShown', 'true');
+                    setTimeout(() => this.showWelcome.set(false), 3300);
+                }
+            } else {
                 this.showWelcome.set(true);
-                sessionStorage.setItem('welcomeShown', 'true');
-                setTimeout(() => this.showWelcome.set(false), 3300);
             }
-        }
+        });
     }
 
     greeting = computed(() => {

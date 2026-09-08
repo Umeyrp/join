@@ -10,7 +10,7 @@
     grid-template-areas:
         'header header'
         'overview welcoming';
-    gap: 56px 80px;
+    gap: 56px clamp(25px, calc(-308.05px + 26.83vw), 80px);
 }
 
 .headline {
@@ -292,6 +292,7 @@
 }
 
 .welcome {
+    grid-area: welcoming;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -299,15 +300,18 @@
 
     p {
         @include font(
-            $size: clamp(2.25rem, 1.87rem + 1.898vw, 2.938rem),
+            $size: clamp(2.25rem, 2.054rem + 0.982vw, 2.938rem),
             $weight: 500,
             $line-height: 120%
         );
-        white-space: nowrap;
     }
 
     span {
-        @include font($size: clamp(1.75rem, 1rem + 4vw, 4rem), $weight: 700);
+        @include font(
+            $size: clamp(2.938rem, 2.634rem + 1.518vw, 4rem),
+            $weight: 700,
+            $line-height: 120%
+        );
         color: #124658;
         display: block;
     }
@@ -366,7 +370,14 @@
 
 @media (max-width: 1234px) {
     :host {
+        display: flex;
+        flex-direction: column;
         position: relative;
+    }
+
+    :host.no-scroll {
+        overflow: hidden;
+        height: 100%;
     }
 
     .welcome {
