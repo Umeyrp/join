@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, signal, AfterViewInit } from '@angular/core';
+import { Component, computed, inject, signal, AfterViewInit, OnDestroy } from '@angular/core';
 import { TasksService } from '../../../core/tasks.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from '../../../core/auth.service';
     templateUrl: './summary.html',
     styleUrl: './summary.scss',
 })
-export class Summary {
+export class Summary implements AfterViewInit, OnDestroy {
     private tasksService = inject(TasksService);
     private authService = inject(AuthService);
 
@@ -41,20 +41,32 @@ export class Summary {
 
     showWelcome = signal(false);
 
-    private el = inject(ElementRef);
-
     ngAfterViewInit() {
         setTimeout(() => {
-            if (window.innerWidth <= 1234) {
-                if (!sessionStorage.getItem('welcomeShown')) {
-                    this.showWelcome.set(true);
-                    sessionStorage.setItem('welcomeShown', 'true');
-                    setTimeout(() => this.showWelcome.set(false), 3300);
-                }
-            } else {
-                this.showWelcome.set(true);
-            }
+            this.evaluateWelcome();
         });
+
+        window.addEventListener('resize', this.onResize);
+    }
+
+    private onResize = () => {
+        this.evaluateWelcome();
+    };
+
+    private evaluateWelcome() {
+        if (window.innerWidth <= 1234) {
+            if (!sessionStorage.getItem('welcomeShown')) {
+                this.showWelcome.set(true);
+                sessionStorage.setItem('welcomeShown', 'true');
+                setTimeout(() => this.showWelcome.set(false), 3300);
+            }
+        } else {
+            this.showWelcome.set(true);
+        }
+    }
+
+    ngOnDestroy() {
+        window.removeEventListener('resize', this.onResize);
     }
 
     greeting = computed(() => {

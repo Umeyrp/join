@@ -16,6 +16,10 @@
 nav {
     width: 100%;
     padding-top: 55px;
+
+    ul.logged-in {
+        justify-content: space-around;
+    }
     ul {
         width: 100%;
         display: flex;
@@ -148,6 +152,11 @@ nav {
         padding: 0;
         background: $color-dark;
 
+        ul.logged-in {
+            max-width: unset;
+            justify-content: space-around;
+        }
+
         ul {
             flex-direction: row;
             align-items: center;
@@ -177,9 +186,6 @@ nav {
     }
 }
 
-// Sehr hohe Viewports (z.B. 4K-Monitor im Hochformat, 3840px hoch): die mittlere
-// 1fr-Zeile würde die Privacy-Links sonst ganz nach unten drücken. Zeilen nicht mehr
-// strecken, Privacy-Links rutschen mit normalem Abstand direkt unter die Navigation.
 @media (min-height: 1800px) {
     :host {
         grid-template-rows: auto auto auto;
@@ -192,7 +198,6 @@ nav {
     }
 }
 
-// Smartphones im Querformat: Navbar auf 40px verkleinert (siehe main.scss), Text ausgeblendet
 @media (max-height: 500px) and (orientation: landscape) {
     :host {
         height: 40px;

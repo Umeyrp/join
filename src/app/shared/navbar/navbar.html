@@ -1,9 +1,9 @@
 <div class="join__img">
     <img src="/app-icons/join.svg" alt="" />
 </div>
-<nav>
+<nav [class.loggend-in]>
     @if (isLoggedIn()) {
-        <ul>
+        <ul class="logged-in">
             <li routerLinkActive="active" routerLink="/summary">
                 <svg
                     width="25"
