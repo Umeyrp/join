@@ -2,8 +2,9 @@
 
 .intro-backdrop {
     position: fixed;
-    inset: 0;
+    z-index: 10;
     background-color: $color-section-bg;
+    inset: 0;
     transition: opacity 0.6s ease;
 
     &.no-anim {
@@ -18,6 +19,7 @@
 
 .intro-logo {
     position: fixed;
+    z-index: 20;
     top: 36px;
     left: 48px;
     width: 100px;

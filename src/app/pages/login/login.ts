@@ -1,35 +1,79 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { form, pattern, required, FormField, submit } from '@angular/forms/signals';
 import { AuthService } from '../../core/auth.service';
 import { Intro } from './intro/intro';
 
+interface LoginFormValue {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    privacyAccepted: boolean;
+}
+
 @Component({
     selector: 'app-login',
-    imports: [ReactiveFormsModule, RouterLink, Intro],
+    imports: [FormField, RouterLink, Intro],
     templateUrl: './login.html',
     styleUrl: './login.scss',
 })
 export class Login {
-    private fb = inject(FormBuilder);
     private auth = inject(AuthService);
     private router = inject(Router);
 
     readonly signupMode = signal(false);
     readonly loading = signal(false);
     readonly error = signal('');
-    readonly form = this.fb.nonNullable.group({
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        passwordConfirm: ['', Validators.required],
-        privacyAccepted: [false, Validators.requiredTrue],
+
+    readonly loginModel = signal<LoginFormValue>({
+        name: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        privacyAccepted: false,
+    });
+
+    loginForm = form(this.loginModel, (schemaPath) => {
+        required(schemaPath.name, {
+            message: 'First and last name are required',
+            when: () => this.signupMode(),
+        });
+        pattern(schemaPath.name, /^\p{L}+ \p{L}+$/u, {
+            message: 'First and last name are required',
+            when: () => this.signupMode(),
+        });
+
+        required(schemaPath.email, { message: 'Email is required' });
+        pattern(schemaPath.email, /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, {
+            message: 'Please enter a valid email address',
+        });
+
+        required(schemaPath.password, { message: 'Password is required' });
+        pattern(schemaPath.password, /^.{6,}$/, {
+            message: 'Password must be at least 6 characters',
+        });
+
+        required(schemaPath.passwordConfirm, {
+            message: 'Please confirm your password',
+            when: () => this.signupMode(),
+        });
+        pattern(schemaPath.passwordConfirm, /^.{6,}$/, {
+            message: 'Please confirm your password',
+            when: () => this.signupMode(),
+        });
+
+        required(schemaPath.privacyAccepted, {
+            message: 'You must accept the privacy policy',
+            when: () => this.signupMode(),
+        });
     });
 
     toggleMode() {
         this.signupMode.update((value) => !value);
         this.error.set('');
-        this.form.reset({
+        this.loginForm().reset();
+        this.loginModel.set({
             name: '',
             email: '',
             password: '',
@@ -38,32 +82,33 @@ export class Login {
         });
     }
 
-    async submit() {
-        const { email, password, name, passwordConfirm, privacyAccepted } = this.form.getRawValue();
-        const needsSignup = this.signupMode();
-        if (
-            this.form.controls.email.invalid ||
-            this.form.controls.password.invalid ||
-            (needsSignup && (!name || !privacyAccepted || password !== passwordConfirm))
-        ) {
-            this.form.markAllAsTouched();
-            this.error.set(
-                needsSignup && password !== passwordConfirm
-                    ? 'Die Passwörter stimmen nicht überein.'
-                    : 'Bitte fülle alle Pflichtfelder korrekt aus.',
-            );
-            return;
-        }
+    async onSubmit(event: Event): Promise<void> {
+        event.preventDefault();
+        await submit(this.loginForm, async (f) => {
+            const { name, email, password, passwordConfirm } = f().value();
+            const needsSignup = this.signupMode();
 
-        this.loading.set(true);
-        this.error.set('');
-        const error = needsSignup
-            ? await this.auth.signup(name, email, password)
-            : await this.auth.login(email, password);
-        this.loading.set(false);
+            if (needsSignup && password !== passwordConfirm) {
+                this.error.set('Die Passwörter stimmen nicht überein.');
+                return null;
+            }
 
-        if (error) this.error.set(error);
-        else await this.router.navigate(['/summary']);
+            this.loading.set(true);
+            this.error.set('');
+
+            const error = needsSignup
+                ? await this.auth.signup(name, email, password)
+                : await this.auth.login(email, password);
+
+            this.loading.set(false);
+
+            if (error) {
+                this.error.set(error);
+            } else {
+                await this.router.navigate(['/summary']);
+            }
+            return null;
+        });
     }
 
     async guestLogin() {

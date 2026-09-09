@@ -1,33 +1,62 @@
 <main class="login-page">
     <app-intro />
-    <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <form class="card" (submit)="onSubmit($event)" novalidate>
         <h1>{{ signupMode() ? 'Sign up' : 'Log in' }}</h1>
 
         @if (signupMode()) {
             <label>
                 Name
-                <input type="text" formControlName="name" autocomplete="name" />
+                <input type="text" [formField]="loginForm.name" autocomplete="name" />
+                @if (loginForm.name().touched() && loginForm.name().invalid()) {
+                    @for (err of loginForm.name().errors(); track err.kind) {
+                        <span class="error">{{ err.message }}</span>
+                    }
+                }
             </label>
         }
+
         <label>
             Email
-            <input type="email" formControlName="email" autocomplete="email" />
+            <input type="email" [formField]="loginForm.email" autocomplete="email" />
+            @if (loginForm.email().touched() && loginForm.email().invalid()) {
+                @for (err of loginForm.email().errors(); track err.kind) {
+                    <span class="error">{{ err.message }}</span>
+                }
+            }
         </label>
+
         <label>
             Password
-            <input type="password" formControlName="password" autocomplete="current-password" />
+            <input
+                type="password"
+                [formField]="loginForm.password"
+                autocomplete="current-password"
+            />
+            @if (loginForm.password().touched() && loginForm.password().invalid()) {
+                @for (err of loginForm.password().errors(); track err.kind) {
+                    <span class="error">{{ err.message }}</span>
+                }
+            }
         </label>
+
         @if (signupMode()) {
             <label>
                 Confirm Password
                 <input
                     type="password"
-                    formControlName="passwordConfirm"
+                    [formField]="loginForm.passwordConfirm"
                     autocomplete="new-password"
                 />
+                @if (
+                    loginForm.passwordConfirm().touched() && loginForm.passwordConfirm().invalid()
+                ) {
+                    @for (err of loginForm.passwordConfirm().errors(); track err.kind) {
+                        <span class="error">{{ err.message }}</span>
+                    }
+                }
             </label>
             <label class="check">
-                <input type="checkbox" formControlName="privacyAccepted" />
+                <input type="checkbox" [formField]="loginForm.privacyAccepted" />
                 I accept the <a routerLink="/privacy-policy">Privacy policy</a>.
             </label>
         }
@@ -35,8 +64,9 @@
         @if (error()) {
             <p class="error">{{ error() }}</p>
         }
+
         <div class="actions" [class.single]="signupMode()">
-            <button type="submit" [disabled]="loading()">
+            <button type="submit" [disabled]="loading() || loginForm().invalid()">
                 {{ loading() ? 'Bitte warten …' : signupMode() ? 'Sign up' : 'Log in' }}
             </button>
             @if (!signupMode()) {
