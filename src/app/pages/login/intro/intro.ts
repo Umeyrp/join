@@ -11,7 +11,8 @@ const INTRO_HOLD_MS = 800;
 })
 export class Intro {
     private introService = inject(IntroService);
-    protected introDone = signal(this.introService.hasPlayedIntro());
+    protected readonly skipAnimation = this.introService.hasPlayedIntro();
+    protected introDone = signal(this.skipAnimation);
     introFinished = output<void>();
 
     constructor() {

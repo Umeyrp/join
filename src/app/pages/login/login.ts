@@ -6,7 +6,7 @@ import { Intro } from './intro/intro';
 
 @Component({
     selector: 'app-login',
-    imports: [],
+    imports: [ReactiveFormsModule, RouterLink, Intro],
     templateUrl: './login.html',
     styleUrl: './login.scss',
 })

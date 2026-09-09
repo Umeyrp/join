@@ -3,11 +3,12 @@
 .intro-backdrop {
     position: fixed;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: $color-section-bg;
     transition: opacity 0.6s ease;
+
+    &.no-anim {
+        transition: none;
+    }
 
     &.done {
         opacity: 0;
@@ -15,43 +16,19 @@
     }
 }
 
-.intro-logo-big {
-    width: 274px;
-    transform: scale(1);
-    opacity: 1;
-    transition:
-        transform 0.6s ease,
-        opacity 0.4s ease 0.2s;
-
-    &.done {
-        transform: translate(calc(-50vw + 98px), calc(-50vh + 97px)) scale(0.365);
-        opacity: 0;
-    }
-
-    svg {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-}
-
-.intro-logo-small {
+.intro-logo {
     position: fixed;
     top: 36px;
     left: 48px;
     width: 100px;
-    opacity: 0;
-    transition: opacity 0.4s ease 0.2s;
+    transform: translate(calc(50vw - 98px), calc(50vh - 96.5px)) scale(2.74);
+    transition: transform 0.6s ease;
+
+    &.no-anim {
+        transition: none;
+    }
 
     &.done {
-        opacity: 1;
-    }
-}
-
-@media (max-width: 600px) {
-    .intro-logo-small {
-        top: 24px;
-        left: 24px;
-        width: 72px;
+        transform: none;
     }
 }
