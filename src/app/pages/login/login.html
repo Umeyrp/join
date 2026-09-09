@@ -1,5 +1,5 @@
 <main class="login-page">
-    <a class="logo" routerLink="/login"><img src="/app-icons/join_dark.svg" alt="Join" /></a>
+    <app-intro />
     <form class="card" [formGroup]="form" (ngSubmit)="submit()">
         <h1>{{ signupMode() ? 'Sign up' : 'Log in' }}</h1>
 
@@ -28,7 +28,7 @@
             </label>
             <label class="check">
                 <input type="checkbox" formControlName="privacyAccepted" />
-                I accept the  <a routerLink="/privacy-policy">Privacy policy</a>.
+                I accept the <a routerLink="/privacy-policy">Privacy policy</a>.
             </label>
         }
 
