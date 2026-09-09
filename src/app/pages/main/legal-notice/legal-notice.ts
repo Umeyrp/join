@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-legal-notice',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
     templateUrl: './legal-notice.html',
     styleUrl: './legal-notice.scss',
 })
-export class LegalNotice {}
+export class LegalNotice {
+    private location = inject(Location);
+
+    goBack() {
+        this.location.back();
+    }
+}

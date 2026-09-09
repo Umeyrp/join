@@ -1,0 +1,58 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    display: block;
+    width: 100%;
+    max-width: 1016px;
+    padding: clamp(12px, calc(12px + 112 * ((100vh - 700px) / 364)), 124px)
+        clamp(1rem, -3.2rem + 5.5vw, 6rem) 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+
+    h2 {
+        @include font($size: 3.813rem, $weight: 700, $line-height: 120%);
+    }
+
+    button {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        &:hover {
+            scale: 1.08;
+            border-radius: 50%;
+            background: #d9d9d9;
+        }
+    }
+}
+
+h3 {
+    @include font($size: 2.313rem, $weight: 700, $line-height: 120%);
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 24px;
+    @include font($size: 1rem, $weight: 400, $line-height: 120%);
+}
+
+.how-to_section {
+    ol {
+        display: flex;
+        flex-direction: column;
+        @include font($size: 1.688rem, $weight: 700, $line-height: 120%);
+        li {
+            padding-left: 35px;
+            h4 {
+                @include font($size: 1.25rem, $weight: 700, $line-height: 120%);
+            }
+        }
+    }
+}
