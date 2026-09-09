@@ -78,6 +78,34 @@ nav {
     }
 }
 
+.privacy__links--mobile {
+    width: 100%;
+
+    display: none;
+    flex-direction: column;
+    padding-bottom: 64px;
+    gap: 4px;
+    a {
+        max-width: 232px;
+        height: 35px;
+        text-align: center;
+        align-content: center;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 120%;
+        color: $color-light-text;
+
+        &:hover {
+            color: $color-hover-teal;
+        }
+
+        &.active {
+            background: $color-dark-active;
+        }
+    }
+}
+
 @media (max-width: 900px), (max-height: 500px) and (orientation: landscape) {
     :host {
         display: block;
@@ -91,7 +119,27 @@ nav {
         display: none;
     }
 
+    .privacy__links--mobile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        padding: 2px 16px;
+
+        a {
+            height: 100%;
+            width: 100%;
+            max-width: 120px;
+            border-radius: 16px;
+        }
+    }
+
     nav {
+        display: flex;
+        justify-content: space-between;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -103,10 +151,10 @@ nav {
         ul {
             flex-direction: row;
             align-items: center;
-            justify-content: center;
             gap: clamp(0.313rem, -0.205rem + 2.586vw, 1.25rem);
             padding: 2px 0;
             width: 100%;
+            max-width: 80px;
             height: 80px;
 
             li {
