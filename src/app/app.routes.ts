@@ -20,6 +20,7 @@ export const routes: Routes = [
         children: [
             { path: 'privacy-policy', component: PrivacyPolicy },
             { path: 'legal-notice', component: LegalNotice },
+            { path: '', redirectTo: '/login', pathMatch: 'full' },
         ],
     },
 
@@ -40,5 +41,5 @@ export const routes: Routes = [
             { path: '', redirectTo: 'summary', pathMatch: 'full' },
         ],
     },
-    { path: '**', redirectTo: '' },
+    { path: '**', redirectTo: 'login' },
 ];
