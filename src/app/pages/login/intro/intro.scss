@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .intro-backdrop {
     position: fixed;
@@ -25,7 +26,7 @@
     width: clamp(4rem, 3.357rem + 3.214vw, 6.25rem);
     transform: translate(calc(50vw - var(--logo-left) - 50%),
             calc(50vh - var(--logo-top) - 50%)) scale(2.74);
-    transition: transform 0.6s ease;
+    transition: all 0.6s ease;
     --logo-top: clamp(2.313rem, 1.777rem + 2.679vw, 4.188rem);
     --logo-left: clamp(2.375rem, 1.679rem + 3.482vw, 4.813rem);
 
@@ -35,10 +36,28 @@
 
     &.done {
         transform: none;
+
+        & .mobile-logo {
+            fill: $color-dark;
+        }
     }
 }
 
 .logo-placeholder {
     width: clamp(4rem, 3.357rem + 3.214vw, 6.25rem);
     height: 122px;
+}
+
+.mobile-logo {
+    transition: fill 1s ease;
+}
+
+@include mobile {
+    .intro-backdrop {
+        background-color: $color-dark;
+    }
+
+    .mobile-logo {
+        fill: white;
+    }
 }
