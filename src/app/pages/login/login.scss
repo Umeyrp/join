@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
     min-height: 100vh;
@@ -23,6 +22,7 @@ app-intro {
     width: 100%;
     max-width: 652px;
     padding: 36px;
+    margin-bottom: 200px;
     background: white;
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px #00000024;
@@ -124,9 +124,11 @@ form {
 }
 
 h1 {
-    @include font($size: clamp(2.5rem, 2.125rem + 1.876vw, 3.813rem),
+    @include font(
+        $size: clamp(2.5rem, 2.125rem + 1.876vw, 3.813rem),
         $weight: 700,
-        $line-height: 120%);
+        $line-height: 120%
+    );
     position: relative;
     margin: 0 0 8px;
     text-align: center;
@@ -326,6 +328,11 @@ button.guest {
 
     .card {
         order: 1;
+        margin-bottom: 40px;
+    }
+
+    app-intro {
+        align-self: center;
     }
 
     .signup-toggle {
@@ -334,7 +341,6 @@ button.guest {
         order: 2;
         gap: 16px;
         width: 100%;
-        margin-top: auto;
         padding: 16px 0;
 
         button {
