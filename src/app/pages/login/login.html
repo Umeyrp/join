@@ -1,5 +1,12 @@
 <main class="login-page">
     <app-intro />
+    @if (!signupMode()) {
+        <div class="signup-toggle">
+            <p>Not a Join user?</p>
+            <button (click)="toggleMode()">Sign up</button>
+        </div>
+    }
+
     <form class="card" [class.signup]="signupMode()" (submit)="onSubmit($event)" novalidate>
         <div class="card-header">
             @if (signupMode()) {
@@ -262,4 +269,8 @@
             }
         </div>
     </form>
+    <div class="links">
+        <a routerLink="/privacy-policy">Privacy Policy</a>
+        <a routerLink="/legal-notice">Legal notice</a>
+    </div>
 </main>

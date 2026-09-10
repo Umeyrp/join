@@ -13,13 +13,13 @@
 
 .card {
     background: white;
-    border-radius: 24px;
-    box-shadow: 0 4px 16px #0000001a;
+    border-radius: 30px;
     display: grid;
-    gap: 24px;
+    gap: 32px;
     max-width: 652px;
     padding: 36px;
     width: 100%;
+    box-shadow: 0px 0px 14px 3px #00000024;
     margin-top: clamp(10.313rem, 9.741rem + 2.857vw, 12.313rem);
 
     &.signup {
@@ -106,38 +106,88 @@ h1 {
         $weight: 700,
         $line-height: 120%
     );
-    color: #2a3647;
+    color: black;
+    @include font($weight: 700, $size: 61px, $line-height: 120%);
     margin: 0 0 8px;
     text-align: center;
     position: relative;
-    padding-bottom: 16px;
 
     &::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        width: 20%;
+        bottom: -23px;
         left: 50%;
-        transform: translateX(-50%);
-        width: 150px;
-        height: 3px;
-        background: #29abe2;
+        border-radius: 2px;
+        transform: translate(-50%, -50%);
+        border: 3px solid #29abe2;
     }
 }
 
 label {
+    position: relative;
     color: #2a3647;
     display: grid;
     font-weight: 600;
+    margin: 0 115px;
     gap: 6px;
+
+    & svg {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+    }
+
+    & .password-toggle {
+        cursor: pointer;
+
+        &.hidden {
+            display: none;
+        }
+    }
+}
+
+.signup-toggle {
+    display: flex;
+    gap: 35px;
+    position: absolute;
+    align-items: center;
+    top: 67px;
+    right: 122px;
+
+    & p {
+        @include font($size: 20px, $line-height: 120%);
+    }
+
+    & button {
+        padding: 15px 16px;
+    }
 }
 
 input {
-    border: 1px solid #d1d1d1;
-    border-radius: 8px;
+    border: 1px solid white;
+    color: black;
+    @include font($size: 20px, $line-height: 120%);
+    border-radius: 10px;
+    border: 1px solid $color-divider;
     box-sizing: border-box;
-    font: inherit;
+    height: 48px;
     padding: 12px;
     width: 100%;
+
+    &::placeholder {
+        color: $color-divider;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-hover-teal;
+    }
+}
+
+.error-input {
+    border-color: #e60026;
 }
 
 .check {
@@ -163,10 +213,10 @@ button {
     border: 0;
     border-radius: 8px;
     color: white;
+    @include font($weight: 700, $size: 21px, $line-height: 120%);
     cursor: pointer;
-    font: inherit;
     font-weight: 700;
-    padding: 12px;
+    padding: 15px 24px;
 }
 
 button:disabled {
@@ -181,9 +231,10 @@ button.link {
 }
 
 .actions {
-    display: grid;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
     gap: 12px;
-    grid-template-columns: 1fr 1fr;
 }
 
 .actions.single {
@@ -192,18 +243,40 @@ button.link {
     justify-self: center;
 }
 
+
 button.guest {
     background: white;
     border: 1px solid #2a3647;
     color: #2a3647;
 }
 
+
 .error {
     position: absolute;
     top: 46px;
-    color: #e53e3e;
-    font-size: 14px;
+    @include font($size: 16px, $line-height: 120%);
+    color: #E60026;
     margin: 0;
+}
+
+.links {
+    display: flex;
+    gap: 16px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 36px;
+
+    & a {
+        @include font($size: 1rem, $line-height: 120%);
+        color: $task-divider;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-hover-teal;
+            font-weight: 700;
+        }
+    }
 }
 
 @media (max-width: 600px) {
