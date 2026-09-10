@@ -18,13 +18,16 @@
 }
 
 .intro-logo {
-    position: fixed;
+    position: absolute;
     z-index: 20;
-    top: clamp(2.313rem, 1.777rem + 2.679vw, 4.188rem);
-    left: clamp(2.375rem, 1.679rem + 3.482vw, 4.813rem);
+    top: var(--logo-top);
+    left: var(--logo-left);
     width: clamp(4rem, 3.357rem + 3.214vw, 6.25rem);
-    transform: translate(calc(50vw - 98px), calc(50vh - 96.5px)) scale(2.74);
+    transform: translate(calc(50vw - var(--logo-left) - 50%),
+            calc(50vh - var(--logo-top) - 50%)) scale(2.74);
     transition: transform 0.6s ease;
+    --logo-top: clamp(2.313rem, 1.777rem + 2.679vw, 4.188rem);
+    --logo-left: clamp(2.375rem, 1.679rem + 3.482vw, 4.813rem);
 
     &.no-anim {
         transition: none;
