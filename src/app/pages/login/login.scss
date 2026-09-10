@@ -1,3 +1,6 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
 .login-page {
     align-items: center;
     background: #f6f7f8;
@@ -10,80 +13,153 @@
 
 .card {
     background: white;
-    border-radius: 24px;
-    box-shadow: 0 4px 16px #0000001a;
+    border-radius: 30px;
     display: grid;
-    gap: 16px;
-    max-width: 380px;
+    gap: 32px;
+    max-width: 652px;
     padding: 36px;
     width: 100%;
+    box-shadow: 0px 0px 14px 3px #00000024;
 }
 
 h1 {
-    color: #2a3647;
+    color: black;
+    @include font($weight: 700, $size: 61px, $line-height: 120%);
     margin: 0 0 8px;
     text-align: center;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        width: 20%;
+        bottom: -23px;
+        left: 50%;
+        border-radius: 2px;
+        transform: translate(-50%, -50%);
+        border: 3px solid #29abe2;
+    }
 }
+
 label {
+    position: relative;
     color: #2a3647;
     display: grid;
     font-weight: 600;
+    margin: 0 115px;
     gap: 6px;
+
+    & svg {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+    }
+
+    & .password-toggle {
+        cursor: pointer;
+
+        &.hidden {
+            display: none;
+        }
+    }
 }
+
+.signup-toggle {
+    display: flex;
+    gap: 35px;
+    position: absolute;
+    align-items: center;
+    top: 67px;
+    right: 122px;
+
+    & p {
+        @include font($size: 20px, $line-height: 120%);
+    }
+
+    & button {
+        padding: 15px 16px;
+    }
+}
+
 input {
-    border: 1px solid #d1d1d1;
-    border-radius: 8px;
+    border: 1px solid white;
+    color: black;
+    @include font($size: 20px, $line-height: 120%);
+    border-radius: 10px;
+    border: 1px solid $color-divider;
     box-sizing: border-box;
-    font: inherit;
+    height: 48px;
     padding: 12px;
     width: 100%;
+
+    &::placeholder {
+        color: $color-divider;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-hover-teal;
+    }
 }
+
+.error-input {
+    border-color: #E60026;
+}
+
 .check {
     display: flex;
     font-size: 14px;
     font-weight: 400;
 }
+
 .check input {
     width: auto;
 }
+
 a {
     color: #007cee;
 }
+
 button {
     background: #2a3647;
     border: 0;
     border-radius: 8px;
     color: white;
+    @include font($weight: 700, $size: 21px, $line-height: 120%);
     cursor: pointer;
-    font: inherit;
     font-weight: 700;
-    padding: 12px;
+    padding: 15px 24px;
 }
+
 button:disabled {
     opacity: 0.6;
 }
+
 button.link {
     background: transparent;
     color: #007cee;
     font-weight: 400;
     padding: 0;
 }
+
 .actions {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
 }
-.actions.single {
-    grid-template-columns: 1fr;
-}
+
 button.guest {
     background: white;
     border: 1px solid #2a3647;
     color: #2a3647;
 }
+
 .error {
-    color: #e53e3e;
-    font-size: 14px;
+    position: absolute;
+    bottom: -22px;
+    @include font($size: 16px, $line-height: 120%);
+    color: #E60026;
     margin: 0;
 }
 

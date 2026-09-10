@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { form, pattern, required, FormField, submit } from '@angular/forms/signals';
 import { AuthService } from '../../core/auth.service';
@@ -25,6 +25,10 @@ export class Login {
     readonly signupMode = signal(false);
     readonly loading = signal(false);
     readonly error = signal('');
+    readonly passwordVisible = signal(false);
+    readonly passwordConfirmVisible = signal(false);
+    readonly passwordHasValue = computed(() => this.loginModel().password.length > 0);
+    readonly passwordConfirmHasValue = computed(() => this.loginModel().passwordConfirm.length > 0);
 
     readonly loginModel = signal<LoginFormValue>({
         name: '',
@@ -72,6 +76,8 @@ export class Login {
     toggleMode() {
         this.signupMode.update((value) => !value);
         this.error.set('');
+        this.passwordVisible.set(false);
+        this.passwordConfirmVisible.set(false);
         this.loginForm().reset();
         this.loginModel.set({
             name: '',
