@@ -89,7 +89,7 @@ export class Login {
             const needsSignup = this.signupMode();
 
             if (needsSignup && password !== passwordConfirm) {
-                this.error.set('Die Passwörter stimmen nicht überein.');
+                this.error.set("Your passwords don't match. Please try again.");
                 return null;
             }
 
