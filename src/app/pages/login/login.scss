@@ -163,6 +163,26 @@ button.guest {
     margin: 0;
 }
 
+.links {
+    display: flex;
+    gap: 16px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 36px;
+
+    & a {
+        @include font($size: 1rem, $line-height: 120%);
+        color: $task-divider;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-hover-teal;
+            font-weight: 700;
+        }
+    }
+}
+
 @media (max-width: 600px) {
     .card {
         padding: 28px 20px;
