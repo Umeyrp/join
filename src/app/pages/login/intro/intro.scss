@@ -34,3 +34,9 @@
         transform: none;
     }
 }
+
+.logo-placeholder {
+    width: clamp(4rem, 3.357rem + 3.214vw, 6.25rem);
+    height: clamp(4rem, 3.357rem + 3.214vw, 6.25rem);
+    margin-bottom: clamp(1rem, 0.5rem + 2vw, 2rem);
+}

@@ -30,9 +30,6 @@ export class Login {
     readonly passwordHasValue = computed(() => this.loginModel().password.length > 0);
     readonly passwordConfirmHasValue = computed(() => this.loginModel().passwordConfirm.length > 0);
 
-    readonly passwordVisible = signal(false);
-    readonly passwordConfirmVisible = signal(false);
-
     readonly loginModel = signal<LoginFormValue>({
         name: '',
         email: '',
