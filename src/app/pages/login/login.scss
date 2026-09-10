@@ -2,16 +2,16 @@
 @use 'mixins' as *;
 
 .login-page {
-    align-items: center;
-    background: #f6f7f8;
-    box-sizing: border-box;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
     min-height: 100vh;
-    overflow-y: auto;
     padding: clamp(2.313rem, 1.813rem + 2.5vw, 4.063rem) 24px 24px;
+    overflow-y: auto;
+    background: #f6f7f8;
 }
 
 app-intro {
@@ -19,13 +19,12 @@ app-intro {
 }
 
 .card {
-    background: white;
-    border-radius: 30px;
     display: grid;
-    gap: 32px;
+    width: 100%;
     max-width: 652px;
     padding: 36px;
-    width: 100%;
+    background: white;
+    border-radius: 30px;
     box-shadow: 0px 0px 14px 3px #00000024;
 
     &.signup {
@@ -41,17 +40,17 @@ app-intro {
         }
 
         .back {
+            position: absolute;
+            z-index: 2;
+            top: 25%;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 32px;
             height: 32px;
-            border-radius: 16px;
             padding: 0;
-            position: absolute;
-            top: 25%;
             background: none;
-            z-index: 2;
+            border-radius: 16px;
 
             &:hover {
                 background: #f0f0f0;
@@ -60,28 +59,40 @@ app-intro {
     }
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    margin-top: 32px;
+
+    &.signup {
+        gap: 24px;
+    }
+}
+
 .checkbox {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
     width: 24px;
     height: 24px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     input[type='checkbox'] {
         position: absolute;
-        opacity: 0;
+        z-index: 1;
         width: 100%;
         height: 100%;
         margin: 0;
+        opacity: 0;
         cursor: pointer;
-        z-index: 1;
     }
 
     svg {
-        pointer-events: none;
         position: static;
+        pointer-events: none;
         transform: none;
     }
 }
@@ -94,9 +105,9 @@ app-intro {
     position: relative;
     display: flex;
     align-items: center;
-    justify-self: center;
     width: 100%;
     max-width: 422px;
+    justify-self: center;
 
     input {
         padding-right: 44px;
@@ -113,35 +124,33 @@ app-intro {
 }
 
 h1 {
-    @include font(
-        $size: clamp(2.5rem, 2.125rem + 1.876vw, 3.813rem),
+    @include font($size: clamp(2.5rem, 2.125rem + 1.876vw, 3.813rem),
         $weight: 700,
-        $line-height: 120%
-    );
-    color: black;
+        $line-height: 120%);
+    position: relative;
     margin: 0 0 8px;
     text-align: center;
-    position: relative;
+    color: black;
 
     &::after {
-        content: '';
         position: absolute;
-        bottom: 0;
+        bottom: -17px;
         left: 50%;
-        transform: translateX(-50%);
         width: clamp(5.5rem, 4.393rem + 5.536vw, 9.375rem);
         height: 3px;
         background: #29abe2;
+        content: '';
+        transform: translateX(-50%);
     }
 }
 
 label {
     position: relative;
-    color: #2a3647;
     display: grid;
-    font-weight: 600;
-    margin: 0 115px;
     gap: 6px;
+    margin: 0 115px;
+    font-weight: 600;
+    color: #2a3647;
 
     & svg {
         position: absolute;
@@ -160,12 +169,12 @@ label {
 }
 
 .signup-toggle {
-    display: flex;
-    gap: 35px;
     position: absolute;
-    align-items: center;
     top: 67px;
     right: 122px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
 
     & p {
         @include font($size: clamp(1rem, 0.929rem + 0.357vw, 1.25rem), $line-height: 120%);
@@ -177,15 +186,15 @@ label {
 }
 
 input {
-    border: 1px solid white;
-    color: black;
-    @include font($size: 20px, $line-height: 120%);
-    border-radius: 10px;
-    border: 1px solid $color-divider;
     box-sizing: border-box;
+    width: 100%;
     height: 48px;
     padding: 12px;
-    width: 100%;
+    border: 1px solid white;
+    border: 1px solid $color-divider;
+    border-radius: 10px;
+    color: black;
+    @include font($size: 20px, $line-height: 120%);
 
     &::placeholder {
         color: $color-divider;
@@ -205,11 +214,11 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    @include font($size: 1rem, $weight: 400, $line-height: 120%);
-    color: #686868;
     margin-top: 18px;
     margin-bottom: 8px;
+    color: #686868;
     margin-inline: 0;
+    @include font($size: 1rem, $weight: 400, $line-height: 120%);
 }
 
 .check input {
@@ -217,19 +226,19 @@ input {
 }
 
 a {
-    color: #124658;
     text-decoration: none;
+    color: #124658;
 }
 
 button {
+    padding: 15px 24px;
     background: #2a3647;
     border: 0;
     border-radius: 8px;
-    color: white;
-    @include font($weight: 700, $size: 21px, $line-height: 120%);
-    cursor: pointer;
     font-weight: 700;
-    padding: 15px 24px;
+    color: white;
+    cursor: pointer;
+    @include font($weight: 700, $size: 21px, $line-height: 120%);
 }
 
 button:disabled {
@@ -237,22 +246,22 @@ button:disabled {
 }
 
 button.link {
-    background: transparent;
-    color: #007cee;
-    font-weight: 400;
     padding: 0;
+    background: transparent;
+    font-weight: 400;
+    color: #007cee;
 }
 
 .actions {
     display: flex;
-    gap: 35px;
     justify-content: center;
+    gap: 35px;
     gap: 12px;
 }
 
 .actions.single {
-    grid-template-columns: 1fr;
     align-items: center;
+    grid-template-columns: 1fr;
     justify-self: center;
 }
 
@@ -264,28 +273,28 @@ button.guest {
 
 .error {
     position: absolute;
-    top: 46px;
-    @include font($size: 16px, $line-height: 120%);
-    color: #e60026;
+    top: 49px;
     margin: 0;
+    color: #e60026;
+    @include font($size: 16px, $line-height: 120%);
 }
 
 .links {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
     display: flex;
     gap: 16px;
-    position: absolute;
-    left: 50%;
     transform: translate(-50%, -50%);
-    bottom: 36px;
 
     & a {
         @include font($size: 1rem, $line-height: 120%);
-        color: $task-divider;
         text-decoration: none;
+        color: $task-divider;
 
         &:hover {
-            color: $color-hover-teal;
             font-weight: 700;
+            color: $color-hover-teal;
         }
     }
 }
@@ -314,18 +323,19 @@ button.guest {
             max-width: 180px;
         }
     }
+
     .card {
         order: 1;
     }
 
     .signup-toggle {
         position: static;
-        order: 2;
         justify-content: center;
-        width: 100%;
+        order: 2;
         gap: 16px;
-        padding: 16px 0;
+        width: 100%;
         margin-top: auto;
+        padding: 16px 0;
 
         button {
             max-width: clamp(6.875rem, 4.461rem + 12.069vw, 11.25rem);
@@ -334,10 +344,10 @@ button.guest {
 
     .links {
         position: static;
-        transform: none;
-        order: 3;
         justify-content: center;
-        padding-bottom: 24px;
+        order: 3;
         margin-top: 42px;
+        padding-bottom: 24px;
+        transform: none;
     }
 }
