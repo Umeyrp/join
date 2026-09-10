@@ -26,6 +26,9 @@ export class Login {
     readonly loading = signal(false);
     readonly error = signal('');
 
+    readonly passwordVisible = signal(false);
+    readonly passwordConfirmVisible = signal(false);
+
     readonly loginModel = signal<LoginFormValue>({
         name: '',
         email: '',
@@ -55,7 +58,7 @@ export class Login {
         });
 
         required(schemaPath.passwordConfirm, {
-            message: 'Please confirm your password',
+            message: 'Your password don`t match. Please try again.',
             when: () => this.signupMode(),
         });
         pattern(schemaPath.passwordConfirm, /^.{6,}$/, {
