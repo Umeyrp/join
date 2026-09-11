@@ -190,6 +190,7 @@ nav {
     :host {
         grid-template-rows: auto auto auto;
         align-content: start;
+        gap: 120px;
     }
 
     .privacy__links {
