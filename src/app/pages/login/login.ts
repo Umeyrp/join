@@ -25,6 +25,7 @@ export class Login {
     readonly signupMode = signal(false);
     readonly loading = signal(false);
     readonly error = signal('');
+    readonly showSignupToast = signal(false);
     readonly passwordVisible = signal(false);
     readonly passwordConfirmVisible = signal(false);
     readonly passwordHasValue = computed(() => this.loginModel().password.length > 0);
@@ -111,7 +112,14 @@ export class Login {
             if (error) {
                 this.error.set(error);
             } else {
-                await this.router.navigate(['/summary']);
+                if (needsSignup) {
+                    this.signupMode.set(false);
+                    this.showSignupToast.set(true);
+                    setTimeout(() => this.showSignupToast.set(false), 3000);
+                    return;
+                } else {
+                    await this.router.navigate(['/summary']);
+                }
             }
             return null;
         });

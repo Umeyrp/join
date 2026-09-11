@@ -46,6 +46,9 @@ export class AuthService {
         const { error: contactError } = await this.supabase.client
             .from('contacts')
             .insert({ name, email, phone: '' });
+
+        await this.supabase.client.auth.signOut();
+
         return contactError?.message ?? null;
     }
 
