@@ -61,14 +61,3 @@
         fill: white;
     }
 }
-
-@media (max-width: 900px) {
-    .intro-logo {
-        left: 50%;
-        transform: translate(-50%, calc(50vh - var(--logo-top) - 50%)) scale(2.74);
-
-        &.done {
-            transform: translateX(-50%);
-        }
-    }
-}
