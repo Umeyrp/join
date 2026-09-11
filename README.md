@@ -1,59 +1,66 @@
 # Join
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.7.
+Join is a Kanban board web app built with Angular and Supabase, developed as a training project during the Developer Akademie bootcamp. It lets you organize tasks across columns (To Do, In Progress, Await Feedback, Done), assign them to contacts, and track progress with drag and drop.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Sign up and log in with email and password, or use Guest Login to try the app without creating an account.
+- A summary dashboard showing task counts by status and the next upcoming urgent deadline.
+- A board with four columns. Tasks can be moved between columns with drag and drop, or through a menu on touch devices.
+- Search and filter tasks on the board by title, description, or assigned contact.
+- Add tasks with a title, description, due date, priority, category, assigned contacts, and subtasks.
+- Click any task to open its details, check off subtasks, edit it, or delete it.
+- A contact list grouped alphabetically, with colored initials as avatars. Contacts can be added, edited, and deleted.
+- A help page explaining how the board works.
 
-```bash
-ng serve
-```
+## Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular 22 (zoneless, Signals)
+- Supabase for authentication, the database, and realtime updates
+- SCSS for styling
 
-## Code scaffolding
+## Setup
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Install dependencies.
 
-```bash
-ng generate component component-name
-```
+    ```bash
+    npm install
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. Create a Supabase project at [supabase.com](https://supabase.com) and open `src/environments/environment.ts` and `src/environments/environment.development.ts`. Replace the placeholder values with your own project URL and anon key, both found in the Supabase dashboard under Project Settings, API.
 
-```bash
-ng generate --help
-```
+    ```ts
+    export const environment = {
+        production: false,
+        supabaseUrl: 'YOUR_SUPABASE_URL',
+        supabaseAnonKey: 'YOUR_SUPABASE_ANON_KEY',
+    };
+    ```
 
-## Building
+    The database schema (tables and RLS policies) is not included in this repository. Based on the code, the app expects at least these tables: `contacts`, `tasks`, `subtasks`, and `task_contacts` (linking tasks to contacts). They need to be recreated manually in your own Supabase project.
 
-To build the project run:
+3. Start the development server.
 
-```bash
-ng build
-```
+    ```bash
+    npm start
+    ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+    The app runs at `http://localhost:4200`.
 
-## Running unit tests
+## Available Scripts
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- `npm start` runs the development server.
+- `npm run build` creates a production build in `dist/`.
+- `npm test` runs the unit tests with Vitest.
+- `npm run watch` builds the app in watch mode.
 
-```bash
-ng test
-```
+## How to Use the App
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Open the app and either sign up with your name, email, and password, log in with an existing account, or click Guest Login to explore without registering.
+2. After logging in, you land on the summary page, which shows how many tasks are in each status and highlights the next urgent deadline.
+3. Go to the board to see all tasks sorted into four columns. Drag a task card to a different column to change its status, or use the menu option on mobile.
+4. Click the plus button in any column, or go to Add Task, to create a new task. Fill in the title, due date, and category, and optionally set a priority, assign contacts, and add subtasks.
+5. Click any task card to open its details. From there you can check off subtasks, edit the task, or delete it.
+6. Use the search box and the contact filter on the board to quickly find specific tasks.
+7. Go to Contacts to see everyone assigned to tasks. You can add new contacts, edit existing ones, or remove them.
+8. Visit the Help page at any time for a short walkthrough of the board.
