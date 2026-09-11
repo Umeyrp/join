@@ -193,6 +193,7 @@ label {
 
     & button {
         padding: 15px 16px;
+        @include font($weight: 700, $size: 1rem, $line-height: 120%);
     }
 }
 
