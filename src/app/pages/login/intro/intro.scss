@@ -24,7 +24,10 @@
     top: var(--logo-top);
     left: var(--logo-left);
     width: clamp(4rem, 3.357rem + 3.214vw, 6.25rem);
-    transform: translate(calc(50vw - var(--logo-left) - 50%), calc(50vh - var(--logo-top) - 50%))
+    transform: translate(
+            calc(50vw - var(--logo-left) - 50% - max(0px, (100vw - 1440px) / 2)),
+            calc(50vh - var(--logo-top) - 50%)
+        )
         scale(2.74);
     transition: all 0.6s ease;
     --logo-top: clamp(2.313rem, 1.777rem + 2.679vw, 4.188rem);
