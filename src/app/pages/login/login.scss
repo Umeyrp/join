@@ -37,10 +37,12 @@ app-intro {
             height: 55px;
             padding: 15px 24px;
             cursor: pointer;
+            transition: all 170ms ease-in-out;
 
             &:hover {
                 box-shadow: 0 4px 4px 0 #00000040;
                 background: #124658;
+                transition: all 170ms ease-in-out;
             }
         }
 
@@ -56,9 +58,11 @@ app-intro {
             padding: 0;
             background: none;
             border-radius: 16px;
+            transition: all 170ms ease-in-out;
 
             &:hover {
                 background: #f0f0f0;
+                transition: all 170ms ease-in-out;
             }
         }
     }
@@ -246,10 +250,12 @@ button {
     color: white;
     cursor: pointer;
     @include font($weight: 700, $size: 21px, $line-height: 120%);
+    transition: all 170ms ease-in-out;
 
     &:hover {
         box-shadow: 0 4px 4px 0 #00000040;
         background: #124658;
+        transition: all 170ms ease-in-out;
     }
 }
 
