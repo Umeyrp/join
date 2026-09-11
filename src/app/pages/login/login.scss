@@ -1,16 +1,26 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+:host {
+    display: block;
+    min-height: 100vh;
+    background: #f6f7f8;
+}
+
 .login-page {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 1440px;
     min-height: 100vh;
     padding: clamp(2.313rem, 1.813rem + 2.5vw, 4.063rem) 24px 24px;
     overflow-y: auto;
     background: #f6f7f8;
+    margin-inline: auto;
 }
 
 app-intro {
