@@ -1,6 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Location } from '@angular/common';
 
+/**
+ * Static legal notice (Impressum) page.
+ * Provides a back button that returns to the previous browser history entry.
+ */
 @Component({
     selector: 'app-legal-notice',
     imports: [],
@@ -10,7 +14,8 @@ import { Location } from '@angular/common';
 export class LegalNotice {
     private location = inject(Location);
 
-    goBack() {
+    /** Navigates back to the previous page in the browser history. */
+    goBack(): void {
         this.location.back();
     }
 }
