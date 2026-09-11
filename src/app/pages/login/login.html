@@ -140,6 +140,9 @@
                         <span class="error">{{ err.message }}</span>
                     }
                 }
+                @if (error() && loginForm.password().valid()) {
+                    <p class="error">{{ error() }}</p>
+                }
             </div>
 
             @if (signupMode()) {
