@@ -22,7 +22,6 @@ export class IntroService {
      * @todo Remove `return false` and re-enable the `sessionStorage` line
      */
     hasPlayedIntro(): boolean {
-        return false; // remove to set session storage
         return sessionStorage.getItem(INTRO_PLAYED_KEY) === 'true';
     }
 
